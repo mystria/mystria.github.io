@@ -2,6 +2,7 @@
 layout: page
 title: Guestbook
 permalink: /guestbook/
+comments: true
 public: true
 ---
 
