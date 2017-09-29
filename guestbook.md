@@ -5,6 +5,6 @@ permalink: /guestbook/
 public: true
 ---
 
-Welcome to this website!
+Leave a message.
 
-> This website is using [laobubu](http://laobubu.net)'s theme: [EasyBook](https://github.com/laobubu/jekyll-theme-EasyBook)
+> 아무말 대잔치
