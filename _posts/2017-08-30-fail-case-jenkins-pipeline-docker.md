@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "금주의 Jenkins 실패사례 - Pipeline"
+title:  "금주의 Jenkins 실패사례 - Pipeline과 Docker"
 date:   2017-08-30 12:00:00 +0900
-categories: Jenkins Pipeline Failure
+categories: Jenkins Pipeline Docker Failure
 comments: true
 ---
 # 이번 주 Jenkins를 사용하면서 겪은 실패 사례
@@ -54,13 +54,13 @@ comments: true
   - 이 변수와 pipeline 내 변수와 착각하지 말 것
 
 ## Docker 사용시 이슈들
-- 이런저런 문제                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+- 이런저런 문제
   - Docker를 Declarative pipeline에서 선언할 수도 있는 듯? 확인 필요
   - docker run
     - -it -rm 사용 불가
     - -network 활용 필요
 - Docker container간 통신
-  - link 사용 : deprecated 
+  - link 사용 : deprecated
     - https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/
   - network 사용 : 하나의 가상의 bridge로 연결하여 같은 네트워크 망에서 동작하는 것 처럼 사용 가능
     - https://docs.docker.com/engine/userguide/networking/work-with-networks/
@@ -69,7 +69,7 @@ comments: true
   - waitUntil과 timeout 사용
     - https://stackoverflow.com/questions/37920830/make-jenkins-pipeline-wait-until-server-is-up
     - 이때 shell 실행 결과를 가져오는 걸 활용(curl로 OK값 반환 받는것 확인)
-    
+
 ## Shell Scripts함
 - sh
   - && 와 ;
