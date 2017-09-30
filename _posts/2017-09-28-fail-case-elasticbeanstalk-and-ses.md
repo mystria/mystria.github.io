@@ -34,9 +34,9 @@ MongoDB Atlas와 VPC간 Peering을 하면, 서비스가 위치한 VPC의 Subnet�
   - 수작업으로 Environment 생성
     - 그러나 Instance 생성 단계에서 자꾸 waiting이 걸려 실패
     - 에러메시지
-~~~
-    The EC2 instances failed to communicate with AWS Elastic Beanstalk, either because of configuration problems with the VPC or a failed EC2 instance. Check your VPC configuration and try launching the environment again.
-~~~
+```
+The EC2 instances failed to communicate with AWS Elastic Beanstalk, either because of configuration problems with the VPC or a failed EC2 instance. Check your VPC configuration and try launching the environment again.
+```
 
   - VPC와 Subnet 확인 중 Route Table이 누락된 것을 확인
     - Route Table 생성 후 Environment 생성 성공
