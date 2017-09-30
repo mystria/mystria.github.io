@@ -6,11 +6,11 @@ body {
 }
 a {
 	text-decoration: none;
-	color: #036;
+	color: #5AE;
 }
 a:hover, a:focus {
 	text-decoration:underline;
-	color: #069;
+	color: #7BE;
 }
 blockquote {
 	background: #FFF;
@@ -37,7 +37,7 @@ pre, pre code {
 	background-color: #223;
 }
 pre code {
-	padding: 0;	
+	padding: 0;
 }
 .hide {
     display: none;
@@ -56,14 +56,14 @@ table {
 		padding: 5px 15px;
 		margin: 0;
 	}
-	
+
 	th {
 		border-color: #555;
 		background: #555;
 		color: #eee;
 		font-weight:normal;
 	}
-	
+
 	tr:hover {
 		background: rgba(255,255,0,0.2);
 	}
