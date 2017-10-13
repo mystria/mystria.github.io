@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "AWS Elastic Load Balancer 미립자 팁"
+title:  "AWS Elastic Load Balancer와 SSL인증서"
 date:   2017-10-13 14:00:00 +0900
-categories: AWS Tip ELB ElasticBeanstalk
+categories: AWS Tip ELB ElasticBeanstalk SSL
 comments: true
 ---
 # AWS ELB와 EB 미립자 팁
