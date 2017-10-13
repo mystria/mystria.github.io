@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "AWS Elastic Load Balancer 미립자 팁"
-date:   2017-09-26 14:00:00 +0900
+date:   2017-10-13 14:00:00 +0900
 categories: AWS Tip ELB ElasticBeanstalk
 comments: true
 ---
@@ -47,14 +47,16 @@ comments: true
     - Rule기반으로 지정된 Target Group으로 라우팅
 
 ## ELB 보안, 인증서 정책 바꾸기
- * 공식홈페이지 참조 : [AWS HTTPS Listener][aws-https-listner]
+ * 공식홈페이지 참조 : [AWS Classic LB Listener][aws-https-listner1], [AWS Application LB Listener][aws-https-listner2]
  * 보안 정책 수정하는 위치
   - AWS Admin Console은 정말 사용자 친화적이지 않음(익숙해지면 불편하진 않음)
   1. 일단 Load Balancer 찾기
-  2. Listeners tab
-    - Classic LB일 경우, Load Balancer Protocol이 HTTPS또는 SSL일 경우 Cipher항목 변경(Change)가능
-    - Application/Network LB일 경우, Listener 선택 후 수정
-  3. Predefined와 Custom Security Policy 선택 가능
+  2. Listeners 탭
+    - Classic LB의 경우, Load Balancer Protocol이 HTTPS또는 SSL일 경우 Cipher항목 변경(Change)가능
+    - Application/Network LB의 경우, Listener 선택 후 수정(Action > Edit)
+  3. 보안 정책 선택
+    - Classic LB의 경우, Predefined와 Custom Security Policy 선택 가능
+    - Application/Network LB의 경우, Predefined된 Security Policy만 지원
   4. 적절히 선택 후 적용
  * 보안 정책을 수정해야 하는 이유
   - TLS는 SSL3.0을 개선한 국제 표준 프로토콜, 그러나 하위 호환성을 위해 클라이언트 요청에 의해 다운그레이드 가능
@@ -64,6 +66,7 @@ comments: true
   - 오래전에 생성한 ELB의 경우 어떤 암호화 방식을 지원하는지 보안 정책을 확인해야 함
 
 [aws-elb]: https://aws.amazon.com/elasticloadbalancing/details/#compare
-[aws-https-listner]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html
+[aws-https-listner1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-https-load-balancers.html
+[aws-https-listner2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html
 [poodle]: https://www.krcert.or.kr/data/trendView.do?bulletin_writing_sequence=22128
 [tls-ssl-vulnerability]: https://www.kb.cert.org/vuls/id/864643
