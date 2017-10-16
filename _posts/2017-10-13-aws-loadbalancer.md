@@ -8,11 +8,11 @@ comments: true
 # AWS ELB와 EB 미립자 팁
 1. [ElasticBeanstalk의 ELB찾기](#elasticbeanstalk의-elb찾기)
 2. [ELB에 SSL인증서 붙이기](#elb에-ssl인증서-붙이기)
-2. [ELB 보안, 인증서 정책 바꾸기](#elb-보안,-인증서-정책-바꾸기)
+2. [ELB 보안, 인증서 정책 바꾸기](#elb-보안-인증서-정책-바꾸기)
 
 ## ElasticBeanstalk의 ELB찾기
 * ElasticBeanstalk(이하 EB)에서의 ELB
-  + Environment의 Capacity가 Single Instance말고 Load Balanced일때만 활성화
+  + Environment의 Capacity가 Single Instance말고 Load Balanced일때 만 활성화
   + Configuration의 Network Tier에서 Load Balancer 설정 가능
   + 설정할 수 있는 것
     - SSL Certificate
@@ -22,24 +22,31 @@ comments: true
     - 찾기 힘듦(AWS Admin Console의 문제점.. 사용성이 떨어짐)
 * Load Balancer 찾기
   1. Instances에서 EB의 Environment이름으로 Instance찾기
-  2. 찾은 Instance의 InstanceId를 통해 Auto Scaling > Auto Scaling Group에서 ASG찾기
+  2. 찾은 Instance의 InstanceId를 통해 Auto Scaling > Auto Scaling Group(이하 ASG)에서 ASG찾기
   3. 찾은 ASG의 Details정보에서 Load Balancers의 ID확보
   4. 해당 ID로 Load Balancers에서 ELB찾기 성공
 
 
 ## ELB에 SSL인증서 붙이기
 * SSL 등록
-  + 예전에는 EC2 > Load Balancers > Load Balancing에서 SSL 인증서를 업로드해야함
+  + 현재 SSL처리는 Load Balancer(이하 LB)가 전담
+    - LB 뒷단은 일단은 (보안상 안전할 것으로 보고) 평문 통신
+    - EC2에서도 SSL처리 하기 원할 경우 Proxy 설정 등에 수동으로 script를 넣어 적용시켜야 함
+  + 예전에는 EC2 > Load Balancers > Load Balancing에서 해당 LB 선택 후 SSL 인증서를 업로드해야함
+    - 즉 ELB에 SSL을 개별적으로 붙여야 함
     - 대상 Load Balancer선택 후 Listener에서 SSL Certificate 변경(Change)으로 업로드/변경
-    - 일단 업로드 된 것은 EB의 Configuration에서 적용 가능함
-  + 현재는 Amazon Certificate Manager에서 관리 가능
-    - Load Balancer에서 업로드 한 것은 Certificate Manager에서 관리 안됨
+    - 일단 업로드 된 것은 EB에서도 Load Balancer설정 시 Configuration에서 적용 가능함
+  + 현재는 Amazon Certificate Manager에서 관리 기능 지원
+    - 무료 SSL 인증서를 제공하기도 하고, 업로드도 지원
+    - 여기서 관리되는 인증서를 ELB에서 사용 가능
+    - 단, Load Balancer에서 업로드 한 것은 Certificate Manager에서 관리 안됨
 * Load Balancer에 적용
   + EB의 경우 Environment의 Configuration에서 Load Balancer에서 적용 가능
   + 개별 Load Balancer를 찾아 Listener tab에서 수정 가능
-* Load Balancer(이하 LB)의 Listener란?
+* Load Balancer의 Listener란?
   + 참고로 Elastic LB는 HTTP/HTTPS를 지원하는 Application LB, TCP를 지원하는 Network LB, 그리고 기존의 Classic LB로 구분
   + Classic LB
+    - EB에서는 아직도 Classic LB사용
     - LB로 들어온 Protocol과 Port를 bind된 Instance의 Protocol과 Port로 라우팅
   + Application LB, Network LB팅
     - 언제 부터 생긴거지... [AWS ELB][aws-elb]
@@ -61,7 +68,7 @@ comments: true
 * 보안 정책을 수정해야 하는 이유
   + TLS는 SSL3.0을 개선한 국제 표준 프로토콜, 그러나 하위 호환성을 위해 클라이언트 요청에 의해 다운그레이드 가능
   + TLS1.0과 SSL3.0에는 취약점이 있다고 함(자세한 내용은 [인터넷 검색][tls-ssl-vulnerability])
-  + TLS1.0과 SSL3.0의 보안 취약점을 이용하기 위해 TLS의 버전을 다운그레이드 하게끔 유도하는 공격[KISA보도자료][poodle]
+  + TLS1.0과 SSL3.0의 보안 취약점을 이용하기 위해, TLS의 버전을 다운그레이드 하게끔 유도하는 공격[KISA보도자료][poodle]
   + 앗싸리 TLS1.0과 SSL3.0을 비활성화 하길 권장
   + 오래전에 생성한 ELB의 경우 어떤 암호화 방식을 지원하는지 보안 정책을 확인해야 함
 
