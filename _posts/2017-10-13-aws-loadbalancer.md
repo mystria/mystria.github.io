@@ -49,7 +49,7 @@ comments: true
 ## ELB 보안, 인증서 정책 바꾸기
 * 공식홈페이지 참조 : [AWS Classic LB Listener][aws-https-listner1], [AWS Application LB Listener][aws-https-listner2]
 * 보안 정책 수정하는 위치
-  + AWS Admin Console은 정말 사용자 친화적이지 않음(익숙해지면 불편하진 않음)
+  0. AWS Admin Console은 정말 사용자 친화적이지 않음(익숙해지면 불편하진 않음)
   1. 일단 Load Balancer 찾기
   2. Listeners 탭
     - Classic LB의 경우, Load Balancer Protocol이 HTTPS또는 SSL일 경우 Cipher항목 변경(Change)가능
