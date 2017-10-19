@@ -6,8 +6,8 @@ categories: AWS EC2 Lightsail StackOverflow
 comments: true
 ---
 # Lightsail과 EC2의 차이
-영어 공부겸 StackOverflow의 글 번역. 발번역 주의
-[한국 공식 블로그](https://aws.amazon.com/ko/blogs/korea/category/amazon-lightsail/)에서 Lightsail소개 해줌
+영어 공부겸 StackOverflow의 글 번역. 발번역 주의!  
+[한국 공식 블로그](https://aws.amazon.com/ko/blogs/korea/category/amazon-lightsail/)에서 Lightsail소개 해줌  
 
 ## [What is difference between Lightsail and EC2?][reference]
 
