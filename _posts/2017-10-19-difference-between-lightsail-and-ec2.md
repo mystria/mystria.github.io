@@ -7,9 +7,9 @@ comments: true
 ---
 # Lightsail과 EC2의 차이
 영어 공부겸 StackOverflow의 글 번역. 발번역 주의
-한국 공식 블로그(https://aws.amazon.com/ko/blogs/korea/category/amazon-lightsail/)에서 Lightsail소개 해줌
+[한국 공식 블로그](https://aws.amazon.com/ko/blogs/korea/category/amazon-lightsail/)에서 Lightsail소개 해줌
 
-##[What is difference between Lightsail and EC2?][reference]
+## [What is difference between Lightsail and EC2?][reference]
 
 테스트에 의하면&sup1; Lightsail은 사실 버스트 기능이 있는 [`t2`](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/t2-instances.html) 계열의 EC2 instance와 동일하다.
 
@@ -32,11 +32,11 @@ Lightsail의 대상은 AWS의 EC2, EBS, VPC, 그리고 Route53 같은 무수한 
 
 ----
 
-&sup1;Lightsail instance는 단지 (VPC와 Classic의) "regular"한 EC2와 같다. 모든 Instance는 [instance metadata service][instance-metadata-service]에 접근하여 instance type이나 가용영역(AZ)와 같은 자기 자신의 메타 정보들을 확인할 수 있다. Lightsail instance의 메타 정보에 의하면 `t2`머신이라는 것이 확인되었다.
+&sup1;Lightsail instance는 단지 (VPC와 Classic의) "regular"한 EC2와 같다. 모든 Instance는 [instance metadata service][instance-metadata-service]에 접근하여 instance type이나 가용영역(AZ)와 같은 자기 자신의 메타 정보들을 확인할 수 있다. Lightsail instance의 메타 정보에 의하면 t2 머신이라는 것이 확인되었다.
 
-&sup2;Lightsail의 문서에는 *Default VPC* 만 peering 동작한다고 명시적으로 표시되어 있지는 않다. 그러나 이것은 사실인 것으로 보인다. 만약 2013년 이전에 생성된 AWS 계정이라면, Default VPC라는 것이 없을 수도 있다. 그러나 이것은 다음 설명[Can't establish VPC peering connection from Amazon Lightsail(at Server Fault)][vpc-peering-lightsail]에서 처럼 고객 지원으로 해결 할 수 있을 것이다.
+&sup2;Lightsail의 문서에는 *Default VPC* 만 peering 동작한다고 명시적으로 표시되어 있지는 않다. 그러나 이것은 사실인 것으로 보인다. 만약 2013년 이전에 생성된 AWS 계정이라면, Default VPC라는 것이 없을 수도 있다. 그러나 이것은 다음 설명 [Can't establish VPC peering connection from Amazon Lightsail(at Server Fault)][vpc-peering-lightsail]에서 처럼 고객 지원으로 해결 할 수 있을 것이다.
 
-&sup3;번역자 주석: Lightsail은 월별 과금 [공식사이트][lightsail-pricing], Instance별로 outbound 기본 무료용량이 제공되고, 초과분은 EC2의 데이터전송 비용과 동일하게 과금
+&sup3;번역자 주석: Lightsail은 월별 과금 ([공식사이트][lightsail-pricing]), Instance별로 outbound 기본 무료용량이 제공되고, 초과분은 EC2의 데이터전송 비용과 동일하게 과금
 
 기타: 현재(2017년 10월) Northern Virginia, Oregon, Ohio, London, Frankfurt, Ireland, Mumbai, Tokyo, Singapore, Sydney만 지원
 
