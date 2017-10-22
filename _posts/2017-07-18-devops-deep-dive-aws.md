@@ -54,17 +54,18 @@ comments: true
       - 스택들을 위한 지속적 전달 워크플로우(CodePipeline에서 지원), SAM(Serverless App Model)지원
 
 ## Infrastructure 관리
-  * Immutable Infra : 불변하는 인프라. 개발하다보면 환경이 금방 엉망이 된다. 즉 환경을 언제든지 일관되게 할 수 있어야 한다.
+  * Immutable Infrastructure : 불변하는 인프라
+    + 개발하다보면 환경이 금방 엉망(?)이 된다. 이때는 인프라를 변경하지말고 새로 만들어라. -> 배포할땐 새 인프라에!
     + 보통 CLI나 SDK를 통해 스크립트로 AWS 인프라를 관리 : 롤백, 시간측정 등이 어려움
     + 인프라와 소프트웨어를 함께 관리, 언제든지 재현할 수 있어야 하고, 보안 등을 통해 감사가 가능해야 함 -> CloudFormation
-  * CloudFormation의 장점 : 인프라를 코드로 관리하여 특정상황에서 옛날 버전을 로드하여 사용가능(최신 버전의 인프라와 다를 때)
+  * CloudFormation의 장점 : 인프라를 코드로 관리하여 특정상황(최신 버전의 인프라와 다를 때)에서 옛날 버전을 로드하여 사용가능
     + CloudFormation에서 application 배포 시 - 부트스트래핑 활용
   * 피드백루프 : CloudWatch
     + CloudWatch logs 사용(중앙 집중식 로깅) : 비용 발생 주의(Full logs 조심), 필터 활용
     + X-Ray : 코드 내(API 호출인듯)에 위치하며 정보수집 가능
 
 ## Summary
-  * 전체적으로 보면 CodePipeline이 조율하고, CodeCommit에서 소스관리, CodeBuild에서 빌드, CodeDeploy에서(CloudFormation을 써서?) 배포
+  * 전체적으로 보면 CodePipeline이 조율하고, CodeCommit에서 소스관리, CodeBuild에서 빌드, CodeDeploy에서 배포
   * 인프라 구성은 CloudFormation을 무조건 쓰고, 간단한건 EB로 해결
     + OpsWorks는 서버내 러닝 환경을 쉐프를 통해 스크립트화
   * 혁신은 민첩성이 중요
@@ -73,5 +74,5 @@ comments: true
   * 즉, AWS의 도구들을 쓰세요!
 
 ---
-&sup1; AWS의 Code 시리즈를 쓰라는 암시(?)인듯
+&sup1; AWS의 Code 시리즈를 쓰라는 암시(?)인듯  
 &sup2; EB : Elastic Beanstalk, 애플리케이션 레이어 중심의 PaaS서비스
