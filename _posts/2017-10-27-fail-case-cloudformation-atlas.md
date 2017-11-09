@@ -50,6 +50,11 @@ comments: true
       - 이때, Connection이 이뤄지는 중이라 Connection ID가 None으로 넘어 올 수 있음
       - 재시도 하면 됨
   * Response가 json이므로 Python의 json.loads()로 응답 처리
+  * 다음과 같은 Error 발생
+  ```
+  curl: (35) gnutls_handshake() failed: Access was denied
+  ```
+    + Account정보에서 Public API Access의 API Whitelist에 개발환경의 CIDR을 추가해야 함
 
 ## AWS API
   * boto3 Library를 이용
