@@ -5,7 +5,7 @@ date:   2017-11-03 16:00:00 +0900
 categories: Migration
 comments: true
 ---
-# 이번 주 AWS를 사용하면서 겪은 실패 사례
+# 이번 주 Gmail을 사용하면서 겪은 실패 사례
 Gmail에서 수천건 이상의 메일을 다른 사람에게 전달해야 하는데 어떡하지?
 
 ## 개요
