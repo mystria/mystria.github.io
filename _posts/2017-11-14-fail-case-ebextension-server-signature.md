@@ -40,7 +40,7 @@ comments: true
     + .ebextensions/nginx/nginx.conf 을 추가하면 구성을 완전히 재정의 함
       - 처음엔 nginx.conf 파일에서 설정 일부만 작성하면 해당 설정을 override될 줄 알았는데 아니었음
       - 다음과 같은 에러 발생
-      ```
+~~~
 [2017-11-13T04:55:21.342Z] ERROR [5197]  : Command execution failed: Activity failed. (ElasticBeanstalk::ActivityFatalError)
 caused by: Executing: /opt/elasticbeanstalk/bin/log-conf -n nginx -l'/var/log/nginx/*'
 
@@ -51,7 +51,7 @@ nginx: configuration file /var/elasticbeanstalk/staging/nginx/nginx.conf test fa
 Failed to execute '/usr/sbin/nginx -t -c /var/elasticbeanstalk/staging/nginx/nginx.conf'
 Failed to execute '/usr/sbin/nginx -t -c /var/elasticbeanstalk/staging/nginx/nginx.conf' (ElasticBeanstalk::ExternalInvocationError)
 caused by: Executing: /opt/elasticbeanstalk/bin/log-conf -n nginx -l'/var/log/nginx/*'
-      ```
+~~~
       - 아마 nginx.conf 파일의 구성이 완벽하지 못해 load가 되지 않는 다는 뜻인듯
     + .ebextensions/nginx/conf.d/myconf.conf 을 추가하면 해당 설정을 override함
       - [AWS Blog](https://aws.amazon.com/blogs/aws/elastic-beanstalk-update-support-for-java-and-go/) 설명 참조
@@ -84,11 +84,11 @@ caused by: Executing: /opt/elasticbeanstalk/bin/log-conf -n nginx -l'/var/log/ng
     + Response header에서 Server를 삭제할 수 없음
     + Tomcat의 server.xml에서 Connector에 server property를 입력하면 그걸로 표시됨
   * .ebextensions/에서 config파일을 생성
-  ```
+~~~ yaml
   container_commands:
   replace-config:
     command: cp .ebextensions/server.xml /etc/tomcat7/server.xml
-  ```
+~~~
     + shell script로 server.xml파일을 덮어쓰기
 
 ## Server Signature를 숨긴 것의 의미
