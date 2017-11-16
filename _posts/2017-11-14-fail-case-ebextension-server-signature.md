@@ -40,11 +40,10 @@ comments: true
     + .ebextensions/nginx/nginx.conf 을 추가하면 구성을 완전히 재정의 함
       - 처음엔 nginx.conf 파일에서 설정 일부만 작성하면 해당 설정을 override될 줄 알았는데 아니었음
       - 다음과 같은 에러 발생
-
-~~~
+        ~~~
 [2017-11-13T04:55:21.342Z] ERROR [5197]  : Command execution failed: Activity failed. (ElasticBeanstalk::ActivityFatalError)
 caused by: Executing: /opt/elasticbeanstalk/bin/log-conf -n nginx -l'/var/log/nginx/*'
-
+.
 Nginx configuration detected in the '.ebextensions/nginx' directory. AWS Elastic Beanstalk will no longer manage the Nginx configuration for this environment.
 Executing: /usr/sbin/nginx -t -c /var/elasticbeanstalk/staging/nginx/nginx.conf
 nginx: [emerg] unknown directive "more_set_headers" in /var/elasticbeanstalk/staging/nginx/nginx.conf:2
@@ -52,7 +51,7 @@ nginx: configuration file /var/elasticbeanstalk/staging/nginx/nginx.conf test fa
 Failed to execute '/usr/sbin/nginx -t -c /var/elasticbeanstalk/staging/nginx/nginx.conf'
 Failed to execute '/usr/sbin/nginx -t -c /var/elasticbeanstalk/staging/nginx/nginx.conf' (ElasticBeanstalk::ExternalInvocationError)
 caused by: Executing: /opt/elasticbeanstalk/bin/log-conf -n nginx -l'/var/log/nginx/*'
-~~~
+        ~~~
       - 아마 nginx.conf 파일의 구성이 완벽하지 못해 load가 되지 않는 다는 뜻인듯
     + .ebextensions/nginx/conf.d/myconf.conf 을 추가하면 해당 설정을 override함
       - [AWS Blog](https://aws.amazon.com/blogs/aws/elastic-beanstalk-update-support-for-java-and-go/) 설명 참조
@@ -69,8 +68,8 @@ caused by: Executing: /opt/elasticbeanstalk/bin/log-conf -n nginx -l'/var/log/ng
       - ServerTokens Prod로 하면 Response의 header에서 서버 정보가 숨겨짐
   * httpd.conf 파일은 어디에 있을까?
     + Linux에 익숙하지 않아 파일 [검색방법1](https://serverfault.com/questions/49879/cant-find-httpd-conf), [검색방법2](https://www.digitalocean.com/community/tutorials/how-to-use-find-and-locate-to-search-for-files-on-a-linux-vps) 찾기
-    + 힌트 발견, [Apache설정 말고 Tomcat설정을 바꾸라는 글](https://stackoverflow.com/questions/10928516/unable-to-find-httpd-conf)
-    + conf 파일을 수정
+      - 의외의 힌트 발견, [Apache설정 말고 Tomcat설정을 바꾸라는 글](https://stackoverflow.com/questions/10928516/unable-to-find-httpd-conf)
+    + conf 파일을 찾아 수정
   * 그리고 [서버 서비스(service httpd) 재시작](https://stackoverflow.com/questions/4062723/restart-httpd-after-changes-in-the-httpd-conf)
   * 왠지 모르겠지만 잘 안됨... 추가 확인 필요
 
