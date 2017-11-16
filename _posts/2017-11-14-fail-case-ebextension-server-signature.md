@@ -40,6 +40,7 @@ comments: true
     + .ebextensions/nginx/nginx.conf 을 추가하면 구성을 완전히 재정의 함
       - 처음엔 nginx.conf 파일에서 설정 일부만 작성하면 해당 설정을 override될 줄 알았는데 아니었음
       - 다음과 같은 에러 발생
+
 ~~~
 [2017-11-13T04:55:21.342Z] ERROR [5197]  : Command execution failed: Activity failed. (ElasticBeanstalk::ActivityFatalError)
 caused by: Executing: /opt/elasticbeanstalk/bin/log-conf -n nginx -l'/var/log/nginx/*'
@@ -69,7 +70,9 @@ caused by: Executing: /opt/elasticbeanstalk/bin/log-conf -n nginx -l'/var/log/ng
   * httpd.conf 파일은 어디에 있을까?
     + Linux에 익숙하지 않아 파일 [검색방법1](https://serverfault.com/questions/49879/cant-find-httpd-conf), [검색방법2](https://www.digitalocean.com/community/tutorials/how-to-use-find-and-locate-to-search-for-files-on-a-linux-vps) 찾기
     + 힌트 발견, [Apache설정 말고 Tomcat설정을 바꾸라는 글](https://stackoverflow.com/questions/10928516/unable-to-find-httpd-conf)
+    + conf 파일을 수정
   * 그리고 [서버 서비스(service httpd) 재시작](https://stackoverflow.com/questions/4062723/restart-httpd-after-changes-in-the-httpd-conf)
+  * 왠지 모르겠지만 잘 안됨... 추가 확인 필요
 
 ## ElasticBeanstalk에서 Apache 설정 변경
   * nginx와 달리 Apache는 ebextension설정이 훨씬 복잡
@@ -86,8 +89,8 @@ caused by: Executing: /opt/elasticbeanstalk/bin/log-conf -n nginx -l'/var/log/ng
   * .ebextensions/에서 config파일을 생성
 ~~~ yaml
   container_commands:
-  replace-config:
-    command: cp .ebextensions/server.xml /etc/tomcat7/server.xml
+      replace-config:
+        command: cp .ebextensions/server.xml /etc/tomcat7/server.xml
 ~~~
     + shell script로 server.xml파일을 덮어쓰기
 
@@ -96,8 +99,8 @@ caused by: Executing: /opt/elasticbeanstalk/bin/log-conf -n nginx -l'/var/log/ng
   필요한 port만 개방하고, 서버 보안 패치를 하는게 중요할 듯
 
 ## 기타 참고사항
-  + Private Subnet의 EC2에 붙기
+  + Private Subnet의 EC2에 붙기  
 https://aws.amazon.com/ko/blogs/security/securely-connect-to-linux-instances-running-in-a-private-amazon-vpc/
-  + Putty로 EC2에 붙기
+  + Putty로 EC2에 붙기  
 https://linuxacademy.com/howtoguides/posts/show/topic/17385-use-putty-to-access-ec2-linux-instances-via-ssh-from-windows  
 https://cpuu.postype.com/post/30065
