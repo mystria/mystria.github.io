@@ -5,6 +5,8 @@ permalink: /about/
 public: true
 ---
 
-Welcome to this website!
 
-> This website is using [laobubu](http://laobubu.net)'s theme: [EasyBook](https://github.com/laobubu/jekyll-theme-EasyBook)
+귤이 신가요 단가요?
+> 언젠가 이직할 때 자랑하려고 서푼 경험을 모아 기술 블로그를 운영하고 있습니다.  
+본문에 이미지 삽입이 불편하여 최대한 글로 설명하고자 합니다. 너른 양해 부탁드립니다.  
+궁금한 점이 있으시면 해당 포스팅에 댓글을 남겨주세요.
