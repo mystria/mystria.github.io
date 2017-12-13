@@ -24,7 +24,7 @@ LDAP을 적용하기 위해서는 도대체 뭘 수정해야 한단말인가?!
     + /etc/apache2/conf-enabled/도구.conf
     + /etc/apache2/conf-available/도구.conf
   * AmazonLinux AMI의 경우 /etc/httpd
-    + 이유 : 기존에는 httpd(Daemon)였으나 ubuntu에서는 전반적인 구조가 바뀜 [참고: Ubuntu 도움말][https://help.ubuntu.com/lts/serverguide/httpd.html]
+    + 이유 : 기존에는 httpd(Daemon)였으나 ubuntu에서는 전반적인 구조가 바뀜 [[참고: Ubuntu 도움말](https://help.ubuntu.com/lts/serverguide/httpd.html)]
   * 모니터링 도구 설정인 경우 /etc/도구
     + 도구별로 설치 위치가 다를 수 있음
 
@@ -45,7 +45,7 @@ LDAP을 적용하기 위해서는 도대체 뭘 수정해야 한단말인가?!
     AuthLDAPGroupAttribute memberUid
 ~~~
     + Require의 cn에 따옴표를 붙이지 말 것
-    + 참고 [Apache httpd][https://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html]
+    + 참고 [[Apache httpd](https://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html)]
 
 ## 설정 후
   * 수정 후 서버 재시작 : sudo service apache2 restart
@@ -70,10 +70,10 @@ LDAP을 적용하기 위해서는 도대체 뭘 수정해야 한단말인가?!
 
   * htaccess파일에 암호를 지정 방법
     + htpasswd 파일 경로는 Basic Authentication에 연결되어야 함  
-~~~ ssh
+``` ssh
   # htpasswd -c /etc/apache2/htpasswd rbowen
     New password: mypassword
     Re-type new password: mypassword
     Adding password for user rbowen
-~~~
-    + 참조 [Apache httpd][https://httpd.apache.org/docs/2.4/howto/auth.html]
+```
+    + 참조 [[Apache httpd](https://httpd.apache.org/docs/2.4/howto/auth.html)]
