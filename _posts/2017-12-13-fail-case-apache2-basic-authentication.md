@@ -56,9 +56,8 @@ LDAP을 적용하기 위해서는 도대체 뭘 수정해야 한단말인가?!
     + 설정 방법은 LDAP과 유사
       - htaccess파일은 AuthUserFile에서 경로를 지정
     + Web Server에서 LDAP으로 할지 htaccess로 할지 결정은 /etc/apache2/conf-enabled/에 위치한 conf파일을 참조
-    + conf파일 내 <Location>의 웹 페이지 경로에 해당할 경우 적용됨
-
-~~~
+    + conf파일 내 <Location>의 웹 페이지 경로에 해당할 경우 적용됨  
+```
 <Location /munin/>
         Order allow,deny
         Allow from All
@@ -67,12 +66,11 @@ LDAP을 적용하기 위해서는 도대체 뭘 수정해야 한단말인가?!
          AuthUserFile /etc/apache2/htpasswd
          Require valid-user
 </Location>
-~~~
+```
 
   * htaccess파일에 암호를 지정 방법
-    + htpasswd 파일 경로는 Basic Authentication에 연결되어야 함
-    
-~~~
+    + htpasswd 파일 경로는 Basic Authentication에 연결되어야 함  
+~~~ ssh
   # htpasswd -c /etc/apache2/htpasswd rbowen
     New password: mypassword
     Re-type new password: mypassword
