@@ -33,17 +33,17 @@ LDAP을 적용하기 위해서는 도대체 뭘 수정해야 한단말인가?!
   * LDAP을 통해 인증 받으려면 LDAP서버의 AuthLDAPUrl, AuthLDAPBindDN와 AuthLDAPBindPassword을 이용하여 인증 요청을 해야함
     + Require ldap-group으로 특정 그룹의 사용자만 Authorization할 수 있음
     + 예제
-~~~
-    AuthName "Restricted Area"
-    AuthType Basic
-    AuthBasicProvider ldap
-    AuthLDAPUrl "ldap://10.0.0.1:10389/dc=iam,dc=aws,dc=org?uid?sub?(objectclass=posixaccount)"
-    AuthLDAPBindDN "uid=admin,ou=system"
-    AuthLDAPBindPassword "password"
-    Require ldap-group cn=AdminGroup,ou=groups,dc=iam,dc=aws,dc=org
-    AuthLDAPGroupAttributeIsDN off
-    AuthLDAPGroupAttribute memberUid
-~~~
+      ~~~ shell
+          AuthName "Restricted Area"
+          AuthType Basic
+          AuthBasicProvider ldap
+          AuthLDAPUrl "ldap://10.0.0.1:10389/dc=iam,dc=aws,dc=org?uid?sub?(objectclass=posixaccount)"
+          AuthLDAPBindDN "uid=admin,ou=system"
+          AuthLDAPBindPassword "password"
+          Require ldap-group cn=AdminGroup,ou=groups,dc=iam,dc=aws,dc=org
+          AuthLDAPGroupAttributeIsDN off
+          AuthLDAPGroupAttribute memberUid
+      ~~~
     + Require의 cn에 따옴표를 붙이지 말 것
     + 참고 [[Apache httpd](https://httpd.apache.org/docs/2.4/mod/mod_authnz_ldap.html)]
 
@@ -57,25 +57,23 @@ LDAP을 적용하기 위해서는 도대체 뭘 수정해야 한단말인가?!
       - htaccess파일은 AuthUserFile에서 경로를 지정
     + Web Server에서 LDAP으로 할지 htaccess로 할지 결정은 /etc/apache2/conf-enabled/에 위치한 conf파일을 참조
     + conf파일 내 <Location>의 웹 페이지 경로에 해당할 경우 적용됨
-
-
-    ~~~ ddd
-    <Location /munin/>
-            Order allow,deny
-            Allow from All
-             AuthName "Restricted Area"
-             AuthType Basic
-             AuthUserFile /etc/apache2/htpasswd
-             Require valid-user
-    </Location>
-    ~~~
+      ~~~ shell
+      <Location /munin/>
+              Order allow,deny
+              Allow from All
+               AuthName "Restricted Area"
+               AuthType Basic
+               AuthUserFile /etc/apache2/htpasswd
+               Require valid-user
+      </Location>
+      ~~~
 
   * htaccess파일에 암호를 지정 방법
     + htpasswd 파일 경로는 Basic Authentication에 연결되어야 함  
-~~~ sh
-  $ htpasswd -c /etc/apache2/htpasswd rbowen
-    New password: mypassword
-    Re-type new password: mypassword
-    Adding password for user rbowen
-~~~
+      ~~~ shell
+        $ htpasswd -c /etc/apache2/htpasswd rbowen
+          New password: mypassword
+          Re-type new password: mypassword
+          Adding password for user rbowen
+      ~~~
     + 참조 [[Apache httpd](https://httpd.apache.org/docs/2.4/howto/auth.html)]
