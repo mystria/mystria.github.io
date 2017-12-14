@@ -70,10 +70,10 @@ LDAP을 적용하기 위해서는 도대체 뭘 수정해야 한단말인가?!
 
   * htaccess파일에 암호를 지정 방법
     + htpasswd 파일 경로는 Basic Authentication에 연결되어야 함  
-{% highlight sh %}
+~~~ sh
   $ htpasswd -c /etc/apache2/htpasswd rbowen
     New password: mypassword
     Re-type new password: mypassword
     Adding password for user rbowen
-{% endhighlight %}
+~~~
     + 참조 [[Apache httpd](https://httpd.apache.org/docs/2.4/howto/auth.html)]
