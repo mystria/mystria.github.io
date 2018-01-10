@@ -29,9 +29,9 @@ comments: true
   * 해당 Policy에서 특정 Action만 제외하고 싶다면 Deny를 사용
   ``` json
   {
-    "Effect": "Deny",
-    "Action": "IAM:*",
-    "Resource": "*"
+      "Effect": "Deny",
+      "Action": "IAM:*",
+      "Resource": "*"
   }
   ```
   * Deny를 사용할 경우 해당 Action은 어떤 경우에도 사용불가, 다른 Policy에서 Allow해줘도 Deny가 우선되어 차단됨
@@ -54,15 +54,15 @@ comments: true
   * 예제: 모든 권한을 갖고 있지만, IAM관련 기능은 본인관련 리소스만 접근가능
   ``` json
   {
-    {
-      "Effect": "Allow",
-      "NotAction": "iam:*",
-      "Resource": "*"
-    },야
-    {
-      "Effect": "Allow",
-      "Action": "iam:*",
-      "Resource": "arn:aws:iam::123456789010:user/${aws:username}"
-    }
+      {
+          "Effect": "Allow",
+          "NotAction": "iam:*",
+          "Resource": "*"
+      },
+      {
+          "Effect": "Allow",
+          "Action": "iam:*",
+          "Resource": "arn:aws:iam::123456789010:user/${aws:username}"
+      }
   }
   ```
