@@ -21,9 +21,9 @@ comments: true
   * 관리자급의 Policy를 만들 때 보통 Allow * 함
   ``` json
   {
-    "Effect": "Allow",
-    "Action": "*",
-    "Resource": "*"
+      "Effect": "Allow",
+      "Action": "*",
+      "Resource": "*"
   }
   ```
   * 해당 Policy에서 특정 Action만 제외하고 싶다면 Deny를 사용
