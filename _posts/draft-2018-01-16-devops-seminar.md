@@ -8,19 +8,14 @@ comments: true
 # 내부 공유용 DevOps 세미나
 본 포스팅은 본인이 일하는 조직 내부에서 DevOps에 대한 이해를 넓히고자 작성한 세미나 자료입니다.
 1. DevOps란?
-2. DevOps 도구들
-2. CI/CD
-3. Monitoring
-4. AWS - Resource management
-5. Infrastructure as Code
-6. Miscellaneous
+2. DevOps Tools
 
 ## What is DevOps?
 * Agile
   + 소프트웨어 개발 속도 향상 - 비즈니스 환경 변화에 따른 요구
   + 개발 프로세스 : Waterfall -> Agile, 최소 기능 제품(MVP) 출시 후 시장의 피드백에 대응하며 개발
 * Developers vs Operators
-  + 새로운 기능 개발 vs 안정적 운영 = 빠른 개발 사이클 vs 적은 변화
+  + 새로운 기능 개발 vs 적은 변화 = 빠른 개발 사이클 vs 안정적 운영
   + DevOps의 탄생 : 개발자와 운영자의 상호협력하여 비즈니스 가치를 실현하는 개념
   + DevOps 활동 : CLAMS(Culture, Lean, Automation, Measurement, Sharing)
 * Culture, Tools, Organization
@@ -58,31 +53,6 @@ comments: true
   + 널리 쓰이는 도구(De Facto Standard)를 선택
   + 단계적 도입, 교육 및 정착 확인 필수
   + 스스로 유지 보수
-
-
-## CI/CD
-* Continuous Integration
-* Continuous Delivery
-* Continuous Deployment
-* CI/CD and Tool-chain
-  + GHE + Jenkins
-  + Jenkins Pipeline
-  + CloudFormation
-  + To-Be..  
-* Mindset
-
-## Monitoring
-* Infrastructure, Application, Business
-* Incident Tracking
-* Life-cycle of DevOps
-
-## AWS - Resource management
-* Understanding of AWS
-* Other Cloud Platforms
-* Resource/Service of AWS
-  + IaaS
-  + PaaS
-  + SaaS
 
 ## Infrastructure as Code
 * Dynamic Infrastructure : 동적 인프라, 자유롭게 생성/삭제 할 수 있고 바꿀 수 있음
