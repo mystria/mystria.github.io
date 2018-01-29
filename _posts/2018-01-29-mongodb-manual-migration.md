@@ -28,7 +28,7 @@ comments: true
 $ mongo
 ```
 1. Rename the database if you want  
-``` sssh
+``` ssh
 > db.copyDatabase('inventory','new_inventory');
 { "ok" : 1 }
 ```
@@ -39,7 +39,8 @@ $ mongo
         "info" : "now locked against writes, use db.fsyncUnlock() to unlock",
         "seeAlso" : "http://dochub.mongodb.org/core/fsynccommand",
         "ok" : 1
-}```
+}
+```
 1. This works can be applied on shell like this  
 ``` ssh
 $ mongo --eval "db.copyDatabase('inventory','new_inventory')"
@@ -50,14 +51,15 @@ $ mongo --eval "db.fsyncLock()"```
 $ mongodump --db=new_inventory```
 1. Check to connect the target mongodb server  
 ``` ssh
-$ ping cluster-dev-shard-00-00-z35un.mongodb.net```
+$ ping cluster-shard-00-00-abcde.mongodb.net```
 1. Restore dumpped data to the target MongoDB  
 ``` ssh
 $ mongorestore --host Cluster-shard-0/cluster-shard-00-00-abcde.mongodb.net:27017,cluster-shard-00-01-abcde.mongodb.net:27017,cluster-shard-00-02-abcde.mongodb.net:27017 --ssl --username <username> --password <password> --authenticationDatabase admin ~/dump/```
 1. Unlock database writes  
 ``` ssh
 $ mongo --eval "db.fsyncUnlock()"
-{ "info" : "unlock completed", "ok" : 1 }```
+{ "info" : "unlock completed", "ok" : 1 }
+```
 
 ## Reference
 * [MongoDB Atlas Migration]( https://www.mongodb.com/blog/post/migrating-data-to-mongodb-atlas)  
