@@ -24,28 +24,39 @@ comments: true
 ## 진행순서
 1. Connect an origin MongoDB shell
 1. Access the mongodb console  
-```$ mongo```
+``` ssh
+$ mongo
+```
 1. Rename the database if you want  
-```> db.copyDatabase('inventory','new_inventory');
-{ "ok" : 1 }```
+``` sssh
+> db.copyDatabase('inventory','new_inventory');
+{ "ok" : 1 }
+```
 1. Stop database writes to your existing database  
-```> db.fsyncLock();{
+``` ssh
+> db.fsyncLock();
+{
         "info" : "now locked against writes, use db.fsyncUnlock() to unlock",
         "seeAlso" : "http://dochub.mongodb.org/core/fsynccommand",
         "ok" : 1
 }```
 1. This works can be applied on shell like this  
-```$ mongo --eval "db.copyDatabase('inventory','new_inventory')"
+``` ssh
+$ mongo --eval "db.copyDatabase('inventory','new_inventory')"
 $ mongo --eval "db.fsyncLock()"```
 1. Exit the mongodb console
 1. Dump original data  
-```$ mongodump --db=new_inventory```
+``` ssh
+$ mongodump --db=new_inventory```
 1. Check to connect the target mongodb server  
-```$ ping cluster-dev-shard-00-00-z35un.mongodb.net```
+``` ssh
+$ ping cluster-dev-shard-00-00-z35un.mongodb.net```
 1. Restore dumpped data to the target MongoDB  
-```$ mongorestore --host Cluster-shard-0/cluster-shard-00-00-abcde.mongodb.net:27017,cluster-shard-00-01-abcde.mongodb.net:27017,cluster-shard-00-02-abcde.mongodb.net:27017 --ssl --username <username> --password <password> --authenticationDatabase admin ~/dump/```
-1. Unlock database writes
-```$ mongo --eval "db.fsyncUnlock()"
+``` ssh
+$ mongorestore --host Cluster-shard-0/cluster-shard-00-00-abcde.mongodb.net:27017,cluster-shard-00-01-abcde.mongodb.net:27017,cluster-shard-00-02-abcde.mongodb.net:27017 --ssl --username <username> --password <password> --authenticationDatabase admin ~/dump/```
+1. Unlock database writes  
+``` ssh
+$ mongo --eval "db.fsyncUnlock()"
 { "info" : "unlock completed", "ok" : 1 }```
 
 ## Reference
