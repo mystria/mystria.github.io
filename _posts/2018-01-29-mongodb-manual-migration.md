@@ -44,17 +44,21 @@ $ mongo
 1. This works can be applied on shell like this  
 ``` ssh
 $ mongo --eval "db.copyDatabase('inventory','new_inventory')"
-$ mongo --eval "db.fsyncLock()"```
+$ mongo --eval "db.fsyncLock()"
+```
 1. Exit the mongodb console
 1. Dump original data  
 ``` ssh
-$ mongodump --db=new_inventory```
+$ mongodump --db=new_inventory
+```
 1. Check to connect the target mongodb server  
 ``` ssh
-$ ping cluster-shard-00-00-abcde.mongodb.net```
+$ ping cluster-shard-00-00-abcde.mongodb.net
+```
 1. Restore dumpped data to the target MongoDB  
 ``` ssh
-$ mongorestore --host Cluster-shard-0/cluster-shard-00-00-abcde.mongodb.net:27017,cluster-shard-00-01-abcde.mongodb.net:27017,cluster-shard-00-02-abcde.mongodb.net:27017 --ssl --username <username> --password <password> --authenticationDatabase admin ~/dump/```
+$ mongorestore --host Cluster-shard-0/cluster-shard-00-00-abcde.mongodb.net:27017,cluster-shard-00-01-abcde.mongodb.net:27017,cluster-shard-00-02-abcde.mongodb.net:27017 --ssl --username <username> --password <password> --authenticationDatabase admin ~/dump/
+```
 1. Unlock database writes  
 ``` ssh
 $ mongo --eval "db.fsyncUnlock()"
