@@ -90,7 +90,7 @@ ReplicaSet 중 하나가 망가지니 나머지에 load가 몰려 전체적인 t
     5. Instance에 SSH로 접속 후 EBS mount : [참고](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/ebs-using-volumes.html)
     6. 하다보니 뭔가 이상...
     7. "Launch More Like This" 는 해당 instance와 동일한 AMI를 동일한 설정값으로 생성하는 것
-      - MongoDB가 설정되어 있지 않고, 각종 설정파일들이 세팅되어 있지 않음
+      - MongoDB가 설치되어 있지 않고, 각종 설정파일들이 세팅되어 있지 않음
       - 이것은 Chef로 설정되어 있던 것!
       - 사실 이 MongoDB는 다른 조직이 설치 후 인수인계 받은 것이며, Chef는 사라졌음(인수인계 못받음ㅠㅜ)
     8. 빠른 포기 후 instance와 EBS, snapshot 삭제
@@ -106,18 +106,20 @@ ReplicaSet 중 하나가 망가지니 나머지에 load가 몰려 전체적인 t
     9. rs.status()로 확인
 * Application에 ReplicaSet 주소를 변경
   + 원래 App의 (Java일 경우) JVM설정 등을 변경하여 신규 ReplicaSet을 연결해야 함
-  + 이번 케이스의 경우 해당 ReplicaSet이 Route53으로 등록되어 있었음
+  + 이번 케이스의 경우 해당 ReplicaSet이 Route53 Record로 등록되어 있었음
     - Route53의 Record를 신규 ReplicaSet member로 변경
 * CloudWatch로 확인
   + 정상동작 확인!!
 
 ## 평가
 * 불변 인프라
-서버가 24/7 잘 동작하는게 최고겠지만, 어찌됐건 서버가 죽을 수도 있는 일이다.  
-망가진 서버를 고쳐서 복구시키는 것도 방법이겠지만, 복구를 위해 소요되는 비용, 복구과정에서 알게 모르게 변경되는 여러 설정들을 생각하자면,  
-깔끔하게, 그리고 동일하게 새로 만드는 것이 여러모로 낫다.  
-그러기 위해선 코드로 정의된 인프라(Infrastructure as Code)와 데이터 일관성(Consistency), 끊김없는 전환(Seamless)이 필요한 것이다.  
-업데이트가 아닌 복구 측면에서도 불변 인프라(Immutable Infrastructure)는 유효하다고 생각된다.
+  + 서버가 24/7 잘 동작하는게 최고겠지만, 어찌됐건 서버가 죽을 수도 있는 일이다.  
+  + 망가진 서버를 고쳐서 복구시키는 것도 방법이겠지만, 복구를 위해 소요되는 비용, 복구과정에서 알게 모르게 변경되는 여러 설정들을 생각하자면,
+  + 깔끔하게, 그리고 동일하게 새로 만드는 것이 여러모로 낫다.  
+  + 그러기 위해선 코드로 정의된 인프라(Infrastructure as Code)와 데이터 일관성(Consistency), 끊김없는 전환(Seamless)이 필요한 것이다.  
+  + 업데이트가 아닌 복구(재해 복구) 측면에서도 불변 인프라(Immutable Infrastructure)는 유효하다고 생각된다.
+* 그런데 MongoDB는 왜 깨졌을까?
+  + 영원히 알 수 없게 되버림...
 
 ## 참고
 [MongoDB Replica Set 구성하기](http://minsql.com/blog/mongodb-replica-set-%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0/)
