@@ -119,7 +119,7 @@ ReplicaSet 중 하나가 망가지니 나머지에 load가 몰려 전체적인 t
   + 그러기 위해선 코드로 정의된 인프라(Infrastructure as Code)와 데이터 일관성(Consistency), 끊김없는 전환(Seamless)이 필요한 것이다.  
   + 업데이트가 아닌 복구(재해 복구) 측면에서도 불변 인프라(Immutable Infrastructure)는 유효하다고 생각된다.
 * 그런데 MongoDB는 왜 깨졌을까?
-  + 영원히 알 수 없게 되버림...
+  + 영원히 알 수 없게 됨...
 
 ## 참고
 [MongoDB Replica Set 구성하기](http://minsql.com/blog/mongodb-replica-set-%EA%B5%AC%EC%84%B1%ED%95%98%EA%B8%B0/)
