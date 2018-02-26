@@ -23,7 +23,7 @@ import json
 ...
 s3 = boto3.client("s3")
 bucket = "test_bucket"
-key = "test_object_key"
+key = "test_object_key.json"
 obj = s3.get_object(Bucket=bucket, Key=key)
 json_value = json.dumps(json.load(obj['Body']))
 '''
@@ -37,10 +37,24 @@ json_value = json.dumps(json.load(obj['Body']))
 TypeError: the JSON object must be str, not 'bytes'
 '''
 - 같은 library인데, 왜 str과 bytes로 달라지는 지 이유는 정확히 알 수 없지만, 해결책은 찾음. (제보 요망)
+  + Python2의 경우 Object가 unicode임
+  '''
+  {u'Body': <botocore.response.StreamingBody object at 0x...>, u'AcceptRanges': 'bytes', u'ContentType': 'binary/octet-stream', 'ResponseMetadata': {'HTTPStatusCode': 200, 'RetryAttempts': 0, 'HostId': '...', 'RequestId': '...', 'HTTPHeaders': {'content-length': '13279', 'content-encoding': 'UTF-8', 'x-amz-id-2': '...', 'accept-ranges': 'bytes', 'server': 'AmazonS3', 'last-modified': 'Tue, 20 Feb 2018 10:54:57 GMT', 'x-amz-request-id': '...', 'etag': '"..."', 'date': 'Fri, 23 Feb 2018 07:19:31 GMT', 'x-amz-version-id': '...', 'content-type': 'binary/octet-stream'}}, u'LastModified': datetime.datetime(2018, 2, 20, 10, 54, 57, tzinfo=tzutc()), u'ContentLength': 13279, u'ContentEncoding': 'UTF-8', u'VersionId': '...', u'ETag': '"..."', u'Metadata': {}}
+  '''
+  + Python3의 경우 Object가 UTF-8임
+  '''
+  {'VersionId': '...', 'ContentType': 'binary/octet-stream', 'ContentEncoding': 'UTF-8', 'Body': <botocore.response.StreamingBody object at 0x...>, 'Metadata': {}, 'ResponseMetadata': {'HTTPHeaders': {'last-modified': 'Tue, 20 Feb 2018 10:54:57 GMT', 'server': 'AmazonS3', 'x-amz-request-id': '...', 'etag': '"..."', 'date': 'Fri, 23 Feb 2018 07:19:50 GMT', 'content-type': 'binary/octet-stream', 'accept-ranges': 'bytes', 'content-length': '13279', 'x-amz-id-2': '...', 'x-amz-version-id': '...', 'content-encoding': 'UTF-8'}, 'RetryAttempts': 0, 'HostId': '...', 'RequestId': '...', 'HTTPStatusCode': 200}, 'AcceptRanges': 'bytes', 'ETag': '"..."', 'ContentLength': 13279, 'LastModified': datetime.datetime(2018, 2, 20, 10, 54, 57, tzinfo=tzutc())}
+
+  '''
 - Python3에서 실행 시 다음과 같이 해결
 ''' Python
 json_value = json.dumps(json.loads(obj['Body'].read().decode('utf-8')))
 '''
-- Object의 'Body'가 bytes로 인식되므로 이를 read() 하고 utf-8로 decode하여 String으로 만듦
+- Object의 'Body'가 bytes로 인식되므로 이를 read() 하고 UTF-8로 decode하여 String으로 만듦
 - String을 json.load하기 위해선 loads() 함수 이용
 - Python2에서도 이용 가능
+
+## 참조
+- 해결책: https://stackoverflow.com/questions/31976273/open-s3-object-as-a-string-with-boto3/35376156
+- json: https://www.slideshare.net/dahlmoon/json-20160301
+- 기타: https://stackoverflow.com/questions/956867/how-to-get-string-objects-instead-of-unicode-from-json
