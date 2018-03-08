@@ -26,7 +26,9 @@ An error occurred (ValidationError) when calling the DeleteStack operation: Stac
 
   + https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
   + 이렇게 하면 일단 UPDATE_ROLLBACK_FAILED 상태로 돌아갈 수 있음
-  + 이후 삭제하든 어쩌든 할 수 있음 - 해결!
+  + 이후 삭제하든 어쩌든 할 수 있음
+    - 만약 Nested된 stack이었다면, 상위 stack을 Continue Update Rollback하여 Rollback을 완료시켜야 함
+    - 해결!
 
 ## 그 밖의 해결책
 * 영문 AWS UserGuide에는 FAQ가 존재
