@@ -13,9 +13,9 @@ comments: true
 
 ## API Gateway
   * 29~50초가 기본
-  * 수정 불가 : https://docs.aws.amazon.com/apigateway/latest/developerguide/limits.html#api-gateway-limits
-
-  ~~~
+  * 수정 불가 : https://docs.aws.amazon.com/apigateway/latest/developerguide/limits.html#api-gateway-limits  
+  
+  ~~~ text
   504 Gateway Timeout
 
   {
@@ -25,7 +25,7 @@ comments: true
 
 ## Load Balancer
   * 60초가 기본
-  * 응답 헤더에 특별한 내용 없음
+  * 응답 헤더에 특별한 내용 없음  
   ~~~ text
   504 GATEWAY_TIMEOUT
 
