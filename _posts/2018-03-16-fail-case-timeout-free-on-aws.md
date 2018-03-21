@@ -26,7 +26,7 @@ comments: true
 ## Load Balancer
   * 60초가 기본
   * 응답 헤더에 특별한 내용 없음
-  ~~~
+  ~~~ text
   504 GATEWAY_TIMEOUT
 
   Cache-Control →proxy-revalidate
