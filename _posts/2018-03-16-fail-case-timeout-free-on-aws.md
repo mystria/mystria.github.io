@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "금주의 AWS 실패사례 - Resource가 삭제된 CloudFormation stack을 update하다 dead-lock"
+title:  "금주의 AWS 실패사례 - AWS에서 동작하는 Web Application Server의 Timeout설정"
 date:   2018-03-16 17:00:00 +0900
-categories: AWS
+categories: AWS ElasticBeanstalk
 comments: true
 ---
 # AWS에서 동작하는 Web Application Server의 Timeout설정
@@ -14,6 +14,7 @@ comments: true
 ## API Gateway
   * 29~50초가 기본
   * 수정 불가 : https://docs.aws.amazon.com/apigateway/latest/developerguide/limits.html#api-gateway-limits
+
   ~~~
   504 Gateway Timeout
 
@@ -145,6 +146,7 @@ comments: true
       |       `-- nginx.conf
       `-- WEB-INF
       ~~~
+    + 참고: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/java-se-nginx.html
 
 ## Tomcat server.xml
   * 60000밀리초(주의!)가 기본
@@ -161,6 +163,7 @@ comments: true
         replace-config:
           command: cp .ebextensions/server.xml /etc/tomcat8/server.xml
     ~~~
+    + 참고: https://stackoverflow.com/questions/12264432/how-do-i-supply-configuration-to-elastic-beanstalk-tomcat
 
 ## Application(Spring Framework)
   * 여기도 뭔가 있지만 생략
