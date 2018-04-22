@@ -6,13 +6,22 @@ categories: AWS ELB CloudFormation
 comments: true
 ---
 # Deprecated된 aws:elb:loadbalancer 설정들을 대체하기
-블라블라  
+CloudFormation으로 ElasticBeanstalk 환경을 구축하는데, Load Balancer 설정을 하려했다.  
+예전에 만들어둔 template에서는 aws:elb:loadbalancer라는 namespace의 option_settings 값을 설정하면 간편(?)하였는데, 아마도 좀 더 정교한 설정을 위해 이 설정은 deprecated되었다.  
+정교해진만큼 설정해야 할 option도 많아졌다.  
+그 중 SSLCertificateId의 값을 설정할 때 문제가 발생했다.
 
-## 시밤
-블러러  
-  * EC2 에서 HTTPS 프로토콜 처리 방법
-    1. 대상 instance에 SSL 인증서 파일을 넣는다.
-    2. 대상 instance의 proxy에서(보통 apache 또는 nginx사용) 설치된 인증서를 이용하여 HTTPS 프로토콜을 처리한다.
+## Elastic Load Balancer에 SSL인증서 설정
+Elastic Load Balancer(이하 ELB)의 역할은 물론 네트워크 입력을 분산시켜 처리하도록 해주는 것이다. 하지만 ELB는 한 가지 역할이 더 있는데, 바로 SSL인증서 처리이다.  
+  * Load Balancer에서
+
+## CloudFormation으로 ElasticBeanstalk를 생성
+
+## OptionSettings를 설정하여 ElasticBeanstalk의 세부 설정
+
+## aws:elb:loadbalancer -> aws:elb:listener:*port*
+  * loadbalancer Namespace가 deprecated됨
+    + 자세한 이유는 모르겠지만, Load Balancer가 좀 더 다양해지고 구체적이 되어 관리 포인트도 증가하여 설정도 세분화 한것으로 추정
 https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/aws-properties-elasticbeanstalk-configurationtemplate-configurationoptionsetting.html
 https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/ebextensions-optionsettings.html
 https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.managing.elb.html
