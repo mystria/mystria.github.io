@@ -24,14 +24,14 @@ comments: true
       - 빌드된 artifact는 S3에 업로드
     + CodePipeline 내부에서 Build 단계로 존재 할 수 있음
       - GHE가 아니라면(일반 GitHub, CodeCommit 등) CodePipeline의 Source 단계를 통해 소스코드를 불러와 Build 단계에서 BuildSpec에 정의된 대로 빌드
-      - 빌드된 artifact는 Output Artifact로 S3에 업로드되어 다음 단계의 Input Artifact로 전달 가능
+      - 빌드된 artifact는 Output artifact로 S3에 업로드되어 다음 단계의 Input artifact로 전달 가능
 
   * AWS CodePipeline
     + [AWS CodePipeline이란?](https://docs.aws.amazon.com/ko_kr/codepipeline/latest/userguide/welcome.html)
     + Source 단계에서 S3의 CloudWatch로 부터 update를 기다림
       - S3 외에 GitHub, CodeCommit도 가능
       - 그러나 GHE에서 가져와야 하므로, CodeBuild에서 S3로 artifact 업로드
-    + S3 변경 시 해당 패키지 파일을 가져와 Output Artifact로 등록
+    + S3 변경 시 해당 패키지 파일을 가져와 Output artifact로 등록
     + 이미 CodeBuild에서 build 되었기 때문에 Build 단계는 건너뜀(No Build)
       - 보통은 여기서 CodeBuild를 수행하게 되어있음(Jenkins 등)
       - 이 artifact를 CodeDeploy나 CloudFormation으로 배포해야 함
@@ -63,13 +63,13 @@ CodeDeploy 상태를 봐선, 수동 또는 CF를 이용해서 Lambda코드를 �
 
   * CodePipeline 구축
     + 위 "관련 문서"에서 안내하는대로 작업
-      - Lambda 함수는 CodePipeline의 Deploy단계에서 Deployment Provider로 CF를 선택하여 배포
-      - Template은 SAM 형식으로 Input Artifact 내부에 위치: MyApp::sam.template
-      - 만약, Action Mode를 "Create or update a stack"으로 하게되면 Create(Update)Stack cannot be used with templates containing Transforms. 이라는 에러가 발생
+      - Lambda 함수는 CodePipeline의 Deploy단계에서 Deployment provider로 CF를 선택하여 배포
+      - Template은 SAM 형식으로 Input artifact 내부에 위치: MyApp::sam.template
+      - 만약, Action mode를 "Create or update a stack"으로 하게되면 Create(Update)Stack cannot be used with templates containing Transforms. 이라는 에러가 발생
       - CF에서 stack으로 배포할 때는 그냥 Create Stack을 하면 됨
       - 단, console이 아닌 CLI로 배포시, create-stack이나 update-stack이 아닌 deploy명령으로 실행 해야 함
       - 참고: [Update cloudformation stack from aws cli with SAM transform](https://stackoverflow.com/a/41490589/8350542)
-      - 헷갈리지 말고 Action Mode를 "Create or replace a change set"으로 선택 할 것
+      - 헷갈리지 말고 Action mode를 "Create or replace a change set"으로 선택 할 것
     + ChangeSet
       - SAM은 CF template 형식을 따르지만, 변환 과정을 거쳐야 진정한 CF template이 됨
       - SAM 내용을 CF 형식으로 바꾼 것이 ChangeSet
@@ -84,18 +84,18 @@ CodeDeploy 상태를 봐선, 수동 또는 CF를 이용해서 Lambda코드를 �
       - 즉, S3에 올려둔 artifact가 변했더라도, CF는 인식 불가(ChangeSet의 생성 결과:  FAILED - No updates are to be performed.)
     + 해결책
       - S3에 업로드 할 artifcat이름을 매번 바꿈? 불가 - artifact이름이 바뀌면, CodePipeline의 Source 단계를 trigger할 수 없음
-      - CodePipeline의 Source 단계에서 다음 단계로 전달할 Output Artifact를 이용
-      - Output Artifact는 다시 임의의 S3로 전달되는데, 이 bucket과 key는 매번 임의의 이름으로 생성되므로 이를 SAM parameter로 전달 - Parameter Overrides
+      - CodePipeline의 Source 단계에서 다음 단계로 전달할 Output artifact를 이용
+      - Output artifact는 다시 임의의 S3로 전달되는데, 이 bucket과 key는 매번 임의의 이름으로 생성되므로 이를 SAM parameter로 전달 - Parameter overrides
       - CodeUri가 변경되므로 ChangeSet에서 "Modify"로 반영 됨
 
   * CodeUri 바꾸기
-    + Parameeter overrides 적용
+    + Parameter overrides 적용
       - Deploy 단계에서 Deploy Action의 Advanced 항목을 펼쳐보면, parameter값을 override 할 수 있음
       - 참고 1: [AWS CodePipeline 파이프라인에서 파라미터 재정의 함수 사용](https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-parameter-override-functions.html)
       - 참고 2: [Using Intrinsic Functions](https://github.com/awslabs/serverless-application-model/blob/master/HOWTO.md#using-intrinsic-functions)
       - 참고 3: [Not possible to have CodeUri as a parameter](https://github.com/awslabs/serverless-application-model/issues/61)
     + 실수 사례들
-      - parameter overrides를 적용했는데, SAM template에서 parameter를 받을 준비(Parameters 정의)가 되어 있지 않으면 에러 발생: Parameter values specified for a template which does not require them.
+      - Parameter overrides를 적용했는데, SAM template에서 parameter를 받을 준비(Parameters 정의)가 되어 있지 않으면 에러 발생: Parameter values specified for a template which does not require them.
       - 반대로 paramters를 받을 준비는 됐지만, parameter overrides 설정이 되지 않아도 에러 발생: Parameters: [BucketName, ObjectKey] must have values.
 
   * 기타: AutoPublishAlias
@@ -110,7 +110,7 @@ CodeDeploy 상태를 봐선, 수동 또는 CF를 이용해서 Lambda코드를 �
 
 ## 해야할 것 들
   * CodeDeploy로 production 배포
-    + 위 작업들로 Lambda 함수를 새로 생성하고 Alias까지 부여함
+    + 위 작업들로 Lambda 함수를 새로 생성하고 alias까지 부여함
     + 운영에 배포해야 할 Lambda 함수는 배포 모델을 적용하는 것이 필요
       - CodeDeploy의 Application/Deployment Group을 이용하여 배포 모델 적용
       - Production에 mapping된 alias를 CodeDeploy로 치환
@@ -125,7 +125,8 @@ CodeDeploy 상태를 봐선, 수동 또는 CF를 이용해서 Lambda코드를 �
     + 그러므로, 소스파일 내부에 SAM template를 넣어두는 것도 가능
     + CodeBuild에서 artifact를 만들 때, SAM template도 같이 묶어 활용
       - SAM의 CodeUri로 자기 자신을 참조(단, 위에 설명했듯이 Parameters로 동적으로 참조할 것)
-      - 이것이 Best Practice는 아니겠지만, SAM을 repository에 관리하는 것도 번거로움: 의견 주세요.
+      - 이것이 best practice는 아니겠지만, SAM을 repository에 관리하는 것도 번거로움: 의견 주세요.
+      - Input artifact를 두 개로 하여, 하나에는 SAM을 다른 하나에는 artifact와 template configuration file이 구성되는 방안도 고려: [AWS CloudFormation 아티팩트](https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-cfn-artifacts.html)
   * Artifact file structure
     + zip파일
       - sam.template
