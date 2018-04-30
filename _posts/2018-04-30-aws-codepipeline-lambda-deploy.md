@@ -41,16 +41,16 @@ comments: true
       - 사견: EC2 instance의 경우 artifact를 서버에 배포하고, 배포된 서버를 기존 서버와 치환하는 작업을 수행한다. 그러나 Lambda의 경우, 이미 수정되어 versioning이 된 함수들을 배포 모델(BlueGreen, Canary 등)에 맞춰 치환하는 작업만 수행한다.
       - Application, Deployment Group, Deployment Configurations와 Revision으로 구성됨
       - Application은 하는 역할이 없음, 그냥 Project같은 개념
-      - Application 아래 Deployment Group은 Deployment Configurations중 한가지 배포 모델을 선택하고, Trigger나 Rollback, Alert을 설정하지만 마찬가지로 특별히 하는 역할은 없음
-      - Revision이라고 하고 Deployment라고도 하는(=Deploy new revision)게 CodeDeploy에서 가장 큰 역할
+      - Application 아래 Deployment Group은 Deployment Configurations중 한 가지 배포 모델을 선택하고, Trigger나 Rollback, Alert을 설정하지만 마찬가지로 특별히 하는 역할은 없음
+      - Revision이라고 하고 Deployment(=Deploy new revision)라고도 하는게 CodeDeploy에서 가장 큰 역할
     + Revision 생성
       - Application을 선택하여 대상 플랫폼(EC2/Lambda등)을 결정
-      - Deployment Group을 선택하여 배포 모델(AllAtOnce등)과 기타 옵션을 결정
+      - Deployment Group을 선택하여 배포 모델(Canary, AllAtOnce 등)과 기타 옵션을 결정
       - AppSpec을 수기입력 받거나 S3로 지정하여 실질적인 배포를 수행
       - 사실상, AppSpec이란 것이 CodeDeploy의 전부
-      - 앞서 언급했듯이, AppSpec으로 (EC2에 배포할 경우에는 artifact를 지정할 수 있는 것 같음(files)) Lambda에 배포할 경우 버전 exchange만 가능함
+      - 앞서 언급했듯이, AppSpec으로 (EC2에 배포할 경우에는 artifact를 지정할 수 있는 것 같음(files)) Lambda에 배포할 경우 버전 치환만 가능함
     + 정리: CodeDeploy로 Lambda를 배포하는 것은 불가능
-      - 개발자가 console이나 CLI를 이용하든 CloudFormation(이하 CF)든 Lambda 함수의 artifact(소스코드)를 수정하고, 함수 버전을 publish 해두면, Deployment Group에 지정된 배포 모델을 적용하여 Alias를 seamless하게 변경해주는 것이 전부
+      - 개발자가 console이나 CLI를 이용하든 CloudFormation(이하 CF)든 Lambda 함수의 artifact(소스코드)를 수정하고, 함수 버전을 publish 해두면, Deployment Group에 지정된 배포 모델을 적용하여 alias를 seamless하게 변경해주는 것이 전부
       - 만약, 제가 잘못 이해했다면 댓글 부탁드립니다.
 
 ## 작업 기록
@@ -108,13 +108,15 @@ CodeDeploy 상태를 봐선, 수동 또는 CF를 이용해서 Lambda코드를 �
   * 정리
     - GHE -> CodeBuild -> CodePipeline(Source: S3 -> No Build -> Deploy: CF(Create a ChangeSet) -> Deploy: CF(Execute a ChangeSet)) -> Lambda function
 
-## 해야할 것 들
+## 해야 할 것들
   * CodeDeploy로 production 배포
-    + 위 작업들로 Lambda 함수를 새로 생성하고 alias까지 부여함
-    + 운영에 배포해야 할 Lambda 함수는 배포 모델을 적용하는 것이 필요
+    + 위 작업들로 Lambda 함수를 새 버전으로 update하고 alias까지 부여함
+    + 운영에 배포해야 할 Lambda 함수는 안전을 위해 배포 모델을 적용하는 것이 필요
       - CodeDeploy의 Application/Deployment Group을 이용하여 배포 모델 적용
       - Production에 mapping된 alias를 CodeDeploy로 치환
     + 이를 위한 AppSpec을 어디에 둘 것인가?
+      - AppSpec도 S3에 위치해야 하며, yaml/json 형식이어야 함
+      - CodePipeline상에 위치하기는 어려울 듯 - 고민 필요
 
 ## Sample codes
   * 특이 사항
