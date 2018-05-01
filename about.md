@@ -17,5 +17,5 @@ public: true
 작업과 관련 없는 내용(신변잡기 등)은 작성하지 않습니다.
 
 저작권(License)
-> Contents(\_Post)에 대해서는 CC BY-NC-SA 4.0 을 적용합니다.  
-해당 블로그는 Jekyll을 기반으로 작성되었습니다. 소스코드 관련은 MIT License 를 적용합니다.
+> Contents(\_post)에 대해서는 CC BY-NC-SA 4.0 을 적용합니다.  
+해당 블로그는 Jekyll을 기반으로 작성되었습니다. Jekyll 및 theme 관련 소스 코드는 MIT License 를 적용합니다.
