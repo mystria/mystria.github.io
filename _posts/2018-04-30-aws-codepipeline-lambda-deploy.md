@@ -60,6 +60,7 @@ CodeDeploy 상태를 봐선, 수동 또는 CF를 이용해서 Lambda코드를 �
     + [AWS SAM 사용](https://docs.aws.amazon.com/ko_kr/lambda/latest/dg/serverless_app.html)
     + [Spec](https://github.com/awslabs/serverless-application-model/blob/develop/versions/2016-10-31.md#awsserverlessfunction)
     + CloudFormation형식을 이용한, Serverless 앱 구축을 정의한 모델(템플릿)으로, CF에 stack으로 등록 시 "Transform"하여 일반 CloudFormation template으로 변환됨
+      - [Transform](https://docs.aws.amazon.com/ko_kr/AWSCloudFormation/latest/UserGuide/transform-section-structure.html)
 
   * CodePipeline 구축
     + 위 "관련 문서"에서 안내하는대로 작업
