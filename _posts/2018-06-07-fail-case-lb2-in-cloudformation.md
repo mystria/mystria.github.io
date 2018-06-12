@@ -6,22 +6,20 @@ categories: AWS CloudFormation ELB ElasticBeanstalk
 comments: true
 ---
 # AWS의 Application Load Balancer를 EB용 CloudFormation으로 정의할 때 만난 문제점
-AWS의 EC2는 클라우드에서 동작하는 일종의 "서버", 클라우드는 이런 서버를 무수히 확장(Scale-out)하여 대용량 트래픽에 대응 가능하다.  
-AWS에서는 Auto Scaling Group(서버 묶음)과 이들에게 트래픽을 분배하는 Load Balancer를 제공한다.  
-Elastic Load Balancer라 불리는 이것은 Application Load Balancer(이하 ALB)와 Classic Load Balancer(이하 LB)로 구분 된다.  
-이름에서 보다시피 예전에는 classic만 존재하였으나 모니터링 metric을 몇 개 더 추가하고, 비용을 줄여 ALB를 출시하였다.  
-(아마 Serverless 환경을 노린듯)  
-AWS ElasticBeanstalk를 사용하면 Load Balancer를 구축할 수 있는데, 이때 ALB와 LB를 선택 가능하다.
+AWS의 EC2는 클라우드에서 동작하는 일종의 "서버", 클라우드는 이런 서버를 무수히 확장(Scale-out)하여 대용량 트래픽에 대응 가능하다. Auto Scaling Group(서버 묶음)과 이들에게 트래픽을 분배하는 Load Balancer로 구성한다.  
+Elastic Load Balancer라 불리는 이것은 Application Load Balancer(이하 ALB)와 Classic Load Balancer(이하 LB)로 구분되며, 이름에서 보다시피 예전에는 classic만 존재하였으나 모니터링 metric을 몇 개 더 추가하고, 비용을 줄여 ALB를 출시하였다. (아마 Serverless 환경을 노린듯)  
+AWS ElasticBeanstalk를 사용할 때에도 Load Balancer를 구축할 수 있는데, 이때 ALB와 LB를 선택 가능하다.
 그리고 CloudFormation을 이용하여 ElasticBeanstalk를 생성할 때, 이러한 설정들을 OptionSettings로 전달해야 한다.
 여기에 함정이 숨겨져 있었다.
 
 ## 발단
-ElasticBeanstalk(이하 EB)를 CloudFormation(이하 CF)으로 생성, 이때 Load Balancer를 classic과 application중 선택 가능  
+하나의 ElasticBeanstalk(이하 EB) template를 범용적으로 사용하고자 하여 문제가 발생하였음  
+EB를 CloudFormation(이하 CF)으로 생성, 이때 Load Balancer를 classic과 application중 선택 가능  
 CF로 전달되는 Parameters에 따라 classic과 application을 선택할 수 있게하고, listener를 HTTP와 HTTPS를 선택할 수 있게 했음  
   * Classic
     + OptionSettings에 "aws:elb:listener"를 정의해야 함
     + OptionSettings에 "aws:elb:listener:443"를 정의해야 함
-  * Application
+  * Application(v2)
     + OptionSettings에 "aws:elbv2:listener"를 정의해야 함
     + OptionSettings에 "aws:elbv2:listener:443"를 정의해야 함
 
@@ -29,9 +27,9 @@ CF로 전달되는 Parameters에 따라 classic과 application을 선택할 수 
 
 ## 증상
 완성된 CF template를 실행시키면 아래와 같은 메시지
-~~~
-  Configuration validation exception: You must specify an SSL certificate to configure a listener to use HTTPS. (Service: AWSElasticBeanstalk; Status Code: 400; Error Code: ConfigurationValidationException; Request ID: b8xxxxx3-d5b8-48b2-8087-7xxxxxxxxxx3)
-~~~
+  ~~~
+    Configuration validation exception: You must specify an SSL certificate to configure a listener to use HTTPS. (Service: AWSElasticBeanstalk; Status Code: 400; Error Code: ConfigurationValidationException; Request ID: b8xxxxx3-d5b8-48b2-8087-7xxxxxxxxxx3)
+  ~~~
 HTTPS listener를 쓰기 위해선 SSL인증서를 설정해야 한다는 뜻
 
 ## 원인
@@ -66,6 +64,7 @@ CF의 Parameters에 따라 ALB/LB, HTTP/HTTPS를 선택하게 하기 위해서�
   CF의 조건문(Conditions)는 그다지 강력하지 않기 때문에 특정 조건에서만 Option값을 넣거나 뺄 수 없음  
   그래서 일단 필요한 값을 다 넣은다음 OptionName이나 Value를 조절해야 함  
   이 과정에서 아래와 같은 값도 미리 넣어놔야 함, 왜냐하면 위의 ListenerEnabled가 들어가 있는 이상 "없음" 상태가 아니라 존재하지만 "비활성화" 된 것이기 때문  
+  나중에 HTTPS(443) Listener을 활성화할 때 필요한 것
   * HTTP/HTTPS의 protocol 설정
     ~~~ json
       {
@@ -81,7 +80,7 @@ CF의 Parameters에 따라 ALB/LB, HTTP/HTTPS를 선택하게 하기 위해서�
     ~~~
 
     여기서 문제가 생김, 443포트에 대한 protocol을 HTTPS로 했기 때문에 SSL Certificate가 필요하단 것  
-    443포트이지만 HTTP로 지정해야 함
+    ListenerEnabled가 false라도 위 protocol이 존재하므로 Certificate도 정의 되어야 함
 
 ## 해결책
   * AWS::NoValue
@@ -112,6 +111,7 @@ CF의 Parameters에 따라 ALB/LB, HTTP/HTTPS를 선택하게 하기 위해서�
             "Value": { "Fn::If": [ "UseHttps", "HTTPS", "HTTP" ] }
           },
         ~~~
+  * 위 예제 처럼 443포트이지만 HTTP로 지정해야 함
   * Certificate의 경우
     + 마찬가지로 AWS::NoValue가 적용되지 않음
     + 아래처럼 SSLCertificateId / SSLCertificateArns 와 같은 OptionName이 처음부터 없던것 처럼 만들어야 함
