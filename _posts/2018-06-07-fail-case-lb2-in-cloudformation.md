@@ -127,3 +127,5 @@ CF의 Parameters에 따라 ALB/LB, HTTP/HTTPS를 선택하게 하기 위해서�
           "Value": { "Fn::If": [ "UseHttps", { "Ref": "CertificateArn" }, "HTTP" ] }
         },
       ~~~
+## 참고
+ * [모든 환경에 대한 일반 옵션](https://docs.aws.amazon.com/ko_kr/elasticbeanstalk/latest/dg/command-options-general.html)
