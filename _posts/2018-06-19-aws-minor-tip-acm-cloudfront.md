@@ -22,6 +22,7 @@ CloudFront는 CDN(Content Distribution Network)으로 자체적인 "cloudfront.n
     + 이때 Certificate도 원격지에 복제로 존재
       - Origin(원래 소스위치)에서 ACM을 업데이트 하더라도, 이것이 원격지에 바로 반영되지 않음
       - 몇 시간(개인적으로 4시간)정도 지나면 업데이트 됨
+      - 혹은 Default TTL(Distribution Settings > Behaviors)이 지나면 갱신되는 듯 - 언제가 TTL이 만료되는 시점인지는 알 수 없으나, 최대한으로 TTL만큼만 유지됨을 의미
   * 강제로 업데이트 하려면?
     + Reimport 하지말고 새로운 Certificate로 import한 후 CloudFront에서 해당 ARN으로 변경
     + CloudFront domain으로 변경 후 다시 custom domain을 재적용
