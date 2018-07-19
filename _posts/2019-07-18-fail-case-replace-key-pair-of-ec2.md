@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "금주의 AWS 실패사례 - "
+title:  "금주의 AWS 실패사례 - EC2의 key pair를 바꿔보자"
 date:   2018-07-18 20:00:00 +0900
 categories: AWS EC2
 comments: true
@@ -39,7 +39,7 @@ Amazon EC2에 SSH로 접속하기 위해서는 key pair가 필요하다. EC2 ins
              dmesg | tail or so.
     ~~~
       - 제대로 된 파티션을 지정했지만, 뭔가 잘못되었다고 함
-      - $ dmesg | tail 을 실행해보면 로그가 표시됨
+      - "$ dmesg | tail" 을 실행해보면 로그가 표시됨
       - 참고: [(ServerFault)Cannot mount an existing EBS on AWS](https://serverfault.com/questions/632905/cannot-mount-an-existing-ebs-on-aws)
       - Error 1과 Error 2는 사실상 비슷한 이유
     + Error 2-2: duplicate UUID
