@@ -43,7 +43,6 @@ comments: true
       - https://stackoverflow.com/questions/37127815/how-to-set-the-output-of-sh-to-a-groovy-variable
 - shell 에서 변수 선언
   - 변수명=값 : 띄어쓰기가 있으면 안됨, 변수명 규칙지켜야 함 -(hyphen)사용 불가
-    - https://appcenter23.samsungcloudprint.com/
   - command결과 변수에 넣기
     - 변수명=$(command)
     - grep 사용 시 필요한 값 찾아 넣을 수 있음 (-d f 등 활용)
