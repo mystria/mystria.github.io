@@ -24,12 +24,12 @@ EB Env의 event에서는 확실한 원인을 표시해주지 않는다. EB도 �
   + EB의 wait condition은 무엇이고, 왜 생성 도중 실패한 것인가?
 
 ## 해결책 조사
-Google에서 이것저것 많이 찾아보고 다녔지만, 뾰족한 답변을 구하지 못했는데, 애초에 이런 일이 잘 발생하지 않는 듯 했다.  
-하지만, AWS forum에서 힌트를 얻을 수 있었다.
+Google에서 이것저것 많이 찾아보고 다녀도 뾰족한 답변을 구하지 못했는데, 애초에 이런 일이 잘 발생하지 않는 듯 했다.  
+하지만, AWS forum에서 힌트를 얻을 수 있었다.  
 https://forums.aws.amazon.com/thread.jspa?threadID=113227#jive-message-412668
 * 요약
-  > The VPC is not configured correctly. It does not have a NAT instance running through which the ec2 instance can communicate with the internet.
-  > VPC 설정이 옳바르지 않다. EC2 인스턴스가 인터넷과 통신하게 해줄 NAT 인스턴스가 없다.
+  > The VPC is not configured correctly. It does not have a NAT instance running through which the ec2 instance can communicate with the internet.  
+  > VPC 설정이 옳바르지 않다. EC2 인스턴스가 인터넷과 통신하게 해줄 NAT 인스턴스가 없다.  
 * 풀이
   + Private Subnet에 위치하는 EC2 가 인터넷에 연결되기 위해서는 NAT 인스턴스 또는 NAT Gateway 가 필요
     - NAT Gateway는 동일하게 NAT 기능을 하는 관리형 서비스
