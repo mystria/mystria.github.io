@@ -8,11 +8,13 @@ comments: true
 # AWS Re:Invent 2018 요약 (1부)
 AWS Webinar를 들으며 요약했습니다. 급하게 적느라 빠지거나 틀린 부분이 있을 수도 있습니다.  
 [AWS의 SlideShare](https://www.slideshare.net/awskorea)에 자료가 공유되어 있으니 자세한 내용은 직접 확인 가능합니다.  
-AWS는 여전히 성장 중이며 굉장히 다양한 서비스를 제공
+AWS는 여전히 성장 중이며 굉장히 다양한 서비스를 제공  
+
 ## 글로벌 인프라 업데이트
   * Region 확장 : 총 19개 region으로 확장 중 (5개 추가 중 - 홍콩, 케이프타운, 스웨덴, 밀라노, UAE)
   * Edge location도 많이 추가, AWS Global Accelerator 신규 서비스 - 바로 AWS 백본 망으로 연결하여 속도 증대
   * AWS Transit Gateway - VPC를 AWS 계정 및 On-premise와 손쉽게 연결(기존에는 VPC Peering, Direct connect 등을 통합)
+
 ## 컴퓨팅 업데이트
   * Instance
     + d가 붙어있는 인스턴스 타입 - 물리적 연결된 SSD로 속도 증대
@@ -42,6 +44,7 @@ AWS는 여전히 성장 중이며 굉장히 다양한 서비스를 제공
       - KVM과 동일한 보안
       - 불필요 줄여 빠른 시작 시간을 위한 설계
       - 성능 최적화
+
 ## 스토리지 업데이트
   * Block storage : EBS
   * Object storage : S3 
@@ -68,5 +71,3 @@ AWS는 여전히 성장 중이며 굉장히 다양한 서비스를 제공
   * Blockchain
     - Amazon Quantum Ledger Database : 관리형 원장 관리(투명한 암호화로 업데이트 추적가능)
     - Amazon Managed Blockchain : 블록체인 생성 및 관리(Hyperledger Fabric or Ethereum)
-
-  
