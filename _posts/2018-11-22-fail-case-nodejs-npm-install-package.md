@@ -13,11 +13,12 @@ Apigee Edge는 API를 중계해주는 Cloud API 관리 플랫폼이다. SaaS로 
 이런 저런 사정으로 로컬머신에 Node.js와 EdgeMicro를 설치하려고 하고자 하였으나, 자꾸 설치가 실패하는 문제를 만났다.
 
 ## npm install 시 설치 경로
-npm install <package> -g 로 설치된 package는 보통 (prefix인) /usr/local 아래의 /lib/node_module/<package>에 설치된다고 한다.  
-https://docs.apigee.com/api-platform/microgateway/2.5.x/installing-edge-microgateway.html#whereisedgemicrogatewayinstalled  
-그러나 실제로는 /usr/local이 아닌 /usr아래의 /lib/node_module/<package>에 설치되었는데,  
-어떤 경우인지는 모르겠지만(nodejs나 npm의 버전 차이? global과 local의 차이?) NODE_PATH라는 ENV값(환경 변수로 변경 가능)의 default가 달라지는 것 같다.  
-현재 prefix를 확인하고 싶으면 npm config get prefix 하면 path가 나온다.
+npm install edgemicro -g 로 설치된 package는 보통 (prefix인) /usr/local 아래의 /lib/node_module/edgemicro에 설치된다고 한다.  
+[[edgemicro 설치 가이드](https://docs.apigee.com/api-platform/microgateway/2.5.x/installing-edge-microgateway.html#whereisedgemicrogatewayinstalled) 참고]  
+그러나 실제로는 /usr/local이 아닌 /usr아래의 /lib/node_module/edgemicro에 설치되었는데,  
+어떤 경우인지는 모르겠지만 NODE_PATH라는 ENV값(환경 변수로 변경 가능)의 default가 달라지는 것 같다.  
+(nodejs나 npm의 버전 차이? global과 local의 차이?)  
+현재 prefix를 확인하고 싶으면 npm config get prefix 하면 path가 나온다.  
 
 ## 사고 사례
   * 발단
