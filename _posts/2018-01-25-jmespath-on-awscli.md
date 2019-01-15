@@ -19,37 +19,74 @@ AWS CLI(Command Line Interface)로 요청을 전달하면 json형식의 응답�
 ## Examples
   * Tutorial 좋음: http://jmespath.org/tutorial.html
   * AWS 상의 간단한 예제
-  ~~~ sh
-    $ aws --profile test --region us-east-1 ec2 describe-vpcs --filters "Name=cidr, Values=10.5*.0.0/16" --query "Vpcs[*].CidrBlock"
-    [
-      "10.50.0.0/16",
-      "10.51.0.0/16"
-    ]
-
-    $ aws --profile test route53 list-hosted-zones
-    $ aws --profile test route53 list-resource-record-sets --hosted-zone-id /hostedzone/ABCDE --query "ResourceRecordSets[?Type=='A'].[Name,Type,ResourceRecords[*].*]"
-    [
+    + aws cli의 filter 를 이용하여 걸러낸 결과의 포맷을 변경
+    ~~~ sh
+      $ aws --profile test --region us-east-1 ec2 describe-vpcs --filters "Name=cidr, Values=10.5*.0.0/16" --query "Vpcs[*].CidrBlock"
       [
-        "test.example.com.",
-        "A",
-        null
+        "10.50.0.0/16",
+        "10.51.0.0/16"
       ]
-    ]
 
-    $ aws --profile test --region us-east-1 ec2 describe-instances --filter "Name=network-interface.association.public-ip, Values=54.*" --query "Reservations[*].Instances[*].[InstanceId,PublicIpAddress]"
-    [
+      $ aws --profile test --region us-east-1 ec2 describe-instances --filter "Name=network-interface.association.public-ip, Values=54.*" --query "Reservations[*].Instances[*].[InstanceId,PublicIpAddress]"
       [
         [
-          "i-xxxe0cv9s32d62334",
-          "54.35.112.0"
-        ]
-      ],
-      [
+          [
+            "i-xxxe0cv9s32d62334",
+            "54.35.112.0"
+          ]
+        ],
         [
-          "i-xxx946856ea4xxxaa",
-          "54.17.43.0"
+          [
+            "i-xxx946856ea4xxxaa",
+            "54.17.43.0"
+          ]
         ]
       ]
-    ]
-  ~~~
-  * 위 예제로 알 수 있듯이, --filter로 수 많은 목록을 유의미한 크기로 줄이고, --query로 필요한 값만 뽑아 내는 식으로 사용이 가능
+    ~~~
+
+    + JMESPath를 이용해서 filter 적용
+    ~~~ sh 
+      $ aws --profile test route53 list-hosted-zones
+      $ aws --profile test route53 list-resource-record-sets --hosted-zone-id /hostedzone/ABCDE --query "ResourceRecordSets[?Type=='A'].[Name,Type,ResourceRecords[*].*]"
+      [
+        [
+          "test.example.com.",
+          "A",
+          null
+        ]
+      ]
+    ~~~
+    + 위 예제로 알 수 있듯이, --filter로 수 많은 목록을 유의미한 크기로 줄이고, --query로 필요한 값만 뽑아 내는 식으로 사용이 가능
+  * 심화 예제 : Array 안에 또 Array가 있을 경우에는 다음과 같이 조건(Filter)을 붙여줄 수 있다.
+    + In-bound IP Range에 0.0.0.0/0 를 포함하고 있는 Security Group 찾기
+    + Object[?Object[?Object[?condition]]] 처럼 구현
+    + 결과물을 json처럼 표시하려면 {}를 이용
+    ~~~ sh
+      $ aws --profile test --region us-east-1 ec2 describe-security-groups --query "SecurityGroups[?IpPermissions[?IpRanges[?CidrIp=='0.0.0.0/0']]].{GroupId: GroupId, IpPermissions: IpPermissions[].{FromPort: FromPort, CidrIp: IpRanges[].CidrIp}}"
+      [
+        {
+          "GroupId": "sg-0000aaaa",
+          "IpPermissions": [
+            {
+              "CidrIp": [
+                  "0.0.0.0/0"
+              ],
+              "FromPort": 80
+            }
+          ]
+        },
+        {
+          "GroupId": "sg-abcd1234",
+          "IpPermissions": [
+            {
+              "CidrIp": [
+                  "0.0.0.0/0"
+              ],
+              "FromPort": 80
+            }
+          ]
+        }
+      ]
+    ~~~
+  * 참고 : [공식 예제](http://jmespath.org/examples.html#filtering-and-selecting-nested-data) 를 찾아봐도 Nest Filter에 대해서 부족한 점이 있었음
+    + Object[?Object.Object.Object == 'condition'] 과 같은 형태로는 조회 불가
