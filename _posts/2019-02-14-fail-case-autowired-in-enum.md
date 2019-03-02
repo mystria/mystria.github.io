@@ -22,3 +22,5 @@ DB에서 정보를 가져오는 service를 @Autowired 시켜서 사용하고 싶
 ## 요약
 Enum 안의 static class가 생성될 때 @PostConstruct로 생성되길 기다렸다가 값을 삽입하므로 Injection 문제가 해결 되는 듯
 
+## But
+https://stackoverflow.com/questions/45192373/how-to-assign-a-value-from-application-properties-to-a-static-variable
