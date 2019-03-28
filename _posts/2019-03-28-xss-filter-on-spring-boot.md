@@ -92,3 +92,4 @@ comments: true
   * https://stackoverflow.com/questions/6511880/how-to-parse-a-json-input-stream/13267720
   * https://www.baeldung.com/spring-boot-add-filter
   * https://supawer0728.github.io/2018/04/04/spring-filter-interceptor/
+  * https://github.com/ihoneymon/boot-spring-boot/wiki/%EC%9E%90%EB%8F%99%EA%B5%AC%EC%84%B1%EB%90%9C-Spring-MVC-%EA%B5%AC%EC%84%B1-%EC%A0%9C%EC%96%B4%ED%95%98%EA%B8%B0
