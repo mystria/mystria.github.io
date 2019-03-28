@@ -49,4 +49,4 @@ agent library failed to init: instrument
   * IntelliJ의 장점으로 언급했듯, 여러가지 키워드로 검색하다보니 아래와 같은 고객지원 글 확인
     + 해결책은 있지만, 원인은 못찾은 듯
       - https://intellij-support.jetbrains.com/hc/en-us/community/posts/360000166640-Running-Debug-in-Java-can-t-find-CaptureAgent
-    + Settings | Build, Execution, Deployment | Debugger | Async Stacktraces 를 비활성화 시키면 됨
+    + Settings > Build, Execution, Deployment > Debugger > Async Stacktraces 를 비활성화 시키면 됨
