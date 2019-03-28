@@ -66,6 +66,11 @@ comments: true
     converters.add(createCustomHtmlEscapingConveter());
   }
   ~~~
+  * ObjectMapper 추가 설정
+    + Default Converter 는 기본적으로 존재하지 않는 property는 무시하고 mapping을 해줌
+    + 그런데 그냥 new ObjectMapper()로 생성해버리면, 존재하지 않는 property 전달 시 에러 발생
+      - https://stackoverflow.com/a/12730655/8350542
+      - FAIL_ON_UNKNOWN_PROPERTIES 를 false로 설정
 
 ## 결과
   * RequestBody annotation엔 적용이 안됨(확인 필요)
