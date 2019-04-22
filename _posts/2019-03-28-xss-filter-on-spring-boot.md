@@ -74,18 +74,18 @@ comments: true
 
 ## 결과
   * RequestBody annotation엔 적용이 안됨(확인 필요)
-  * ResponseBody annotation엔 적용 성공!
-  ~~~ json
-  // Request
-  { 
-	  "data": "hello <script>alert('xss attack');</script>" 
-  }
-  
-  // Response
-  {
-    "result": "hello &lt;script&gt;alert('xss attack');&lt;/script&gt;"
-  }
-  ~~~
+  * ResponseBody annotation엔 적용 성공!  
+    ~~~ json
+      // Request
+      { 
+        "data": "hello <script>alert('xss attack');</script>" 
+      }
+      
+      // Response
+      {
+        "result": "hello &lt;script&gt;alert('xss attack');&lt;/script&gt;"
+      }
+    ~~~
 
 ## 기타 참고 자료
   * https://stackoverflow.com/questions/22461663/convert-inputstream-to-jsonobject
