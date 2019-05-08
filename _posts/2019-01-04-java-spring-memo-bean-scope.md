@@ -16,11 +16,11 @@ Spring을 이용해 코딩을 하다보니, 문득 각 bean들의 life cycle(혹
 ## Spring Reference
 * 모든 의문의 답은 레퍼런스에 있다.
   + https://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/beans.html
-  + https://docs.spring.io/spring/docs/3.0.0.M3/reference/html/ch04s04.html)
+  + https://docs.spring.io/spring/docs/3.0.0.M3/reference/html/ch04s04.html
 * 그러나 영어가 부족할 뿐...
 
 ## Bean의 Scope
-* controller는 몇개가 만들어질까?
+* Controller는 몇개가 만들어질까?
   + 정답은 singleton, bean별로 @Scope를 통해 조절 할 수는 있지만, 보통은 singleton
   + https://stackoverflow.com/questions/5667727/spring-controller-lifecycle
   + Spring의 기본 scope는 singleton임 (그래서 Thread-safe 구현이 필요)
