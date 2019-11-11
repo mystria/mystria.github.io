@@ -84,6 +84,37 @@ EC2 Instance Profile의 이름을 알아내어 token을 꺼내면 된다. EC2 In
   + EC2 Instance Profile의 access key와 token을 전달하여 AWS Signature Version 4을 완성
 먼길을 돌아왔지만 정답은 바로 앞에 있었다.  
 
+## 백문이 불여일샘플
+~~~ java
+// If IAM User static credentials are passed
+String currentAccessKeyId = DefaultAWSCredentialsProviderChain.getInstance().getCredentials().getAWSAccessKeyId();
+BasicSessionCredentials basicSessionCredentials = null;
+// IAM User can generate new session credentials by STS
+if (currentAccessKeyId != null && currentAccessKeyId.startsWith("AKIA")) {
+    AWSSecurityTokenService stsClient = AWSSecurityTokenServiceClientBuilder.standard()
+        .withRegion("eu-central-1") // You need to set a region
+        .build();
+
+    GetSessionTokenRequest getSessionTokenRequest = new GetSessionTokenRequest().withDurationSeconds(900);
+    GetSessionTokenResult getSessionTokenResult = stsClient.getSessionToken(getSessionTokenRequest);
+    Credentials sessionCredentials = getSessionTokenResult.getCredentials();
+    basicSessionCredentials = new BasicSessionCredentials(
+        sessionCredentials.getAccessKeyId(), sessionCredentials.getSecretAccessKey(), sessionCredentials.getSessionToken()
+    );
+}
+// EC2 instance profile is a session credentials, use itself
+else {
+    Iterator<IAMSecurityCredential> iter = EC2MetadataUtils.getIAMSecurityCredentials().values().iterator();
+    while (iter.hasNext()) {
+        // Get last one, probably, there is only one role
+        IAMSecurityCredential iamSecurityCredential = iter.next();
+        basicSessionCredentials = new BasicSessionCredentials(
+            iamSecurityCredential.accessKeyId, iamSecurityCredential.secretAccessKey, iamSecurityCredential.token);
+    }
+}
+// AWS Signature Version 4 will use the basicSessionCredentials
+~~~
+
 ## 참고
 * AWS의 Credential provider chain
   + V1: https://docs.aws.amazon.com/sdk-for-java/v1/developer-guide/credentials.html
