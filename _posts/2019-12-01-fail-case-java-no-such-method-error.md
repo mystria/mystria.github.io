@@ -59,6 +59,8 @@ NoSuchMethodError는 없는 메소드를 호출할 때 발생한다. 그런데 �
     - 여러가지 중복된 library 의존성이 문제
   + 실제 여러 다른 사례에서도, library 버전이나 classpath 문제가 원인이었다고 함
     - 중복 class 존재: http://egloos.zum.com/slog2/v/3775114
+    - 버전 정리: https://stackoverflow.com/questions/29444650/spring-boot-error-java-lang-nosuchmethoderror-org-apache-tomcat-util-scan-stan
+    - Library 버전 정리 or Exclude: https://stackoverflow.com/questions/54122724/spring-boot-java-lang-nosuchmethoderror-javax-servlet-http-httpservletrequest
   
 ## 결론
 * NoSuchMethodError는 의존성 문제
