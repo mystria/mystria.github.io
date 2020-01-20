@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "금주의 실패사례 - Jenkins job이 Gradle build시 file 생성"
+title:  "금주의 실패사례 - Jenkins 에서 다른 계정의 S3로 파일 업로드"
 date:   2020-01-20 18:00:00 +0900
 categories: Jenkins S3
 comments: true
