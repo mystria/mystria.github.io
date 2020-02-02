@@ -59,7 +59,7 @@ Jenkins에서 JavaScript로 된 artifact를 S3에 배포하고자 하였는데, 
     - 자세한 설명: https://medium.com/artificial-industry/how-to-download-files-that-others-put-in-your-aws-s3-bucket-2269e20ed041
   + Jenkins에서는 불가능
     - S3 Plugin에서 ACL 기능 미지원(한참 기능 업데이트가 없음): https://issues.jenkins-ci.org/browse/JENKINS-20851
-    - 단, 본인 계정에 업로드 할 경우, 정상적으로 Access for object owner가 등록됩
+    - 단, 본인 계정에 업로드 할 경우, 정상적으로 Access for object owner가 등록됨
     - Execute shell과 같은 작업으로 ACL 설정을 하고 싶지만, Amazon S3 profile에 접근 불가
     - 복잡하게 profile을 읽어오거나, Plugin을 고치거나...
 
