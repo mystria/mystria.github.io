@@ -28,14 +28,17 @@ OpenJDK 64-Bit Server VM (build 13.0.2+8, mixed mode, sharing)
 ## 코드 외 부분
 * 구버전 Gradle이 지원을 하지 않음
   + 정확한 버전 지원은 모르겠으나 Gradle 버전 5 이상(또는 6 이상)만 지원
-    - 버전 4 이하는 에러 표시2
-    ``` sh
-    $ gradle -version
-    FAILURE: Build failed with an exception.
-    
-    What went wrong:
-    Could not determine java version from '13.0.2'.
-    ```
+    - 버전 4 이하는 에러 표시
+      ~~~ sh
+      $ gradle -version
+      FAILURE: Build failed with an exception.
+      
+      * What went wrong:
+      Could not determine java version from '13.0.2'.
+      
+      * Try:
+      Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+      ~~~
   + 주의: Gradle의 plugin 중에서도 아직 지원하지 않는 경우가 존재
 * IDE 설정 필요
   + IDE에 연결되어 있는 Java home과 Gradle home 등을 바뀐 환경에 맞게 수정 필요
