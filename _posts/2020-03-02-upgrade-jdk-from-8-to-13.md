@@ -32,10 +32,10 @@ OpenJDK 64-Bit Server VM (build 13.0.2+8, mixed mode, sharing)
     ~~~ sh
     $ gradle -version
     FAILURE: Build failed with an exception.
-
+    
     \* What went wrong:
     Could not determine java version from '13.0.2'.
-
+    
     \* Try:
     Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
     ~~~
