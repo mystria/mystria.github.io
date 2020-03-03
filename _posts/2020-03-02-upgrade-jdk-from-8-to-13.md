@@ -31,10 +31,9 @@ OpenJDK 64-Bit Server VM (build 13.0.2+8, mixed mode, sharing)
     - 버전 4 이하는 에러 표시2
     ``` sh
     $ gradle -version
-    FAILURE: Build failed with an exception.
-    
+    FAILURE: Build failed with an exception.    
     * What went wrong:
-    Could not determine java version from
+    Could not determine java version from '13.0.2'.
     ```
   + 주의: Gradle의 plugin 중에서도 아직 지원하지 않는 경우가 존재
 * IDE 설정 필요
