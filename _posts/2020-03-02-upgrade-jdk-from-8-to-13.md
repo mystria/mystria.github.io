@@ -39,7 +39,7 @@ OpenJDK 64-Bit Server VM (build 13.0.2+8, mixed mode, sharing)
   * Try:
   Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
   ~~~
-  
+  + 주의: Gradle의 plugin 중에서도 아직 지원하지 않는 경우가 존재
 * IDE 설정 필요
   + IDE에 연결되어 있는 Java home과 Gradle home 등을 바뀐 환경에 맞게 수정 필요
   + org.gson 에서 java.sql.Time class 못찾는 문제 발생
