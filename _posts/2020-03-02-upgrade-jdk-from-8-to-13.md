@@ -18,27 +18,27 @@ JDK 버전을 업그레이드 하면서 Spring Boot기반 개인 프로젝트에
   + PPA: https://launchpad.net/~openjdk-r/+archive/ubuntu/ppa
   + Install: https://installvirtual.com/how-to-install-openjdk-13-on-ubuntu-19/
 * 버전 확인
-~~~ sh
-$ java --version
-openjdk 13.0.2 2020-01-14
-OpenJDK Runtime Environment (build 13.0.2+8)
-OpenJDK 64-Bit Server VM (build 13.0.2+8, mixed mode, sharing)
-~~~
+  ~~~ sh
+  $ java --version
+  openjdk 13.0.2 2020-01-14
+  OpenJDK Runtime Environment (build 13.0.2+8)
+  OpenJDK 64-Bit Server VM (build 13.0.2+8, mixed mode, sharing)
+  ~~~
 
 ## 코드 외 부분
 * 구버전 Gradle이 지원을 하지 않음
   + 정확한 버전 지원은 모르겠으나 Gradle 버전 5 이상(또는 6 이상)만 지원
-    - 버전 4 이하는 에러 표시
-      ~~~ sh
-      $ gradle -version
-      FAILURE: Build failed with an exception.
-      
-      * What went wrong:
-      Could not determine java version from '13.0.2'.
-      
-      * Try:
-      Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
-      ~~~
+  + 버전 4 이하는 에러 표시
+    ~~~ sh
+    $ gradle -version
+    FAILURE: Build failed with an exception.
+    
+    * What went wrong:
+    Could not determine java version from '13.0.2'.
+    
+    * Try:
+    Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+    ~~~
   + 주의: Gradle의 plugin 중에서도 아직 지원하지 않는 경우가 존재
 * IDE 설정 필요
   + IDE에 연결되어 있는 Java home과 Gradle home 등을 바뀐 환경에 맞게 수정 필요
@@ -60,9 +60,7 @@ OpenJDK 64-Bit Server VM (build 13.0.2+8, mixed mode, sharing)
       - RedisOperationsSessionRepository가 deprecated됨 -> RedisIndexedSessionRepository 사용
     - Redis 관련 코드 수정 필요
       - @EnableRedisHttpSession 사용 시, session 값 deserialize 오류 발생
-      ~~~ sh
-      Cannot deserialize; nested exception is org.springframework.core.serializer.support.SerializationFailedException: Failed to deserialize payload
-      ~~~
+      > Cannot deserialize; nested exception is org.springframework.core.serializer.support.SerializationFailedException: Failed to deserialize payload
       - 신규 SpringBoot 버전에서는 해당 annotation이 불필요한듯, [삭제 필요](https://stackoverflow.com/a/38696205/8350542)
       - 참고로 EnableRedisHttpSession 사용 시에는 session timeout 설정 위치를 EnableRedisHttpSession annotation의 maxInactiveIntervalInSeconds 속성으로 정의 해야함, 미사용시엔 application.properties의 server.servlet.session.timeout 속성
 * javax package가 jakarta 로 변경 됨, [OpenJDK 11부터 JavaEE 삭제](http://openjdk.java.net/jeps/320)
