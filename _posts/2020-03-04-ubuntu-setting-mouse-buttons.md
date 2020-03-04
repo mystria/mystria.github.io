@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "VMWare 위 Ubuntu에서 마우스 특수 버튼 활성화"
+title: "VMware 위 Ubuntu에서 마우스 특수 버튼 활성화"
 date: 2020-03-04 18:00:00 +0900
 categories: Ubuntu VMware
 comments: true
