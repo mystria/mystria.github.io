@@ -59,10 +59,9 @@ JDK 버전을 업그레이드 하면서 Spring Boot기반 개인 프로젝트에
     - redis.clients 를 3.1 이상, [참고](https://stackoverflow.com/q/33128318/8350542)
       - RedisOperationsSessionRepository가 deprecated됨 -> RedisIndexedSessionRepository 사용
     - Redis 관련 코드 수정 필요
-      - @EnableRedisHttpSession 사용 시, session 값 deserialize 오류 발생
+      - 이유를 알 수 없지만, StringRedisSerializer 사용 시, session 값 deserialize 오류 발생(향후 원인 확인 필요)
       > Cannot deserialize; nested exception is org.springframework.core.serializer.support.SerializationFailedException: Failed to deserialize payload
-      - 신규 SpringBoot 버전에서는 해당 annotation이 불필요한듯, [삭제 필요](https://stackoverflow.com/a/38696205/8350542)
-      - 참고로 EnableRedisHttpSession 사용 시에는 session timeout 설정 위치를 EnableRedisHttpSession annotation의 maxInactiveIntervalInSeconds 속성으로 정의 해야함, 미사용시엔 application.properties의 server.servlet.session.timeout 속성
+      - 그냥 default인 JdkSerializationRedisSerializer를 사용하면 에러는 해결되지만, 보안에 취약하므로 다른 것을 사용하기를 권장함, [참고](https://docs.spring.io/spring-data/redis/docs/current/reference/html/#redis:serializer)
 * javax package가 jakarta 로 변경 됨, [OpenJDK 11부터 JavaEE 삭제](http://openjdk.java.net/jeps/320)
   + jakarta.xml.bind-api 또는 javax.xml.bind 의존성 추가 필요
   + [참고](https://stackoverflow.com/a/43574427/8350542)
