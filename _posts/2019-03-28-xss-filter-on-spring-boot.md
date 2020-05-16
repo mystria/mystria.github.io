@@ -24,7 +24,7 @@ comments: true
       - Request param 또는 form-data로 전달 된 경우만 filtering
       - RequestBody를 통해 raw data로 보내는 것은 잡지 못함 (2019년 3월 기준)
   * 결국 모두가 비슷한 생각을 함
-    + http://homoefficio.github.io/2016/11/21/Spring%EC%97%90%EC%84%9C-JSON%EC%97%90-XSS-%EB%B0%A9%EC%A7%80-%EC%B2%98%EB%A6%AC-%ED%95%98%EA%B8%B0/
+    + [Spring에서 JSON에 XSS 방지 처리 하기](http://homoefficio.github.io/2016/11/21/Spring%EC%97%90%EC%84%9C-JSON%EC%97%90-XSS-%EB%B0%A9%EC%A7%80-%EC%B2%98%EB%A6%AC-%ED%95%98%EA%B8%B0/)
       - 위 블로그의 작성자님의 방법(Message Conveter)이 가장 현실적으로 다가옴
 
 ## Message Conveter
@@ -48,7 +48,9 @@ comments: true
       - 참고: configureMessageConverters는 default converters를 사용하지 않고, 사용자가 입력한 것만 쓰게만드는 method
       - 이지만, WebMvcConfigurer에서 받을 땐, 이미 default converters가 생성되어 있음
       - 즉, 우리가 override할 MappingJackson2HttpMessageConverter가 이미 포함되어 있음
-  * (주의!) MappingJackson2HttpMessageConverter 이 여러개 일 경우 내가 추가한 것이 선택되지 않음
+    + @EnableWebMvc annotation을 WebMvcConfigurer에 적용하면, 현재 정의한 MessageConverters로 기존 설정을 override함
+      - 단, 이 경우 default converter들이 없어지므로 별도로 설정 필요
+  * (주의!) MappingJackson2HttpMessageConverter 이 여러개 일 경우 내가 추가한 것이 선택되지 않을 수 있음
     + 그러므로 application/json으로 선택되는 converter를 덮어 써야 함
     + 기존것을 수정할 순 없고, 찾아서 지우고, 새로운 것을 add해야 함
   * 수정된 코드
