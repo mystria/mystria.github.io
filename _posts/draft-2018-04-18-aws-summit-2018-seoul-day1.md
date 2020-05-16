@@ -2,7 +2,7 @@
 layout: post
 title:  "AWS Summit 2018 Seoul - Day 1"
 date:   2018-04-18 09:00:00 +0900
-categories: AWS Summit2018
+categories: AWS Summit
 comments: true
 ---
 # 기조 연설

@@ -2,7 +2,7 @@
 layout: post
 title:  "AWS Summit 2018 Seoul - Day 2"
 date:   2018-04-19 09:00:00 +0900
-categories: AWS Summit2018
+categories: AWS Summit
 comments: true
 ---
 ## 마이크로 서비스 Spinnaker
