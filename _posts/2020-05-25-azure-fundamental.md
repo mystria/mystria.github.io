@@ -8,7 +8,7 @@ comments: true
 
 # Azure 기본 교육
 Azure Cloud 사용을 위한 기본 개념 및 Azure 서비스 소개  
-기울임 글꼴은 AZ-900 자격시험을 위해 별도로 추가한 내용
+기울임 글꼴은 AZ-900 자격 시험에 나올 수 있는 주요 키워드  
 
 ## Cloud(이하 클라우드) 개념
 * 클라우드 특성: 고가용성, 확장성(글로벌), 탄력성, 민첩성(빠른 자원할당), 내결함성(보안)
@@ -16,7 +16,7 @@ Azure Cloud 사용을 위한 기본 개념 및 Azure 서비스 소개
   + CapEx: 자본지출, 기존 인프라는 투자비용(초기비용↑, 감가상각), OpEx: 운영비용, 종량제
   + 적은 CapEx, 포기비용? zero
 * 클라우드 모델
-  + 퍼블릭 클라우드: Azure, AWS등.. 공급자가 리소스를 소유하고 최신 상태로 업데이트, 인터넷으로 연결(connectivity), 비교적 쉬운 관리(infra 전문지식 불필요)
+  + 퍼블릭 클라우드: Azure, AWS등.. 공급자가 리소스를 소유하고 최신 상태로 업데이트, 인터넷으로 연결(connectivity), 비교적 쉬운 관리(infra 전문지식 불필요), *On-Prem의 데이터 센터를 없앨 수 있음*
   + 프라이빗 클라우드: 조직이 리소스와 운영책임을 가짐, 완벽한 리소스 제어, 조직 구성원만 접속가능(강화된 보안)
   + 하이브리드 클라우드: 둘을 합쳐서 적절한 위치에서 app 실행, 둘의 장점을 취하고자 함, 퍼블릭으로는 부족한 지역적 법/규정적 요구사항 준수가능(준수성), 비용↑, 관리↑
 * 클라우드 서비스 유형(크게 3가지, 기타)
@@ -24,6 +24,7 @@ Azure Cloud 사용을 위한 기본 개념 및 Azure 서비스 소개
     - 시나리오: 워크로드를 그대로 옮겨서 재현가능(클라우드로 마이그레이션 하는 기업에서 많이 적용), 빠른 자원 확장, POC 해보기 좋음, 기존 웹호스팅 보다 저렴, 백업 및 복구 단순화
     - 비유: 식당의 원재료만 공급
     - Control-ability(제어의 범위) 이 높음, 기존 워크로드를 유지하고자 하는 경우 유리, 인프라 외에는 엔지니어의 관리가 필요
+    - *Azure VM(Virtual Machine)*
   + PaaS: 소프트웨어 개발, 배포, 테스트 환경 제공, 운영체제/개발도구/데이터베이스/비즈니스 분석을 제공하여 서비스 개발에만 집중 가능하고 빠른 app 배포 가능
     - 시나리오: 스타트업
     - 비유: 반조리된 재료 공급 - 간단한 조리 후 판매
@@ -38,11 +39,11 @@ Azure Cloud 사용을 위한 기본 개념 및 Azure 서비스 소개
 
 ## 핵심 Azure 서비스
 * Azure 아키텍처 구성요소
-  + region(지역, location): 데이터 센터의 집합, 사용자와 가까운 지역, 지역별 배포 가용성이 다름, 별도의 글로벌 서비스도 존재
+  + region(지역, location): 데이터 센터의 집합, 사용자와 가까운 지역, 지역별 배포 가용성이 다름, 별도의 글로벌 서비스도 존재, *가용성 강화용으로도 사용 가능*
   + region pair(지역쌍) 존재: 고가용성을 위함, 복제 보관
   + 가용성 옵션: 단일VM, 가용성 세트, 가용성 영역
   + 가용성 세트(Set): 논리적으로 구분한 가용영역, 2가지 설정: UD(업데이트 도메인) - 업데이트 시 순차적으로 적용되도록 분리, FD(오류 도메인) - 물리적(변압기)으로 분리
-  + 가용성 영역(Zone): 물리적 분리(데이터 센터 급 분리, 거의 모든 자원이 분리, 파워, 네트워크, 냉각 등)
+  + 가용성 영역(Zone): 물리적 분리(*데이터 센터 급 분리*, 거의 모든 자원이 분리, 파워, 네트워크, 냉각 등)
   + 리소스: Azure 자원(VM, storage account, web app, DB, virtual network 등)
   + 리소스 그룹: 동일한 수명주기를 가지는 리소스의 컨테이너, 지역으로 묶는게 (관리등에서)좋지만 무조건은 아님
   + Azure Resource Manager: Azure 리소스 배포, 삭제 및 관리(접근제어, 잠금, 태그)용 서비스
@@ -51,11 +52,11 @@ Azure Cloud 사용을 위한 기본 개념 및 Azure 서비스 소개
   + Azure Computing Service: On-Demand 컴퓨팅 서비스, 디스크,프로세서,메모리,네트워킹,운영체제 같은 컴퓨터
   + 가상머신 서비스: IaaS, VM Scale Sets(동일한 VM의 자동크기 조정 - auto scaling)
   + App Service: PaaS
-  + Function: MicroService용(서버리스?)
+  + Function: MicroService용(서버리스)
 
 * 실습
-  + portal.azure.com
-  + CLI: az
+  + *portal.azure.com*
+  + CLI: $ az
   + 리소스 그룹 만들기: 논리적인 그룹, 그룹 자체는 무료, 서브스크립션 지정 (향후 삭제시 리소스 그룹 내부 자원들은 의존성을 고려햐여 순차 삭제됨)
   + VM 만들기: 리소스 그룹 지정, 지역, 가용성 옵션(set vs zone), 이미지 선택, 이 외에도 시스템 자원도 세부 설정 가능
   + Virtual Network: AWS의 VPC와 Subnet과 동일한듯, https://azure.microsoft.com/ko-kr/services/virtual-network/
@@ -75,7 +76,7 @@ Azure Cloud 사용을 위한 기본 개념 및 Azure 서비스 소개
   + 스토리지 익스플로러로 쉽게 관리: https://azure.microsoft.com/en-us/features/storage-explorer/
 * 네트워크
   + Network Rule(NSG): (AWS의 SG같은 거) Inbound 와 outbound로 구분, 기본적인 설정이 추가되어 생성됨
-  + Public IP: 유동이지만 고정도 가능
+  + Public IP: 유동이지만 고정도 가능 *(무료라고 들은 것 같은데, 비용 절감을 위해 미사용 Public IP는 반납 권장)*
   + Network Watcher로 topology 확인 가능
     - *Connection Monitor기능으로 네트워크 트래픽 조사 가능*
     - *Packet Capture: VM간 트래픽을 캡쳐*
@@ -91,26 +92,25 @@ Azure Cloud 사용을 위한 기본 개념 및 Azure 서비스 소개
   + Connection strings: 해당 리소스에 접속하기 위한 보안키?
   + WebHook+API / Timer / DataProcessing(DB에 데이터가 추가되면 자동실행)
 * Azure 데이터베이스 서비스
-  + CosmosDB
+  + *CosmosDB* (AWS의 DynamoDB와 유사)
   + SQL DB
   + Migration service
-  + 등등
 * IoT
   + IoT Central: SaaS, 글로벌 IoT대규모 연결, 모니터링, 관리(시각화 툴)
-  + IoT Hub: 관리형 서비스, 앱과 디바이스간의 양방향 통신, 메시지 허브
-  + Queue storage
+  + *IoT Hub*: 관리형 서비스, 앱과 디바이스간의 양방향 통신, 메시지 허브
+  + *Queue storage*
   + REST는 좀 overhead가 있으니(REST는 서버에 1초에 4~5번 정도만 call 가능) MQTT/AMQP사용(1초에 70~80번 가능)
   + Stream Analysis: Stream -> (input) - IoT Hub, Event Hub(query) - (output) -> 테이블 스토리지(json)
 * 빅데이터 및 분석
-  + SQL Data Warehouse
-  + HDInsight
-  + Data Lake Analytics
+  + *SQL Data Warehouse(=Azure Synapse Analytics)*: 가장 빠르게 인사이트를 얻을 수 있는 무제한 분석 서비스
+  + *HDInsight*: *오픈 소스* 분석을 위한 간편하고 비용 효과적인 엔터프라이즈급 서비스
+  + *Data Lake Analytics*: 빅 데이터를 간소화하는 주문형 분석 작업 서비스
 * 인공지능
   + Machine Learning Service
-  + Machine Learning Studio
+  + *Machine Learning Studio*: AI 개발, 배포
 * 서버리스
-  + Function
-  + Logic App
+  + *Function*
+  + *Logic App*
   + Event Grid
 * 데브옵스
   + DevOps Service
@@ -118,12 +118,14 @@ Azure Cloud 사용을 위한 기본 개념 및 Azure 서비스 소개
   + Web App
 * 관리도구
   + Azure 관리 / 조작
-    - Azure Portal
+    - Azure Portal *(브라우저로 접속 가능)*
     - CLI: 명령어 실행
     - PowerShell *(Windows, Linux, macOS 모두 지원, 설치 필요 -> PowerShell script실행가능(물론 CLI 필요))*
-    - Cloud Shell *(Bash와 PowerShell 선택, PowerShell script실행가능)*
+    - Cloud Shell *(브라우저에서 ssh 제공, Bash와 PowerShell 선택, PowerShell script실행가능)*
     - 모바일 앱
   + Azure Advisor
+    - *백업 활성화 **안된** 디바이스 목록*
+    - *비용 절감 방법 제시* 
   + Export template: 현재 설정 그대로 다른 곳에서 다시 만들 수 있게 json형식의 template을 export
   + Azure DevTest Labs: 개발자가 커스텀된 VM들을 대량으로 만들고 삭제하는 작업을 도와줌(사전 정의 또는 Resource Manager 템플릿 기반)
   + Azure Repos: Version Control tool
@@ -137,11 +139,12 @@ Azure Cloud 사용을 위한 기본 개념 및 Azure 서비스 소개
   + 규칙: NAT규칙, 네트워크 규칙, 애플리케이션 규칙
     - 네트워크 규칙: source와 대상 IP를 기준으로 port 허용 규칙
     - Application 규칙: source IP와 FQDN으로 port 허용 규칙
+  + *VNet의 인바운드 트래픽 제한 가능* 
 * WAF - Application 레벨에서 보호
 * DDoS 보호
   + 원치않는 네트워크 트레픽 제거
   + 기본 Tier: Azure에서 자동으로 제공
-  + 표준 Tier: 완화 기능을 추가 가능, inteligent한 기능 추가 가능
+  + 표준 Tier: 완화 기능을 추가 가능, inteligent한 기능 추가 가능, *공격 방어*
     - 볼륨 공격: overflow유도
     - 프로토콜 공격: 프로토콜 약점을 통해 공격
     - 리소스 공격: 리소스간 데이터 통신 방해
@@ -151,7 +154,7 @@ Azure Cloud 사용을 위한 기본 개념 및 Azure 서비스 소개
   + 경계 부분에 Azure DDoS 보호나 Azure 방화벽 구축,
   + 네트워크 부분에서 네트워크 분할(서브넷)이나, NSG, 인/아웃바운드 통제
 * Azure 신원확인 서비스
-  + ID management: Authenticate(인증, AuthN) and Authorization(권한부여, AuthZ)
+  + *ID management: Authenticate(인증, AuthN) and Authorization(권한부여, AuthZ)*
   + 인증: 사람 또는 서비스를 식별
   + 권한부여: 액세스할 수 있는 데이터/작업의 수준 결정
   + Azure Active Directory(AD) - 주의, 윈도우의 AD와는 다른 기능, 서비스임
@@ -159,25 +162,25 @@ Azure Cloud 사용을 위한 기본 개념 및 Azure 서비스 소개
     - SSO(Same Sign-On은 뭐지?)
     - 응용 프로그램 관리: AzureAD의 App등록에서 설정
     - B2B/B2C의 ID 서비스: AzureAD B2B, AzureAD B2C 두 가지를 만들 수 있음
-  + Azure MFA: ID/PW외에 추가 인증요소 요구(3가지 조건: 당신이 알고 있는 것, 당신이 가지고 있는 것, 당신을 나타내는 것)
+  + *Azure MFA: ID/PW외에 추가 인증요소 요구(3가지 조건: 당신이 알고 있는 것, 당신이 가지고 있는 것, 당신을 나타내는 것)*
 * 추가 보안 도구
   + Azure 보안 센터: Azure 및 온프레미스의 위협 보호 기능을 제공하는 모니터링 서비스
     - 보안 권장 사항 제공
     - 보안 설정 모니터링
     - 신규 리소스에 보안 정책 자동 적용
     - 사용 시나리오: 감지, 평가 및 진단 단계에서 보안 센터 활용
-  + Azure Key Vault: 암호화 토큰, 키를 클라우드에 저장
+  + *Azure Key Vault*: 암호화 토큰, 키를 클라우드에 저장
     - 기밀(secret), 키, 인증서 관리 - 접근과 모니터링 제공
     - HSM(하드웨어 보안 모듈)을 지원 - premium 요금제
   + Azure 정보 보호(AIP): Office 365에서 잘 사용 중
-    - *문서 암호화, 워터마크
+    - *문서 암호화, 워터마크*
     - 레이블을 적용하여 문서 및 전자 메일을 분류/보호
   + Azure 고급 위협 보호(Azure Advanced Threat Protection, ATP)
     - 지능형 위협, 손상된 ID, 악의적 내부자 작업을 식별/탐지/조사, 구성요소: 포털, *센서*
     - 포털: 전용 모니터링 포탈
     - 센서: 도메인 컨트롤러에 설치됨
     - 클라우드 서비스: Azure에서 실행됨
-  + AzureAD Threat Protection: MFA를 강제하거나 신규 접속시 PW를 변경하도록 함 
+  + AzureAD Identity Protection: *MFA를 강제하거나 신규 접속시 PW를 변경하도록 함*
 
 ## Azure 거버넌스
 * Azure 정책: 리소스에 대한 규칙과 효과를 적용하기(강제하기) 위한 것, 회사 SLA 준수
@@ -231,19 +234,36 @@ Azure Cloud 사용을 위한 기본 개념 및 Azure 서비스 소개
   + 프로페셔널: Azure에 의존도가 높은 조직
   + 프리미어: MS제품에 대한 의존도가 높은 큰 조직 *(아키텍처 리뷰 지원)*
   + 대체지원: MSDN Azure, StackOverflow, ServerFault, Azure Knowledge Center
-  + SLA: 99.9%에서 99.99% 약속, 서비스 2개의 SLA는 각 SLA의 곱
+  + SLA: *99.9%에서 99.99% 약속, 서비스 2개의 SLA는 각 SLA의 곱*
 * 지원
   + *the (Microsoft)Trust center: Azure가 기업의 컴플라이언스 준수 사항을 충족하는지 확인(현재 바뀌어서? 없어진 것 같음)*
   + *또는 Service Trust Portal의 Compliance Manager: Azure포함 MS의 제품이 컴플라이언스 준수 사항을 충족하는지 확인 https://servicetrust.microsoft.com/*
+  + 구독, 서비스, 리소스 등에 제약이 걸려있으며 이를 풀기 위해서는 지원 요청(Request) 필요, *Help + Support*
 
-## 서비스 라이프 사이클(Modern ?? LifeCycle)
-* 미리보기(Preview)
-  + Private:특정 고객만,
-  + public 고객 누구나(SLA지원x),
+## 서비스 라이프 사이클(Modern LifeCycle Policy)
+* 미리보기(Preview): Private -> Public -> 이후 GA
+  + Private: 특정 고객만
+  + Public: 고객 누구나 (SLA지원x)
   + 미리보기가 끝나면 GA(상용화), 미리보기일 때 비교적 저렴
 * 서비스 종료: 서비스 지원 종료 시에는 12개월 전에 알려줌
 
-## 소감
+## 개인적인 소견
 * AWS에 비해
   + B2B에 특화: Subscription, Azure AD, VPN
-  + MS답게 서비스, 리소스들의 이름이 헷갈림(고유명사 사용, 잦은 변경)
+  + MS제품답게 서비스, 리소스들의 이름이 헷갈림(고유명사 사용, 잦은 변경)
+
+## 자격 시험 후기
+* 예제 문제에서 90% 나옴, 총 32문제 1시간
+* 예제에 없던 문제들 중 일부
+  + Azure AD 특징: VM에 agent?를 설치해야 하나?, Microsoft 365에도 사용가능? Microsoft 365 라이선스는 몇개씩 할당 가능?
+  + Azure Monitor의 특징: On-Prem 장치에 사용가능? Notification?
+  + 등등..
+* 서비스 이름이 바뀜
+  + Azure SQL Data Warehouse -> Azure SQL Synapse Analytics
+  + Azure Data Lake -> Azure Data Lake Analytics
+* 한글의 경우 용어가 다르니 조심(원어를 직역해보면 대충 알 수 있음)
+* 참고 사이트
+  + 예제에 오답 있음(5% 정도) 
+  + https://www.exam-answer.com/microsoft/az-900
+  + https://www.examtopics.com/exams/microsoft/az-900/view/
+    - 답이 애매하거나 찜찜하면 Discussion에서 다른 사람의 의견 확인 가능, 이 부분을 읽으면 공부에 도움이 많이 됨
