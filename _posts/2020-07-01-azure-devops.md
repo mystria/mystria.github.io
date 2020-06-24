@@ -77,6 +77,7 @@ Azure Cloud 기반 DevOps 적용 방법(Azure DevOps 도구 사용법)
     - Teams, Slack 등과 연동
     - AKS와 연동
 * 실무 대응
+  + Project 생성, Public/Private 지정 가능 
   + 요구사항 관리WBS(vs Workitem) 작성, Dictionaly 작성 - Jira와 매우 유사함(sprint관리, kanban보드, query편집)
     - xls파일로 관리 가능 (Team plugin)
     - MS Project와 연동(deprecated권장, Boards가 완벽 커버)
@@ -99,6 +100,12 @@ Azure Cloud 기반 DevOps 적용 방법(Azure DevOps 도구 사용법)
       - 배포 파이프라인, Artifact(CI와 연결) 획득 이후 커스텀 할 수 있는 stage들을 구성
       - Artifact에서 build가 생성될 때 시작하도록 trigger 설정
       - 배포 단계에서 인프라도 생성하는 단계를 넣을 수도 있음
+  + Pull Request
+    - CI 전, 코드 리뷰 및 토론의 기회
+    - Complete 할 때 merge 방식 지정 가능
+    - Branches 화면에서 branch별 policy를 설정하여 Pull request 정책(필수 리뷰어 수, WorkItem link 등)을 강제 가능
+    - PR의 WorkItem link는 commit의 #link와 다른 개념, PR은 WI를 close 할 수도 있음
+    - 실습: [PR실습](https://www.azuredevoposlabs.com/labs/azuredevops/pullrequest/)
   + 모니터링 도구
     - 현업 담당자: 초기요구사항, 검토, 버그수정요구, 추가요구사항 - 적극적일수록 개선이 잘됨
     - Application Insight: 매소드/프로퍼티 단위 입출입까지 수집 가능, Visual Studio에서 의존성 추가 후 바로 리소스 생성 가능
@@ -107,6 +114,12 @@ Azure Cloud 기반 DevOps 적용 방법(Azure DevOps 도구 사용법)
     - https://dev.azure.com/계정 에 연결 시, board 선택 가능
     - 화면 캡쳐, 녹화, 메시지 등을 수행 후 board에 task나 bug로 등록 가능
     - Boards에서 자연스럽게 처리
+  + 패키지 배포
+    - 실습: [Nuget Push](https://www.azuredevoposlabs.com/labs/azuredevops/packagemanagement/)
+    - Feed를 생성하면 사설 NuGet(의존성 저장소)이 만들어짐
+    - 라이브러리 프로젝트 빌드 후 패키징(pack)을 하고, 이 저장소에 push하면 라이브러리가 업로드 됨
+    - 해당 NuGet을 프로젝트에 추가하면 라이브러리를 의존성에 추가할 수 있음
+    - 위 과정 또한 pipeline으로 구성(코드 커밋 시, 빌드-패키징 하고 이를 release에서 nuget push하면 됨)가능
 
 * 개발도구 관련
   + Visual Studio
@@ -122,7 +135,7 @@ Azure Cloud 기반 DevOps 적용 방법(Azure DevOps 도구 사용법)
     - Azure: Git(분산) vs TFVC(중앙집중) 둘 다 지원
     - TFVC를 Git으로 마이그레이션(git-tfs)
     - Azure인프라 설정도 ARM(Azure Resource Management)라는 json 형식의 코드로 관리, 기존의 절차형 인프라 관리에 비해 공유, 버전관리 가능
-    - 다른 repository를 import 가능, git fork(원 repo와 연결 유지)와 clone의 차이? 
+    - 다른 repository를 import 가능, git fork(원 repo와 연결 유지)와 clone 
     - 멀티 레포지토리 가능: 원활한 코드관리, 테스트 등..
     - 워크플로우 전략: Feature branching / Gitflow branching / Forking Workflow
   + Visual Studio Code
