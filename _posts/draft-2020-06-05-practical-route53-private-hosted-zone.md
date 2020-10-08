@@ -38,6 +38,18 @@ Route53에서는 이를 제공한다. 이 Private DNS는 우리끼리만 쓰는 
     - https://docs.aws.amazon.com/ko_kr/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs.html
     - (다른 계정의 VPC) https://docs.aws.amazon.com/ko_kr/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html
     - https://aws.amazon.com/ko/premiumsupport/knowledge-center/private-hosted-zone-different-account/
+      ~~~ ssh
+        # profile 잘 확인하기
+
+        # 1. Guest VPC에게 권한주기
+        $ aws --profile hostedZoneOwner route53 create-vpc-association-authorization --hosted-zone-id ZONEID_FROM_ROUTE53 --vpc VPCRegion=eu-central-1,VPCId=vpc-guest_vpc_id
+
+        # 2. Guest가 VPC 연결 요청하기
+        $ aws --profile hostedZoneGuest route53 associate-vpc-with-hosted-zone --hosted-zone-id ZONEID_FROM_ROUTE53 --vpc VPCRegion=eu-central-1,VPCId=vpc-guest_vpc_id
+
+        # 3. Guest의 VPC의 권한 삭제
+        $ aws --profile hostedZoneOwner route53 delete-vpc-association-authorization --hosted-zone-id ZONEID_FROM_ROUTE53 --vpc VPCRegion=eu-central-1,VPCId=vpc-guest_vpc_id
+      ~~~
   - Private Hosted Zone을 공유하지 않고 각각 새로 생성
     - 기존 대상 Private Hosted Zone에다 다른 계정의 VPC를 추가하지 않고, 추가하려는 VPC가 있는 계정에 Private Hosted Zone을 추가
     - 이 Hosted Zone에 추가되는 record에 A type Alias 또는 CNAME을 추가하면 됨
