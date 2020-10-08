@@ -15,17 +15,32 @@ Route53에서는 이를 제공한다. 이 Private DNS는 우리끼리만 쓰는 
 이 처럼 재미있는 활용방법이 있는 Private DNS를 이용하여 서비스를 구축해보자.
 
 ## Private Hosted Zone
-- dd
+- 정의: 하나 이상의 VPC 내에 있는 도메인과 그 하위 도메인에 대하여 Amazon Route 53의 DNS 쿼리 응답 정보가 담긴 컨테이너
+- 즉, VPC 안에서만 통용되는 DNS
+- https://docs.aws.amazon.com/ko_kr/Route53/latest/DeveloperGuide/hosted-zones-private.html
+- Private Hosted Zone을 사용하려면 Amazon VPC에 설정 활성화 필요(기본으로 활성화 되어있음)
+  - enableDnsHostnames: true
+  - enableDnsSupport: true
   
 ## 동일한 hostname으로 internet-facing 로드밸런서와 internal 로드밸런서의 동시 운용
 - 로드밸런서가 외부용 / 내부용으로 분리되어 있음
+- 이 로드밸런서를 Route53에 연결하고자 함
 
 ## VPC Peering 너머의 DNS
 - Public Hosted Zone는 공유되어 조회 가능
   - Enabled 해줘야 하는건지? 그냥 되는지? 확인 필요
   - Public Hosted Zone에 정의한 internal 로드밸런서가 조회되어 Private IP를 반환
+    - Private IP를 반환하므로 VPC peering이 되어 있다면 접근 가능(20201004)
     - 신기하게도 같은 VPC에서는 이 Public Hosted Zone을 통해 Private IP가 조회 안됨
 - Private Hosted Zone도 공유 가능
-  - Private Hosted Zone을 정의할 때 VPC를 2개 추가하면 됨
-  - https://aws.amazon.com/ko/premiumsupport/knowledge-center/private-hosted-zone-different-account/
-
+  - Private Hosted Zone을 정의할 때 VPC를 2개 추가
+    - 각 VPC가 모두 해당 Private Hosted Zone을 조회
+    - https://docs.aws.amazon.com/ko_kr/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs.html
+    - (다른 계정의 VPC) https://docs.aws.amazon.com/ko_kr/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html
+    - https://aws.amazon.com/ko/premiumsupport/knowledge-center/private-hosted-zone-different-account/
+  - Private Hosted Zone을 공유하지 않고 각각 새로 생성
+    - 기존 대상 Private Hosted Zone에다 다른 계정의 VPC를 추가하지 않고, 추가하려는 VPC가 있는 계정에 Private Hosted Zone을 추가
+    - 이 Hosted Zone에 추가되는 record에 A type Alias 또는 CNAME을 추가하면 됨
+    - Alias는 다른 계정이라 자동 검색이 되지않으므로 직접 대상 입력 필요
+    - 참고로, ELB의 주소는 public DNS에서 검색됨
+ㄴ
