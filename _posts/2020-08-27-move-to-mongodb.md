@@ -13,7 +13,7 @@ MongoDB 측 세미나이기 때문에 MongoDB의 관점이기는 하지만, Mong
 
 ## DB 시장 트랜드
   + On-prem -> Cloud
-  + RDBMS vs NoSQL-> 내 requirement, pain point를 해결해준다면 적합[^카카오뱅크]
+  + RDBMS vs NoSQL-> 내 requirement, pain point를 해결해준다면 적합[^Kakao_Bank]
   + 한 가지냐? vs Multi model 이냐? -> 어떻게 한 가지로 다양한 요구를 해결할 수 있나? -> MongoDB 한 가지로 해결 가능?
   + RDBMS에도 다양한 data type model의 add-on 지원
   + Data As A Service(DAAS)
@@ -88,6 +88,6 @@ MongoDB 측 세미나이기 때문에 MongoDB의 관점이기는 하지만, Mong
 NoSQL을 쓰면 개발할 때 data type에 얽매이지 않는 것도 좋은 요소이다. 개인적으로 performance 에서도 불리함을 느끼지 못했으나, time-critical 시장에서는 어떨지 모르겠다.  
 MongoDB에서 제품을 영업하는 부분은 감안해야 겠지만, 개인적인 생각으로 일반적인 서비스에서는 RDB를 굳이 고집할 필요가 없을 것 같다.
 
-[^카카오뱅크]: 카카오뱅크는 뱅킹 서비스임에도 불구하고 MySQL로 구축했다. 기사: [카카오뱅크는 어떻게 MySQL로 데이터 유실을 막았을까](https://byline.network/2017/10/17-6/)
+[^Kakao_Bank]: 카카오뱅크는 뱅킹 서비스임에도 불구하고 MySQL로 구축했다. 기사: [카카오뱅크는 어떻게 MySQL로 데이터 유실을 막았을까](https://byline.network/2017/10/17-6/)
 [^Developer_Access]: 정확하게 무슨 뜻인지 못들었는데, 개발자가 접근하기 편하냐 또는 개발자를 구하기 편하냐 정도로 추측
 [^ORM]: DB의 의존성 없이 개발 가능, 그러나 복잡한 query는 불가능
