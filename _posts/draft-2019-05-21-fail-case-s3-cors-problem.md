@@ -1,12 +1,13 @@
 ---
 layout: post
-title:  "금주의 AWS 실패사례 - S3버킷에 upload를 할 때 자꾸 CORS 에러 발생"
+title:  "금주의 AWS 실패사례 - S3 Bucket에 업로드를 할 때 자꾸 CORS 에러 발생"
 date:   2019-09-26 03:00:00 +0900
 categories: AWS S3
 comments: true
 ---
 
-# S3 Bucket에 upload를 할 때 자꾸 CORS 에러 발생
+# S3 Bucket에 업로드를 할 때 자꾸 CORS 에러 발생
+AWS console이나 CLI 등이 아닌 Web browser에서 HTTP request로 S3에 파일을 업로드 하려고 할 때 CORS(Cross-Origin Resource Sharing) 위반 에러가 뜬다.  
 
 ## S3 CORS설정 가이드
 https://docs.aws.amazon.com/ko_kr/AmazonS3/latest/dev/cors.html
@@ -63,6 +64,7 @@ https://docs.aws.amazon.com/ko_kr/AmazonS3/latest/dev/cors-troubleshooting.html
 * Access-Control-* 관련 header가 오지 않을 때?
   - CORS설정이 되어 있음에도 안온다면 Request에 "Origin" header가 있는지 확인, 있어야 함
   - https://stackoverflow.com/a/48774074/8350542
+  - 난 있는데..
 
 ## AWS의 Region별 endpoint가 원인일까?
 * S3는 endpoint 체계가 좀 복잡함
