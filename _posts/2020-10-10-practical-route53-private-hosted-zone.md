@@ -39,7 +39,7 @@ comments: true
 ## VPC Peering 너머의 DNS
 - 기본적으로 Private Hosted Zone은 VPC Peering 너머로 공유가 안됨
 - Public Hosted Zone는 공유되어 조회 가능
-  - Enabled 해줘야 하는건지? 그냥 되는지? 확인 필요
+  - ~~Enabled 해줘야 하는건지? 그냥 되는지? 확인 필요~~
   - Public Hosted Zone에 Private Subnet의 internal 로드밸런서를 정의하면 건너편 VPC에서 조회되어 Private IP를 반환
     - Private IP를 반환하므로 VPC peering이 되어 있다면 접근 가능
     - 그러나 신기하게도 같은 VPC에서는 이 Public Hosted Zone을 통해 Private IP가 조회 안됨, Public IP가 조회 됨, Private IP가 아니기 때문에 Private Subnet 내부로 접근 불가
@@ -66,10 +66,12 @@ comments: true
     - 이 Hosted Zone에 추가되는 record에 A type Alias 또는 CNAME을 추가하면 됨
     - Alias는 다른 계정이라 자동 검색이 되지않으므로 직접 대상 입력 필요
     - 참고로, ELB의 주소는 public DNS에서 검색됨
+    - 이 방법을 쓰지 않는 이유는 운영적인 측면으로 다른 VPC에서 일어나는 일은 나의 R&R 밖의 일일 수 있기 때문에 나도 모르게 내 Private Hosted Zone의 target이 끊어질 수 있기 때문
 
 ## 정리
 - Private Hosted Zone만 두고 보면 그냥 평범한 기능
 - 변칙(?)적으로 운용하면 다양한 네트워크 아키텍처를 구성 할 수 있음
+- 보안과 운영을 살리기 좋은 기능
 
 
 [^PrivateSubnet] Private Subnet은 명시적으로 정의된 기능은 아님, Subnet의 routing table에 IGW(Internet Gateway)가 정의되지 않으면 Private Subnet으로 볼 수 있다. 단, ELB의 경우 internal과 internet-facing으로 구분되는데, internal을 선택하면 Private Subnet처럼 동작한다.
