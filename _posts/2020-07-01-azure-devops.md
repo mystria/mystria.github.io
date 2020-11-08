@@ -216,14 +216,14 @@ Azure Cloud 기반 DevOps 적용 방법(Azure DevOps 도구 사용법)
   + 워크플로우 전략: Feature branching / Gitflow branching / Forking Workflow
 * Visual Studio Code
   + Git ignore 확장 사용
-  + 실습: [Git실습](https://www.azuredevopslabs.com/labs/azuredevops/git/) | [CI실습](https://www.azuredevopslabs.com/labs/azuredevops/continuousintegration/)
+  + 실습: [Git실습](https://www.azuredevopslabs.com/labs/azuredevops/git/) / [CI실습](https://www.azuredevopslabs.com/labs/azuredevops/continuousintegration/)
 * Wiki
   + 개발 산출물(설계문서 등)을 위키로 관리, Azure DevOps에서 위키도 기본으로 제공
   + 흩어져서 관리하지 말고, Azure DevOps로 일원화 하여 형상관리 하기를 권장
 * Jenkins
   - 완전히 설정된 Jenkins 이미지를 바로 Azure에 배포가능
   - CI, CD 모두 지원하는 범용성 높은 도구
-  - 실습: [Jenkins Build](https://www.azuredevopslabs.com/labs/vstsextend/jenkins) | [Tomcat 베포](https://www.azuredevopslabs.com/labs/vstsextend/tomcat/)
+  - 실습: [Jenkins Build](https://www.azuredevopslabs.com/labs/vstsextend/jenkins) / [Tomcat 베포](https://www.azuredevopslabs.com/labs/vstsextend/tomcat/)
   - Azure Pipeline과 연계
     - Jenkins admin의 API Key필요
     - 우선 Jenkins에 build job 생성, source는 Git으로 부터..
