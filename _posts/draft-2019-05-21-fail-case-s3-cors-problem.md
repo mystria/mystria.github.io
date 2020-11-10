@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "금주의 AWS 실패사례 - S3 Bucket에 업로드를 할 때 자꾸 CORS 에러 발생"
+title:  "금주의 AWS 실패사례 - S3 Bucket에 업로드를 할 때 CORS 에러 발생"
 date:   2019-09-26 03:00:00 +0900
 categories: AWS S3
 comments: true
