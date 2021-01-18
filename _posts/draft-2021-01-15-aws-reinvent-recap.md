@@ -45,7 +45,20 @@ AWS Re:Invent 2020의 Recap Webinar를 들으며 요약했습니다. 급하게 �
 
 ## 개발자
 * 서버리스
-  + (향후 보강)
+  + 서버리스(보다 AWS Lambda)의 관심은 계속 증가
+    - Microservice(속도와 유연함)의 확대로 서버리스 트랜드가 가속화
+    - 문제: 개발시 여러개의 application을 만들어야 하는 부담, 서비스 별로 직면하는 Scaling/Monitoring/Deployment/Storage 라는 새로운 도전
+    - 이에 대한 해결책으로 서버리스 고려
+  + 서버리스 개발자의 역할
+    - AWS가 기대하는 미래는, 개발자는 비즈니스 로직에만 집중: AWS의 best practice는 managed/serverless component의 조합들
+    - 각 Component들에 대한 이해, 이들의 효율적인 조합/설계, DevOps코드의 최소화
+  + Lambda의 새로운 기능들
+    - Docker image지원: Container(10GB)를 native로 지원 - ML/데이터 분석과 같이 코드의 사이즈가 큰 경우 또는 dependency가 많은 코드에 효과적 (기존에는 Lambda Layer?)
+      - 기존 ECS/Fargate 와 유사한 flow, Image push - Lambda에 function생성(자동으로 registry에서 pull, 최적화하여 Lambda로 등록)
+    - EFS 불필요
+      - 고성능 file system, 부족했던 Lambda의 local storage(250MB) 보완 용, 비싼 가격 - Lambda로 ML추론(tensorflow)을 했는데 binary가 엄청 큼
+    - 기존 legacy의 서버리스로 migration이 쉬워짐
+      - 코드 재작성? Docker지원 - ECS/EKS/Kubernetes를 적은 수정으로 재사용, cold start가 긴경우(Ruby on Rails)는 검토 필요, PHP는 괜찮을 듯
     - Lambda 1ms 별 과금 (기존 100ms)
       - Microtask에도 Lambda를 적용 - 보통 batch에 사용 중인데, cache가 완벽하게 걸린 GET요청의 경우(10~20%) 5~10ms인데, 이걸 billing이 줄어 이제 실제에도 활용 가능
 
