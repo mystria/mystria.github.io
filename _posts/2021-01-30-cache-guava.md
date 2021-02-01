@@ -58,3 +58,4 @@ Guava, 아마 Google + Java가 아닐까?
 
 ## 기타
 * 참고: [Guava를 써야하는 5가지 이유](https://blog.outsider.ne.kr/710)
+* 참고: [Baeldung: Guava Cache](https://www.baeldung.com/guava-cache)
