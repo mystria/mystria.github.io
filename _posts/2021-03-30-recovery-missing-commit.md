@@ -19,6 +19,7 @@ comments: true
     - 즉, history가 없기 때문에 간단하게 push를 되돌릴 수 없다. log를 보면 그저 현재 commit으로 부터 과거만 볼 수 있다.
 * 확인해 보자!
   - 모든 것이 사라지고 현재 HEAD는 c076328d6 을 가리키고 있다. (본문의 sha-1 hash는 예시이며, 모두 다름)
+
   ``` bash
     your-project$ git log -5 --pretty=format:"%h - %an, %ar : %s"
     c076328d6 - yourname, 77 minutes ago : commit 5
@@ -69,6 +70,7 @@ comments: true
 * 이제부터 집중해서 따라하기
   - 우리는 commit hash 주소로 checkout이 가능하기 때문에, 직전 commit으로 돌아갈 수 있다.
     - 위에 [Stack Overflow의 두번째 답변](https://stackoverflow.com/a/24373376/8350542)이 정답
+
   ``` bash
     your-project$ git checkout cca7fffb4
     Note: checking out 'cca7fffb4'.
