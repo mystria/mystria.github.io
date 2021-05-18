@@ -43,6 +43,7 @@ comments: true
 ## 해결책
 * 작업 이력 확인
   - 먼저 지난 git terminal log(git 수행이력)를 확인해 보자
+  - 
   <!-- -->
     ``` bash
       your-project$ git push -f
@@ -57,6 +58,7 @@ comments: true
   - 만약 이 log를 확인할 수 없다면, 별도의 방법으로 마지막 commit hash를 찾아야 한다.
     - git reflog, git fsck 명령 등으로 확인 가능
     - [Git의 내부 - 운영 및 데이터 복구](https://git-scm.com/book/ko/v2/Git%EC%9D%98-%EB%82%B4%EB%B6%80-%EC%9A%B4%EC%98%81-%EB%B0%8F-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%B3%B5%EA%B5%AC)
+  - 
     ``` bash
       your-project$ git reflog show remotes/origin/MY_BRANCH
       c076328d6 (HEAD -> MY_BRANCH, origin/MY_BRANCH) remotes/origin/MY_BRANCH@{0}: update by push
