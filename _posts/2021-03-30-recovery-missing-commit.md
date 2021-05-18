@@ -44,12 +44,11 @@ comments: true
 * 작업 이력 확인
   - 먼저 지난 git terminal log(git 수행이력)를 확인해 보자
   - 
-  <!-- -->
     ``` bash
       your-project$ git push -f
       Total 0 (delta 0), reused 0 (delta 0)
       To https://github.com/your-org/your-project.git
-      + cca7fffb4...c076328d6 MY_BRANCH -> MY_BRANCH (forced update)
+      \+ cca7fffb4...c076328d6 MY_BRANCH -> MY_BRANCH (forced update)
     ```
   - 내가 한 멍청한 짓을 로그로 확인 가능하다. 
   - 다행히 망치기 직전의 commit hash 값을 확인 할 수 있다. (여기서는 cca7fffb4) 이 값을 아는게 중요한데, 이 값이 우리가 돌아가야할 목적지이기 때문이다.
