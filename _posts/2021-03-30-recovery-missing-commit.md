@@ -43,6 +43,7 @@ comments: true
 ## 해결책
 * 작업 이력 확인
   - 먼저 지난 git terminal log(git 수행이력)를 확인해 보자
+  <!-- -->
     ``` bash
       your-project$ git push -f
       Total 0 (delta 0), reused 0 (delta 0)
@@ -68,7 +69,7 @@ comments: true
     ```
 * 이제부터 집중해서 따라하기
   - 우리는 commit hash 주소로 checkout이 가능하기 때문에, 직전 commit으로 돌아갈 수 있다.
-    - 위에 [Stack Overflow의 두번째 답변](https://stackoverflow.com/a/24373376/8350542)이 정답
+  - 위에 [Stack Overflow의 두번째 답변](https://stackoverflow.com/a/24373376/8350542)이 정답
     ``` bash
       your-project$ git checkout cca7fffb4
       Note: checking out 'cca7fffb4'.
