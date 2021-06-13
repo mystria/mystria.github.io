@@ -53,7 +53,7 @@ Best practice는 확인 못했지만, 이론적으로 생각할 수 있는 구�
 * DNS 확인
 이 중 AZ가 명시되지 않은(아마도 LoadBalancer인 듯한) URL을 선택하여, VPC A에서 접속해보면 AZ교대로 접속이 되는것을 알 수 있다. AZ가 명시된 다른 것을 써도 되지만 특별한 제약이 없는 한 AZ가 없는 것을 쓰는게 자동으로 골고루 AZ routing이 된다는 점에서 좋을 것 같다.  
 이 Endpoint DNS들은 확인해보면 마치 VPC A에 위치한 것 처럼 internal IP로 연결되어 있다.  
-  >[ec2-user@ip-10-204-2-12 ~]$ ping internal-api.service.com
+  >[ec2-user@ip-10-0-2-12 ~]$ ping internal-api.service.com
 PING internal-api.service.com (10.0.1.62) 56(84) bytes of data.
 
 * 직접 DNS 적용하기
@@ -68,16 +68,16 @@ Private DNS name을 제공하는 경우에는 우리의 Endpoint의 Private DNS 
 
 ## Private DNS name의 문제
 그러나 Private DNS name은 설정된 VPC A에서만 가능하고 이를 peering한 VPC B에서는 연결이 되지 않는 문제가 있다. 이상하게도 VPC B에서는 이 private DNS name을 찾을(resolve할) 수 없다.  
->[ec2-user@ip-10-204-2-12 ~]$ ping internal-api.service.com
+>[ec2-user@ip-10-0-2-12 ~]$ ping internal-api.service.com
 ping: unknown host internal-api.service.com
 
 이를 해결하기 위해 위 "직접 DNS 적용하기" 처럼, 직접 VPC B에 private hosted zone을 구성해주어야 한다.   
 \* 참고로 VPC Peering의 DNS Setting으로도 시도해봤지만 해결이 되지 않았음  
 | DNS Settings |
-|:---|
-| Requester VPC (vpc-0622ddc8e3c10ef4b) peering connection attributes:
+|--------------|
+| Requester VPC (vpc-0000ddcxxxxx0ef4b) peering connection attributes:
 DNS resolution from accepter VPC to private IP: Disabled |
-| Accepter VPC (vpc-01ec87849ee98952d) peering connection attributes:	
+| Accepter VPC (vpc-0000878xxxxx8952d) peering connection attributes:	
 DNS resolution from requester VPC to private IP: Enabled |
 
 ## 만약 VPC peering이 없다면?
