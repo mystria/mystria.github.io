@@ -36,12 +36,12 @@ Best practice는 확인 못했지만, 이론적으로 생각할 수 있는 구�
 확실한 내부 구성은 잘 모르겠으나, MongoDB VPC의 private hosted zone에서 Endpoint를 가리키는 URL을 설정해주어 peering된 VPC의 DNS를 탈 수 있는 것으로 보인다.
 * 일반적인 Endpoint의 경우
 
-    |DNS names|
+    | DNS names |
     |:---|
-    |vpce-00000xxxxx00000cc-aaaabbbb.vpce-svc-00000xxxxx00000aa.us-east-1.vpce.amazonaws.com (Z7XXXXXUULQXV)|
-    |vpce-00000xxxxx00000cc-aaaabbbb-us-east-1a.vpce-svc-00000xxxxx00000aa.us-east-1.vpce.amazonaws.com (Z7XXXXXUULQXV)|
-    |vpce-00000xxxxx00000cc-aaaabbbb-us-east-1b.vpce-svc-00000xxxxx00000aa.us-east-1.vpce.amazonaws.com (Z7XXXXXUULQXV)|
-    |internal-api.service.com (Z069XXXXXM0LMA0004WUC)|
+    | vpce-00000xxxxx00000cc-aaaabbbb.vpce-svc-00000xxxxx00000aa.us-east-1.vpce.amazonaws.com (Z7XXXXXUULQXV) |
+    | vpce-00000xxxxx00000cc-aaaabbbb-us-east-1a.vpce-svc-00000xxxxx00000aa.us-east-1.vpce.amazonaws.com (Z7XXXXXUULQXV) |
+    | vpce-00000xxxxx00000cc-aaaabbbb-us-east-1b.vpce-svc-00000xxxxx00000aa.us-east-1.vpce.amazonaws.com (Z7XXXXXUULQXV) |
+    | internal-api.service.com (Z069XXXXXM0LMA0004WUC) |
   + Endpoint-specific DNS hostname
   Endpoint를 생성하고 Endpoint 세부정보의 DNS name을 보면 여러개의 AWS에서 제공했을 법한 읽기 힘든 URL을 볼 수 있는데 우리는 이를 통해 서비스에 접근할 수 있다.  
   예) vpce-00000xxxxx00000cc-aaaabbbb.vpce-svc-00000xxxxx00000aa.us-east-1.vpce.amazonaws.com (Z7XXXXXUULQXV)
@@ -73,12 +73,12 @@ ping: unknown host internal-api.service.com
 
 이를 해결하기 위해 위 "직접 DNS 적용하기" 처럼, 직접 VPC B에 private hosted zone을 구성해주어야 한다.   
 \* 참고로 VPC Peering의 DNS Setting으로도 시도해봤지만 해결이 되지 않았음  
-|DNS Settings|
+| DNS Settings |
 |:---|
-|Requester VPC (vpc-0622ddc8e3c10ef4b) peering connection attributes:
-DNS resolution from accepter VPC to private IP: Disabled|
-|Accepter VPC (vpc-01ec87849ee98952d) peering connection attributes:	
-DNS resolution from requester VPC to private IP: Enabled|
+| Requester VPC (vpc-0622ddc8e3c10ef4b) peering connection attributes:
+DNS resolution from accepter VPC to private IP: Disabled |
+| Accepter VPC (vpc-01ec87849ee98952d) peering connection attributes:	
+DNS resolution from requester VPC to private IP: Enabled |
 
 ## 만약 VPC peering이 없다면?
 주의할 점은 만약 VPC A와 B 간에 VPC peering이 없으면, (당연하게도) Endpoint의 internal IP를 얻어도 해당 IP로 접근이 불가능하다. 
