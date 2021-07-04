@@ -6,16 +6,18 @@
 </head>
 <body>
   <!-- DOM element in which we'll mount our graph -->
-  <div id="graph-container" style="
-    -webkit-transform: scale(0.75);
-    -moz-transform: scale(0.75);
-    -ms-transform: scale(0.75);
-    transform: scale(0.75);
-    -webkit-transform-origin: 0 0 0;
-    -moz-transform-origin: 0 0 0;
-    -ms-transform-origin: 0 0 0;
-    transform-origin: 0 0 0;
-  "></div>
+  <div id="box" style="height:1300px;width:900px;overflow:hidden;">
+    <div id="graph-container" style="
+        -webkit-transform: scale(0.75);
+        -moz-transform: scale(0.75);
+        -ms-transform: scale(0.75);
+        transform: scale(0.75);
+        -webkit-transform-origin: 0 0 0;
+        -moz-transform-origin: 0 0 0;
+        -ms-transform-origin: 0 0 0;
+        transform-origin: 0 0 0;
+    "></div>
+  </div>
 
   <!-- Use the `GitgraphJS` global variable to create your graph -->
   <script>
