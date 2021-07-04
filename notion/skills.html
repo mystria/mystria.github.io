@@ -46,35 +46,35 @@
 
     const scm = stack.branch("Supply Chain Management")
         .commit("Manage Business Process")
-        .commit("Oracle - Procedure").tag("2014");
-    stack.merge(scm, " ").tag("2013");
+        .commit("Oracle - Procedure ❶");
+    stack.merge(scm, " ").tag("2014");
 
     const websolution = stack.branch("Web applications on Cloud")
         .commit("Develop Web Applications");
 
     const frontend = websolution.branch("FrontEnd")
-        .commit("JavaScript/HTML/CSS")
-        .commit("ExtJs")
-        .commit("Sass/Sitemesh");
+        .commit("JavaScript/HTML5/CSS ❷")
+        .commit("ExtJs ❶")
+        .commit("Sass/Sitemesh/Freemarker ❶");
     const backend = websolution.branch("BackEnd")
-        .commit("Java")
-        .commit("Spring")
-        .commit("MySQL");
-    frontend.commit("jQuery/AJAX");
+        .commit("Java/Spring ❸")
+        .commit("VPC/EC2 ❸")
+        .commit("MySQL(Hibernate) ❷");
+    frontend.commit("jQuery/AJAX ❷");
     backend.commit("RESTful API/MSA");
     websolution.merge(frontend, " ");
 
     const devops = stack.commit(" ").tag("2017").branch("DevOps");
     devops.commit("Setup DevOps team");
     const cicd = devops.branch("CICD")
-        .commit("Git/GitHub").commit("Jenkins").commit("Python").commit("Apigee(EdgeMicro)");
+        .commit("Git/GitHub").commit("Jenkins").commit("Python ❶").commit("Apigee(EdgeMicro) ❶");
     const cloud = devops.branch("AWS")
-        .commit("VPC/EC2/ElasticBeanstalk/CloudWatch").commit("CloudFormation").commit("Route53/CloudFront").commit("Solutions Architect Associate");
+        .commit("ElasticBeanstalk/CloudWatch ❸").commit("CloudFormation ❸").commit("Route53/CloudFront ❸").commit("Solutions Architect Associate");
 
     devops.merge(cicd, " ");
     stack.merge(devops, " ").tag("2019");
 
-    backend.commit("Spring Boot").commit("AWS SES/SQS/Lambda/Elasticache/...").commit("MongoDB(MongoDB Atlas)");
+    backend.commit("Spring Boot ❸").commit("AWS SES/SQS/Lambda/Elasticache/... ❸").commit("MongoDB(MongoDB Atlas) ❷");
     backend.merge(cloud, " ");
 
     websolution.merge(backend, " ");
