@@ -55,7 +55,6 @@
         const scm = stack.branch("Supply Chain Management")
             .commit("Oracle - Procedure");
         stack.merge(scm, " ").tag("2014");
-        scm.close();
 
         const websolution = stack.branch("Web applications on Cloud")
             .commit("Develop Web Applications");
