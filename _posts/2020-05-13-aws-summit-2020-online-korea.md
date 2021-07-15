@@ -6,6 +6,7 @@ categories: AWS Summit
 comments: true
 ---
 # 신종 코로나 바이러스 19 때문에 온라인으로 개최
+AWS Summit 2020 에서 참석한 세션 요약
 
 ## 기조 연설(Dr. Werner Vogels)
 * 지금은 기반을 다지기 좋은 때, 변화에 대응하기 위해선 기반이 중요
@@ -40,7 +41,8 @@ comments: true
     - 유연성, 자동화, 데이터 고도화
     - 두가지 spike 패턴: 팬의 reaction 대응 / 상품 판매시 요청처리
 
-## 이벤트 드리븐 아키텍처 구축을 위한 적절한 어플리케이션 통합 서비스 선택 및 사용방법(김성진, Solutions Architect)
+## 이벤트 드리븐 아키텍처 구축을 위한 적절한 어플리케이션 통합 서비스 선택 및 사용방법
+* 김성진, Solutions Architect
 * 이벤트 드리븐 아키텍처의 개념
   + eCommerce에 주로 사용 - 구매 버튼 클릭 후 진행되는 작업들
     - 동기적으로 처리시 하나의 서비스 장애시 장애의 전파, 서비스 변경, 추가 시 변경 전파
@@ -79,7 +81,8 @@ comments: true
     - 견적 시스템의 예, 견적 요청서 분배, 입찰자의 견적서 수집
 * 결론: 이벤트 드리븐은 느슨한 결합, 적절한 서비스 및 패턴 선택, 버퍼역할로 속도차 극복, 큐 제약에 대해 파악 잘하고 서버리스 추천 
 
-## Graviton processor instance 살펴보기 (김종선, Solutions Architect)
+## Graviton processor instance 살펴보기 
+* 김종선, Solutions Architect
 * 다양한 컴퓨팅 소개와 발전 사항 안내
 * 대부분의 서비스는 컴퓨팅으로 시작, AWS에서는 다양한 컴퓨팅을 제공, 22개 리전, 69개 가용영역, 최대규모의 네트워크 인프라
 * 2017년 이후 NITRO 아키텍처 적용하여 가볍고 고성능의 보안 강화된 환경으로 구축, 2019년 발표된 NITRO 기반 인스턴스는 성능이 훨씬 좋음
@@ -123,7 +126,8 @@ comments: true
   + 2가지 활용: Native AWS활용, VMware Cloud on AWS활용 
   + Outpost는 가용영역으로 간주됨 
 
-## 최신 컨테이너 기술 소개 및 가시성 향상을 위한 컨테이너 로깅 / 분석 최적화 (유재석/안효빈, Solutions Architect)
+## 최신 컨테이너 기술 소개 및 가시성 향상을 위한 컨테이너 로깅 / 분석 최적화 
+* 유재석/안효빈, Solutions Architect
 * 다양한 컨테이너 제품: ECS, EKS, AWS Fargate(서버리스 컨테이너 컴퓨팅 서비스) 최신 업데이트 소개(유재석)
   + AWS의 컨테이너 서비스 역사
     - EKS: K8s를 관리형으로 제공, 
@@ -180,7 +184,8 @@ comments: true
 * 활용
   + 인프라 레벨에서 디버깅 뿐 아니라 서비스 레벨, 애플리케이션 레벨까지 디버깅 
 
-## AWS 관리형 서비스를 활용하여 Kubernetes 를 위한 DevOps 환경 구축하기 (김광영, Solutions Architect)
+## AWS 관리형 서비스를 활용하여 Kubernetes 를 위한 DevOps 환경 구축하기 
+* 김광영, Solutions Architect
 * 속도와 민첩성이 중요 - MSA로 바꾸고 Serverless로 그리고 CICD 필요 -> DevOps
   + DevOps: 문화, 방법론, 도구
   + 적은 인력으로 적용하려면? IaC화 필요
@@ -218,7 +223,8 @@ comments: true
   + 보안 및 규정 준수 
   + 구성은 AWS에 맡기고 비즈니스에 집중
 
-## 회사 계정/패스워드 그대로 AWS 관리 콘솔 및 EC2 인스턴스 사용하기(이정훈, Solutions Architect)
+## 회사 계정/패스워드 그대로 AWS 관리 콘솔 및 EC2 인스턴스 사용하기
+* 이정훈, Solutions Architect
 * IAM 101
   + User와 Role: password가 있냐 없냐로 구분할 수 있음, Role은 자격증명 된 누구에게나 줄 수 있음 
   + Role을 통해 account 너머에도 권한을 줄 수 있음
