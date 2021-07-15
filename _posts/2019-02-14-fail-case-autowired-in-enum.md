@@ -22,5 +22,46 @@ DB에서 정보를 가져오는 service를 @Autowired 시켜서 사용하고 싶
 ## 요약
 Enum 안의 static class가 생성될 때 @PostConstruct로 생성되길 기다렸다가 값을 삽입하므로 Injection 문제가 해결 되는 듯
 
+## Sample
+~~~ java
+import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+public enum Fruit {
+  APPLE("red"),
+  BANANA("yellow");
+
+  private String color;
+  private String seller;
+
+  Fruit(String color) {
+    this.color = color;
+  }
+
+  @Component
+  public static class FruitEnumInjector {
+    @Autowired
+    private SellerService sellerService;
+    @PostConstruct
+    public void postConstruct() {
+      try {
+        APPLE.seller = sellerService.getSeller("apple");
+        BANANA.seller = sellerService.getSeller("banana");
+      }
+      catch(Exception e) {
+        throw e;
+      }
+    }
+  }
+  public String getColor() {
+    return color;
+  }
+  public String getSeller() {
+    return seller;
+  }
+}
+~~~
+
 ## But
 https://stackoverflow.com/questions/45192373/how-to-assign-a-value-from-application-properties-to-a-static-variable
