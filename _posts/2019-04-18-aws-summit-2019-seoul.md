@@ -5,7 +5,12 @@ date:   2019-04-18 09:00:00 +0900
 categories: AWS Summit
 comments: true
 ---
-마이크로 서비스 에서 데이터 베이스
+
+# AWS Summit 2019 Seoul
+AWS Summit 2019 에서 참석했던 세션 요약입니다.
+
+---
+## 마이크로 서비스 에서 데이터 베이스
 * 데이터 베이스는 여전히 성장 중
     * 오라클 디비를 아마존 DynamoDB로 옮기는 사례 증가
 * 그러나 모노리틱 시대는 끝났다
@@ -84,10 +89,8 @@ comments: true
             * 스트림데이터(줄을 서서 처리가 오래 걸림) 의 병렬처리 고민
             * 키네시스 파이어호스의 500개 인입 제한은 다른 메시지 브로커 사용
             * Athena 빈도 증가 - EMR 등 비용 절감
-* 끝
-* 아마존 서비스 많이 써주세요 - 선택 가이드 이미진
 
-AWS에서 Kubernetes 실행하기
+## AWS에서 Kubernetes 실행하기
 * EKS 아키텍처, 글로발 고객 사례(Fidelity, Snapchat, State Street), 데모
 * EKS 아키텍처 : AWS 의 관리형 서비스
     * Tenets : 서비스를 만드는 원칙
@@ -163,10 +166,8 @@ AWS에서 Kubernetes 실행하기
                 * 이벤트 - Kube의 이벤트
                 * 애플리케이션
             * 클러스터 구축시 함께 구축(설정)
-* 데모
-    * 그냥 평범...
 
-MongoDB Atlas
+## MongoDB Atlas
 * 고객들이 원하는 데이터베이스
     * 쉽고
     * 플렉시블
@@ -227,9 +228,9 @@ MongoDB Atlas
     * API만 에뮬레이팅 한 것보다 낫다
     * 차이점과 기능은 부스에서...
 
-EKS통한 차량 공유서비스 ‘타다’ 구축기
-* 많이 본 아저씨네… VCNC GitHub.io/ditto
-    * 비트윈 개발한 아저씨네..
+## EKS통한 차량 공유서비스 ‘타다’ 구축기
+* 여러 세션에서 많이 뵌 분… VCNC GitHub.io/ditto
+    * 비트윈 개발자
     * 실시간 호출, 예약 서비스 제공
 * 아키텍처 / EKS 사용 경험(kops -> EKS 경험)
 * 기술 선택 배경
@@ -306,4 +307,3 @@ EKS통한 차량 공유서비스 ‘타다’ 구축기
             * kube2iam 사용
                 * 팟마다 다른 iam 프로파일을 사용하기 위함
         * VCNC 기술 블로그 : engineering.vcnc.co.kr
-* 끝
