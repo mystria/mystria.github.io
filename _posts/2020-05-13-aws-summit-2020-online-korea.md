@@ -5,7 +5,8 @@ date:   2020-05-13 09:00:00 +0900
 categories: AWS Summit
 comments: true
 ---
-# 신종 코로나 바이러스 19 때문에 온라인으로 개최
+# AWS Summit 2020 Online Korea
+신종 코로나 바이러스 19 때문에 온라인으로 개최  
 AWS Summit 2020 에서 참석한 세션 요약
 
 ## 기조 연설(Dr. Werner Vogels)
