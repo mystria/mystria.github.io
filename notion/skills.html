@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Load the JS file -->
+  <!-- https://github.com/nicoespeon/gitgraph.js/tree/master/packages/gitgraph-js#gitgraphjs -->
+  <script src="https://cdn.jsdelivr.net/npm/@gitgraph/js"></script>
+</head>
+<body>
+  <!-- DOM element in which we'll mount our graph -->
+  <div id="box" style="height:1300px;width:900px;overflow:hidden;">
+    <div id="graph-container" style="
+        -webkit-transform: scale(0.75);
+        -moz-transform: scale(0.75);
+        -ms-transform: scale(0.75);
+        transform: scale(0.75);
+        -webkit-transform-origin: 0 0 0;
+        -moz-transform-origin: 0 0 0;
+        -ms-transform-origin: 0 0 0;
+        transform-origin: 0 0 0;
+    "></div>
+  </div>
+
+        <!-- Use the `GitgraphJS` global variable to create your graph -->
+        <script>
+        // Get the graph container HTML element.
+        const graphContainer = document.getElementById("graph-container");
+
+        // Instantiate the graph with template
+        const options = {
+            template: GitgraphJS.templateExtend("metro", {
+                
+                colors: ["#676767", "#008fb5", "#f1c109", "#ff7878", "#007850"],
+                commit: {
+                    spacing: 40,
+                    dot: {
+                        size: 10,
+                    },
+                    message: {
+                        displayHash: false,
+                        displayAuthor: false,
+                    },
+                },
+                branch: {
+                    lineWidth: 3,
+                    spacing: 35,
+                }
+            })
+        }
+        const gitgraph = GitgraphJS.createGitgraph(graphContainer, options);
+
+        // Simulate git commands with Gitgraph API.
+        const stack = gitgraph.branch("Technical Skills");
+        stack.commit("ABEEK(공학인증) certified").tag("2009");
+
+        const scm = stack.branch("Supply Chain Management")
+            .commit("Oracle - Procedure");
+        stack.merge(scm, " ").tag("2014");
+
+        const websolution = stack.branch("Web applications on Cloud")
+            .commit("Develop Web Applications");
+
+        const frontend = websolution.branch("FrontEnd")
+            .commit("JavaScript/HTML5/CSS ●●")
+            .commit("ExtJs")
+            .commit("Sass/Sitemesh/Freemarker ●");
+        const backend = websolution.branch("BackEnd")
+            .commit("Java/Spring ●●●")
+            .commit("VPC/EC2 ●●●")
+            .commit("MySQL(Hibernate) ●");
+        frontend.commit("jQuery/AJAX ●");
+        backend.commit("RESTful API/MSA");
+        websolution.merge(frontend, " ");
+
+        const devops = stack.commit(" ").tag("2017").branch("DevOps");
+        devops.commit("Setup DevOps team");
+        const cicd = devops.branch("CICD")
+            .commit("Git/GitHub").commit("Jenkins").commit("Python ●").commit("Apigee(EdgeMicro)");
+        const cloud = devops.branch("AWS")
+            .commit("ElasticBeanstalk/CloudWatch ●●●").commit("CloudFormation ●●").commit("Route53/CloudFront ●●●").commit("Solutions Architect Associate");
+
+        devops.merge(cicd, " ");
+        stack.merge(devops, " ").tag("2019");
+
+        backend.commit("Spring Boot ●●●").commit("AWS SES/SQS/Lambda/Elasticache/... ●●●").commit("MongoDB(MongoDB Atlas) ●●");
+        backend.merge(cloud, " ");
+
+        websolution.merge(backend, " ");
+        stack.merge(websolution, " ").tag("NOW");
+        </script>
+</body>
+</html>
