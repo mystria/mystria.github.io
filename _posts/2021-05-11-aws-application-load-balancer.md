@@ -39,4 +39,4 @@ tag:elasticbeanstalk:environment-name 또는 tag:elasticbeanstalk:environment-id
 * ASG는 LB의 Name(tag:Name아님)으로 검색하면, 연결된 Load balancing(target group)을 통해 찾을 수 있음
 
 ## 참고
-https://docs.aws.amazon.com/ko_kr/elasticloadbalancing/latest/application/load-balancer-target-groups.html
+* https://docs.aws.amazon.com/ko_kr/elasticloadbalancing/latest/application/load-balancer-target-groups.html
