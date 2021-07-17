@@ -8,8 +8,8 @@ comments: true
 
 # Session Fixation 해결하기
 Session Fixation, 세션 고정 취약점은 무엇일까?  
-간단히 요약하면 FrontEnd(이하 FE)에서 BackEnd(이하 BE)로 request할 때 쓰는 sessionId를 뻐꾸기 알처럼 이용한 누군가에 의해서 권한을 빼앗길 수 있는 문제이다.  
-보통 처음 사이트에 접속하면 sessionId key(이하 key)를 발급 받는데, 이 key를 이용하여 로그인 하고, 서비스를 이용하게된다. 만약 이 key가 내가 서비스로부터 직접 발급받은 것이 아닌 누군가 미리 발급받아 몰래 넣어둔 것이라면? 그 key로 내가 로그인 해버리 순간 그 권한을 침투자도 사용할 수 있게되는 것이다. 핵심은 '첫 접속 시 받은 key' 이다. 이미 로그인 된 key를 훔쳐가는 부분은 CSRF나 CORS의 영역.  
+간단히 요약하면 FrontEnd에서 BackEnd로 request할 때 쓰는 sessionId를 뻐꾸기 알처럼 이용한 누군가에 의해서 권한을 빼앗길 수 있는 문제이다.  
+보통 처음 사이트에 접속하면 sessionId key(이하 key)를 발급 받는데, 이 key를 이용하여 로그인 하고, 서비스를 이용하게된다. 만약 이 key가 내가 서비스로부터 직접 발급받은 것이 아닌 누군가 미리 발급받아 몰래 넣어둔 것이라면? 그 key로 내가 로그인 해버리 순간 그 권한을 침투자도 사용할 수 있게되는 것이다. 핵심은 '첫 접속 시 발급받은 key' 이다. 이미 로그인 된 key를 훔쳐가는 부분은 CSRF나 CORS의 영역.  
 이런 트릭이 있다는 것을 알게된 건 얼마 전의 일이고, 역시 Spring에서는 이를 간단히 해결해 준다. 근데 나는 안된다...?
 
 ## Session Fixation 해결책
@@ -87,6 +87,7 @@ Session Fixation, 세션 고정 취약점은 무엇일까?
 * 다르게 말하면, 직접 만든 AuthenticationProcessingFilter를 사용한다면, 별도로 strategy를 적용해주어야 함
 * Filter에 해당 로직을 넣지 말고,
   > oAuth2ProcessingFilter.setSessionAuthenticationStrategy(new SessionFixationProtectionStrategy());
+
   > http.addFilterBefore(oAuth2ProcessingFilter, UsernamePasswordAuthenticationFilter.class);
 
   이런 방식(WebSecurityConfigurerAdapter에서 HttpSecurity의 config)도 가능
@@ -98,7 +99,7 @@ Session Fixation, 세션 고정 취약점은 무엇일까?
   + https://www.javadevjournal.com/spring-security/spring-security-session-fixation/
   + https://guleum-zone.tistory.com/163
   + https://www.baeldung.com/spring-security-session#session-fixation
-* OWSAP의 정의
+* OWSAP의 SessionFixation 정의
   + https://owasp.org/www-community/attacks/Session_fixation
 * 스프링 없이 Session-Fixation막는 방법(수동 코딩)
   + https://stackoverflow.com/a/8165963/8350542
