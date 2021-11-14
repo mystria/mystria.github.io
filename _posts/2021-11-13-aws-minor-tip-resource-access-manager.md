@@ -7,7 +7,6 @@ comments: true
 ---
 
 # Amazon Resource Access Manager, RAM
-
 AWS에는 별의별 기능이 다 있는데, 이번에는 RAM, Resource Access Manager이다.  
 이름 그대로 AWS의 자원을 서로 다른 계정들이 접근하도록 하는, 공유하는 방법이다.  
 보통 AWS의 best practice는 각 팀끼리 계정을 고립(isolated)시켜 사용하길 권장한다. 하지만 가끔 중복 자원 방지(= 비용 절감) 등을 위해 자원을 함께 사용하고 싶을 수도 있을 것이다.
