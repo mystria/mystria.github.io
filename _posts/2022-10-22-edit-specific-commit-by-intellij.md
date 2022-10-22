@@ -70,9 +70,9 @@ Amend를 체크하고 commit한 다음, push 할 때 Force Push 버튼(Push 버�
 
 Interactively Rebase from Here… 을 수행하면 수정을 위한 Rebasing Commits 팝업창이 표시된다. 선택한 commit에서 최신 commit까지 위에서 아래로 목록으로 표시되는데, 여기서 다양한 작업을 할 수 있다.
 
-- ▲▼ (Up/Down): commit의 순서를 변경 (서로 상관없는 commit이면 문제 없으나 변경이 겹칠 경우 conflict 가 발생할 수 있으므로 주의하자)
-- 뒤로가기 화살표(Pick): 해당 커밋은 아무것도 하지 않고 그대로 유지, 만약 뭔가 수정했었다면 이를 되돌림
-- 일시정지(Stop to Edit): 이 commit에서 rebase를 멈춤 → **이 때 우리가 commit의 코드를 수정할 수 있다.**
+- 🔼/🔽 (Up/Down): commit의 순서를 변경 (서로 상관없는 commit이면 문제 없으나 변경이 겹칠 경우 conflict 가 발생할 수 있으므로 주의하자)
+- ↩️⮌ (Pick): 해당 커밋은 아무것도 하지 않고 그대로 유지, 만약 뭔가 수정했었다면 이를 되돌림
+- ⏸ (Stop to Edit): 이 commit에서 rebase를 멈춤 → **이 때 우리가 commit의 코드를 수정할 수 있다.**
 - Reword: 선택한 commit의 commit message 수정
 - Squash(or Fixup): 선택한 commit을 이전 commit에 통합 (Fixup은 기존 commit message 사용)
 - Drop: 선택한 commit을 삭제(즉, 변경 내역이 삭제됨)
