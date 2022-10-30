@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /about/
 Disallow: /category/
 Disallow: /guestbook/
-Disallow: /page*
+Disallow: /page*/
