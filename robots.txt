@@ -3,3 +3,4 @@ Disallow: /about/
 Disallow: /category/
 Disallow: /guestbook/
 Disallow: /page*/
+Disallow: /$
