@@ -7,14 +7,14 @@ comments: true
 ---
 
 # Java Lambda 표현에서 reversed가 안될 때
-Java Lambda에서는 collection 을 효과적/직관적으로 map, filter, sort 등을 할 수 있다.  
+Java Lambda 에서는 collection 을 효과적/직관적으로 map, filter, sort 등을 할 수 있다.  
 목록을 정렬할 때는 `.sorted()` 를 적용하면 되는데, 이때 정렬할 요소(elements)가 comparable 하지 않다면 Comparator 로 별도의 정렬 기준을 정해줘야 (이 기준도 comparable 해야 함) 한다.  
 그리고 이 Comparator 를 역순으로 만들고자 할 때는 간단하게 `.reversed()` 를 적용해주면 되는데...  
 라고 생각했지만 약간의 이해와 추가작업이 더 필요하다.
 
 ## 주의
 본 글이 작성되었을 시점에는 컴파일 에러가 발생하였으나, 현재는 IDE 단에서 메소드 참조로 바꾸라고 하는 식으로 제안하거나  
-> Cannot resolve method 'getBaseProductId' in 'Object'
+> Cannot resolve method 'getName' in 'Object'
 >
 
 와 같은 에러를 발생하여 처음부터 컴파일 되지 않을 것임을 안내해 준다.
