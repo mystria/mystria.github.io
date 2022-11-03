@@ -12,7 +12,7 @@ comments: true
   - 예전에 정리했던대로 [Live migration]({% post_url 2017-07-11-mongodb-live-migration %}) 수행
   - 대신 Source DB가 legacy DB가 아닌, 다른 VPC에 존재하는 MongoDB instance
     - 즉, 이미 VPC 내부에 MongoDB를 사용중인 서비스가 내부 MongoDB를 끊고, 외부 Atlas를 VPC Peering해서 쓰고자 하는 상황
-MongoDB Atlas와 VPC간 Peering을 하면, 서비스가 위치한 VPC의 Subnet에는 Route table설정을 해야 함([참고]({% post_url 2017-06-20-Config-MongoDB-Atlas-with-AWS %}))
+MongoDB Atlas와 VPC간 Peering을 하면, 서비스가 위치한 VPC의 Subnet에는 Route table설정을 해야 함([참고]({% post_url 2017-06-20-config-mongodb-atlas-with-aws %}))
   - 이때, Atlas VPC <-> Service VPC 사이 양방향 통신이 가능한 줄 알았으나 아님!
     - Service VPC가 Atlas VPC를 호출 할 수 있으나, 그 반대는 불가능
     - 관련하여 담당자에게 문의를 하려 했으나 아직 이용요금 지불을 못해서 보류 중
