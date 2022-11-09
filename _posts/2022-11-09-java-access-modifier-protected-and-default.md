@@ -20,9 +20,7 @@ Java 의 접근 제한자(access modifier)에 대한 내용은 기본적인 것�
 
 ### 접근 가능 범위
 
-| Modifier | Class | Package | Subclass
-(same pkg) | Subclass
-(diff pkg) | World |
+| Modifier | Class | Package | Subclass<br/>(same pkg) | Subclass<br/>(diff pkg) | World |
 | --- | --- | --- | --- | --- | --- |
 | public | Y | Y | Y | Y | Y |
 | protected | Y | Y | Y | Y |  |
