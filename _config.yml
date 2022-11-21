@@ -25,6 +25,7 @@ gems:
  - jekyll-paginate
  - jekyll-gist
  - jemoji
+ - jekyll-mermaid
 
 # Build settings
 paginate: 5
