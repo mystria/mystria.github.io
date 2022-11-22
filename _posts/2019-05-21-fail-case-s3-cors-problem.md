@@ -76,6 +76,8 @@ AWS console이나 CLI 등이 아닌 Web browser에서 HTTP request로 S3에 파�
   - Access-Control- 로 시작하는 header가 response에 있는지?
   - https://stackoverflow.com/questions/32839310/amazon-s3-direct-upload-cors-error
 
+* 위 링크들에서 다양한 의견이 있지만, 공통적으로 보이는 의견은 S3 의 endpoint 주소가 이상하다는 것이다. 확인해보자.
+
 ## AWS의 Region별 endpoint가 원인일까?
 * S3는 endpoint 체계가 좀 복잡함
   - S3가 발전하면서 S3의 주소가 많이 바뀌었는데, 하위 호환을 위해 옛 버전의 endpoint도 유지되고 있음
@@ -86,7 +88,7 @@ AWS console이나 CLI 등이 아닌 Web browser에서 HTTP request로 S3에 파�
   - 참고: [AWS service endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region), [AWS S3 endpoints](https://docs.aws.amazon.com/general/latest/gr/s3.html)
 
 ## 해결 코드
-Java로 된 code를 보면 endpoint를 AWS SDK를 통해 안전하게 획득할 수 있음
+Java로 된 예제 code를 보면 endpoint 를 AWS SDK를 통해 안전하게 획득하는 것을 알 수 있다. 자신의 region 과 bucket 에 맞는 endpoint 를 사용해 보자.
   ~~~ java
     // Enable CORS
     String bucketName = "your-resources-bucket";
