@@ -12,14 +12,11 @@ comments: true
 ## Markdown 으로 다이어그램 그리는 방법
 
 IDE 에서 PlantUML 플러그인을 통해 코드로 다이어그램을 그려본 적이 있을 것이다. 이와 비슷한 Markdown(이하 MD) 용 도구가 Mermaid 이다.  
+- 공식 사이트의 세부 가이드: https://mermaid-js.github.io/mermaid/#/flowchart
 - 여기에서 실습해보자. https://mermaid.live
-
 
 이 Mermaid 의 JavaScript 도구를 사용하여 MD 에 다이어그램을 넣는 방법을 사용하자.  
 - 공식 문서: https://mermaid-js.github.io/mermaid/#/
-
-공식 사이트에 MD 로 다이어그램을 그리는 방법을 구체적으로 설명해 뒀으니 반드시 참고하길 바란다.  
-https://mermaid-js.github.io/mermaid/#/flowchart
 
 ## GitHub Pages 에 적용하기
 
@@ -117,7 +114,7 @@ mermaid.initialize(config);
 ~~~
 
 해당 구문이 다이어그램도 없는 문서에서도 매번 수행되는게 부담된다면 아래와 같이 if 문으로 두르는 것도 가능하다.
-~~~
+~~~ text
 {% if page.mermaid %}
 ...
 {% endif %}
