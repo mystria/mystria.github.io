@@ -7,18 +7,18 @@ comments: true
 ---
 
 # 공포의 git push -f
-살다보면 force push (git push -f) 를 쓸 일이 있다. 그럴 일이 없는게 제일 좋겠지만, 뭔가 잘못 commit 하고 push 한 걸 흔적없이 깔끔하게 되돌리고 싶은 욕구, 꼬여버린 git history graph 를 좀 보기좋게 돌려놓고 싶은 욕구가 생기곤 한다.  
+살다보면 force push (git push -f) 를 쓸 일이 있다. 그럴 일이 없는게 제일 좋겠지만, 뭔가 잘못 commit 하고 push 한 걸 흔적없이 깔끔하게 되돌리고 싶은 욕구, 꼬여버린 git history graph 를 좀 보기 좋게 돌려놓고 싶은 욕구가 생기곤 한다.  
 하지만 force push 는 너무 위험하기 때문에 모두가 말린다. 남들이 말리는건 듣는게 좋겠지만, '나는 괜찮겠지' 하는 몹쓸 합리화로 누군가는 쓰고야만다. 그리고 실수를 하게 되고, 무언가를 날려먹은 이후에 이하 본문에서 서술할 force push 를 되돌릴 방법을 검색하게 되곤 한다.  
 
 ## git push -f 로 망쳐버린 commit을 살려보자
 * 왜 이런일이 생길까?
   - git reset --hard 로 과거로 돌아감
-    - 여기서 --hard 말고, mixed나 soft로만 돌려도 다행이었을텐데 ...
-  - git push -f 로 과거 시점으로 commit을 돌림 
-    - 이때 모든 history가 사라지고 commit간의 link도 dangling 된다.
-    - 즉, history가 없기 때문에 간단하게 push를 되돌릴 수 없다. log를 보면 그저 현재 commit으로 부터 과거만 볼 수 있다.
+    - 여기서 --hard 말고, mixed 나 soft 로만 돌려도 다행이었을텐데 ...
+  - git push -f 로 과거 시점으로 commit 을 돌림 
+    - 이때 모든 history 가 사라지고 commit 간의 link 도 dangling 된다.
+    - 즉, history가 없기 때문에 간단하게 push를 되돌릴 수 없다. commit log 를 보면 그저 현재 commit 으로 부터 과거만 볼 수 있다.
 * 확인해 보자!
-  - 모든 것이 사라지고 현재 HEAD는 c076328d6 을 가리키고 있다. (본문의 sha-1 hash는 예시이며, 모두 다름)
+  - 모든 것이 사라지고 현재 HEAD는 c076328d6 을 가리키고 있다. (본문의 sha-1 hash는 예시이며, 각자 모두 다름)
     ``` bash
       your-project$ git log -5 --pretty=format:"%h - %an, %ar : %s"
       c076328d6 - yourname, 77 minutes ago : commit 5
@@ -27,12 +27,12 @@ comments: true
       a1c6ed523 - yourname, 3 days ago : commit 2
       977fe4914 - yourname, 3 days ago : commit 1
     ```
-  - 정상처럼 보인다. 아주 깔끔하게 사라졌기 때문에 문제를 못느낄 수도 있다. 다만 코드가 옛날로 돌아가 있을 뿐... c076328d6 이후의 commit들은 사라졌다. 되돌리고 싶어도 되돌아 갈 곳이 없어진 것이다.
+  - 정상처럼 보인다. 아주 깔끔하게 사라졌기 때문에 문제를 못느낄 수도 있다. 다만 코드가 옛날로 돌아가 있을 뿐... c076328d6 이후의 commit 들은 사라졌다. 되돌리고 싶어도 되돌아 갈 곳이 없어진 것이다.
 
 * 응급 조치
-  - **절대 git gc(garbage collection)를 하면 안된다**. gc를 하면 dangling 된 commit이 삭제될 수 있다.
-  - IDE를 사용한다면, 해당 IDE의 local history를 이용해서 긴급 복구도 가능하다. IntelliJ 같은 도구에는 workspace의 작업 이력을 어느 정도 저장해주곤 한다. 모든 IDE가 그렇지는 않으므로 일단 확인해보자. (가급적 좋은 IDE를 쓰자)
-  - 복구 작업 전에 이 local history로 복구한 내용을 (소스코드만) 백업해두면, 최악의 경우 history는 잃어도 작업물은 지킬 수 있다. (commit을 squash 한거라고 정신 승리 가능)
+  - **절대 git gc(garbage collection)를 하면 안된다**. gc를 하면 dangling 된 commit 이 삭제될 수 있다.
+  - IDE 를 사용한다면, 해당 IDE의 local history 를 이용해서 긴급 복구도 가능하다. IntelliJ 같은 도구에는 workspace 의 작업 이력을 어느 정도 저장해주곤 한다. 모든 IDE 가 그렇지는 않으므로 일단 확인해보자. (가급적 좋은 IDE 를 쓰자)
+  - 복구 작업 전에 이 local history 로 복구한 내용을 (소스코드만) 백업해두면, 최악의 경우 history 는 잃어도 작업물은 지킬 수 있다. (commit을 squash 한거라고 정신 승리 가능)
 
 * 이제 다른 사람의 실수를 보고 배우자
   - 아래 링크에서 같은 길을 걸었던 사람들의 해결책을 확인할 수 있다.
@@ -42,7 +42,7 @@ comments: true
 
 ## 해결책
 * 작업 이력 확인
-  - 먼저 지난 git terminal log(git 수행이력)를 확인해 보자
+  - 먼저 terminal 에서 지난 git 수행이력(bash history)에서 MY_BRANCH 가 forced update 된 것을 확인해 보자.
   - 
     ``` bash
       your-project$ git push -f
@@ -50,8 +50,9 @@ comments: true
       To https://github.com/your-org/your-project.git
       \+ cca7fffb4...c076328d6 MY_BRANCH -> MY_BRANCH (forced update)
     ```
-  - 내가 한 멍청한 짓을 로그로 확인 가능하다. 
-  - 다행히 망치기 직전의 commit hash 값을 확인 할 수 있다. (여기서는 cca7fffb4) 이 값을 아는게 중요한데, 이 값이 우리가 돌아가야할 목적지이기 때문이다.
+  - 내가 한 멍청한 짓을 확인 가능하다. 
+  - `cca7fffb4...c076328d6` 는 HEAD 의 hash 가 cca7fffb4 에서 c076328d6 으로 변경되었다는 뜻.
+  - 다행히 망치기 직전의 commit hash 값(여기서는 `cca7fffb4`)을 확인 할 수 있다. 이 값을 아는게 중요한데, 이 값이 우리가 돌아가야할 목적지이기 때문이다.
   - 참고로 github web에서 이 hash를 통해 코드와 히스토리가 아직 남아 있음을 확인할 수 있다.
     - https://github.com/your-id/your-project/commits/**cca7fffb4**
   - 만약 이 log를 확인할 수 없다면, 별도의 방법으로 마지막 commit hash를 찾아야 한다.
@@ -69,8 +70,8 @@ comments: true
       0aa4b7df4 remotes/origin/MY_BRANCH@{6}: update by push
     ```
 * 이제부터 집중해서 따라하기
-  - 우리는 commit hash 주소로 checkout이 가능하기 때문에, 직전 commit으로 돌아갈 수 있다.
-  - 위에 [Stack Overflow의 두번째 답변](https://stackoverflow.com/a/24373376/8350542)이 정답
+  - 앞서 언급한 [Stack Overflow의 두번째 답변](https://stackoverflow.com/a/24373376/8350542)의 방법이다.
+  - 우리는 commit hash 주소로 `checkout` 이 가능하기 때문에, 직전 commit 으로 돌아갈 수 있다.
     ``` bash
       your-project$ git checkout cca7fffb4
       Note: checking out 'cca7fffb4'.
@@ -86,14 +87,15 @@ comments: true
 
       HEAD is now at cca7fffb4... Merge remote-tracking branch 'origin/master' into MY_BRANCH
     ```
-  - 이제 이 checkout을 다시 원래의 branch로 붙이면 된다. 안붙여진다면 -f 로 강제로 붙여주자. (또 force?)
+  - HEAD 가 `cca7fffb4` 되었다.
+  - 이제 이 checkout 을 다시 원래의 `branch` 로 붙이면 된다. 안붙여진다면 -f 로 강제로 붙여주자. (또 force?)
     ``` bash
       your-project$ git branch MY_BRANCH
       fatal: A branch named 'MY_BRANCH' already exists.
 
       your-project$ git branch MY_BRANCH -f
     ```
-  - 지정한 branch에 잃어버렸던 commit이 연결된다. 이제 그 branch로 다시 checkout 하고, origin으로 push 하자.
+  - 지정한 branch 에 잃어버렸던 commit 이 연결된다. 이제 그 branch 로 다시 checkout 하고, origin 으로 `push` 하자.
   (이 부분은 각자 조금씩 다를 수 있으니 상황에 맞춰서 진행 필요)
     ``` bash
       your-project$ git checkout MY_BRANCH
@@ -101,5 +103,5 @@ comments: true
     ```
 
 ## 결론
-요약하자면, push -f 로 dangling 되어버린 commit을 다시 내 branch로 이어주자는 것이다.
+요약하자면, push -f 로 dangling 되어버린 commit 을 다시 내 branch 로 이어주자는 것이다.  
 force push 는 안쓰는게 좋겠지만, 어쨌든 쓰라고 있는 기능이니 조심해서 쓰면 된다. 이제 되돌리는 방법도 알았으니(!) 너무 겁먹지 말자.
