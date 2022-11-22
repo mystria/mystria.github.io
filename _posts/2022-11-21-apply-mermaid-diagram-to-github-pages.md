@@ -114,11 +114,13 @@ mermaid.initialize(config);
 ~~~
 
 해당 구문이 다이어그램도 없는 문서에서도 매번 수행되는게 부담된다면 아래와 같이 if 문으로 두르는 것도 가능하다.
+{% raw %}
 ~~~ text
 {% if page.mermaid %}
 ...
 {% endif %}
 ~~~
+{% endraw %}
 
 이제 GitHub Pages 에 mermaid 코드 블럭으로 다이어그램이 그릴 수 있게 되었다.  
 참고로 다이어그램에 특수 문자를 쓰고 싶을 때는 따옴표(")를 사용하자.  
