@@ -16,17 +16,18 @@ IDE 에서 PlantUML 플러그인을 통해 코드로 다이어그램을 그려�
 - 여기에서 실습해보자. https://mermaid.live
 
 이 Mermaid 의 JavaScript 도구를 사용하여 MD 에 다이어그램을 넣는 방법을 사용하자.  
-- 공식 문서: https://mermaid-js.github.io/mermaid/#/
+- Mermaid 공식 문서: https://mermaid-js.github.io/mermaid/#/
 
 ## GitHub Pages 에 적용하기
 
-GitHub Pages 는 Jekyll 로 markdown(이하 MD)를 정적 페이지를 생성한다. 설치 및 사용 방법은 검색하면 잘 나온다.
+GitHub Pages 의 MD 는 Jekyll 이라는 정적 페이지 생성도구를 통해 HTML 로 만들어진다. 설치 및 사용 방법은 검색하면 잘 나온다.
 - Pages 의 Jekyll 설정 방법: https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll
 
 [GitHub 공식 문서](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)
 를 읽어보면 MD 문서에 다이어그램을 적용할 수 있다고 되어 있다.
 
-하지만 동작하지 않는다!
+하지만 동작하지 않는다!  
+우선 이유를 간단히 말하자면 GitHub Pages 는 GitHub 이 아니기 때문이다.
 
 ## 문제점
 
