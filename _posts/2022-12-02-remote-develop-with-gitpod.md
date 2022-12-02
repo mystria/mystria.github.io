@@ -39,9 +39,9 @@ JetBrains 계열과 VS Code 등의 IDE 나 에디터로 접속하면 원격 개�
 Git 을 Pod 로 만들기 때문에 Gitpod 인 것일까?  
 
 ## JetBrains Gateway
-서두에 말했던 Armeria 예제를 Gitpod 으로 실행했더니 "IntelliJ IDEA 에서 여세요" 라는 메시지를 띄워줬다. 그래서 IntelliJ 에서 개발이 된다고? 싶었지만, Gateway 라는 프로그램을 설치해야 한다고 하며, 설치하더라도 JetBrains Client 라고 하는 경량 에디터가 실행되면서 개발 환경이 나타난다.  
+서두에 말했던 Armeria 예제를 Gitpod 으로 실행했더니 "IntelliJ IDEA 에서 여세요" 라는 메시지를 띄워줬다. 그래서 IntelliJ 에서 개발이 된다고? 싶었지만, Gateway 라는 프로그램을 설치해야 한다고 하며, 설치하더라도 JetBrains Client 라고 하는 경량 에디터(어쨋든 IntelliJ 와 기반은 동일)가 실행되면서 개발 환경이 나타난다.  
 최근 IntelliJ 의 UX 가 VS Code 와 거의 흡사해졌는데, 그래서인지 Client 도 VS Code 와 UX 가 비슷하다.  
-참고로 이 Client 는 바로 [Code with Me]({% post_url 2022-12-02-jetbrains-code-with-me %}) 에서 언급한 원격 클라이언트 이다. 확신할 수는 없지만, 어떤 지점에서 원격 개발을 위한 프로토콜이 완성되어가고 있는 것으로 생각된다.
+참고로 이 Client 는 바로 [Code with Me]({% post_url 2022-12-02-jetbrains-code-with-me %}) 에서 언급한 원격 클라이언트 이다. 확신할 수는 없지만, 어떤 지점에서 원격 개발을 위한 프로토콜이 완성되어가고 있다고 생각된다.
 
 ## 정리
 Gitpod 를 이용하는 절차를 정리하면 다음과 같다.
@@ -51,11 +51,12 @@ Gitpod 를 이용하는 절차를 정리하면 다음과 같다.
     - `https://gitpod.io/#project=프로젝트이름/https://github.com/프로젝트URL` 와 같은 형식의 링크
     - 또는, JetBrains Gateway 에서 repository 지정 후 `New Workspace` 생성
     - `.gitpod.yml` 을 이용한 개발 환경 설정 파일 구성
+    - 자신의 워크스페이스의 snapshot 으로도 공유 가능
 1. 워크스페이스 이미지 생성 및 배포 - endpoint 생성
     - 약 1분 미만의 시간 소요
 1. 원격 개발 환경 접속
     - 별도의 개발용 client (JetBrains Gateway, VS Code, SSH 등) 사용
-    - 여러명 동시 접속, 동시 편집 가능 (실제 사용은 안해 봄)
+    - 여러명 동시 접속, 동시 편집 가능
 1. 개발 종료 시 워크스페이스 자원 반납
     - 사용 시간 만큼 과금
 
@@ -63,8 +64,8 @@ Gitpod 를 이용하는 절차를 정리하면 다음과 같다.
 - 예제를 실행해 보기위해 로컬에 환경 구축(JVM, 컴파일러, SDK 등 설치) 하고 코드 clone 받는 작업이 사실상 진입 장벽인데, 이를 해결해 줌
 - 그런데 이를 위해 설치해야 하는 도구들이 좀 있을 수 있음
 - 익숙하지 않은 사람은 이게 뭔 상황이야? 할 수 있음
-- 무료여서인지 Cold start 시간이 좀 긴 것 같음 - 하지만 SaaS를 상시로 띄워두면 비싼 것 같은데? 온프레미스(Self-hosted) 모델도 있음
-- 이제 개발자가 맥북 프로를 쓸 필요 없이 크롬북🤭으로 원격의 맥북 프로급 가상 머신 위 개발 환경에 접속만 하면 되는 시대가 올 것 같음(마치 Steam Remote Play 나 GeForce NOW 같음)
+- 무료여서인지 cold start 시간이 좀 긴 것 같음 - 하지만 SaaS 를 상시로 띄워두면 비싼 것 같은데? 온프레미스(Self-hosted) 모델도 있음
+- 이제 개발자가 200만원 짜리 맥북 프로를 쓸 필요 없이 20만원 짜리 크롬북🤭으로 원격의 맥북 프로급 가상 머신에 접속해서 개발하면 되는 시대가 올 것 같음(마치 Steam Remote Play 나 GeForce NOW 같음)
 - 하지만 네트워크 지연이 좀 거슬림 - 한국에 호스팅 하고 기가급 네트워크 망이 연결되면 해결될 지도... (하지만 VPN 이 등장하면 어떨까?!)
 
 ## 참고
