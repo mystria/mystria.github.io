@@ -70,7 +70,9 @@ Gitpod 를 이용하는 절차를 정리하면 다음과 같다.
 
 ## 참고
 - Gitpod 공식 문서 : https://www.gitpod.io/docs/introduction
+- JetBrains Gateway 와 Gitpod : https://blog.jetbrains.com/ko/blog/2022/04/28/jetbrains_partners_with_gitpod/
 - 구글 워크스테이션 : https://cloud.google.com/workstations
 - AWS Cloud 9 : https://aws.amazon.com/ko/cloud9/
 - GitHub Codespaces : https://github.com/features/codespaces
 - JetBrains Space : https://www.jetbrains.com/space/
+- Gitpod 사용자 블로그 : https://ddochea.tistory.com/191, https://bitlog.tistory.com/64
