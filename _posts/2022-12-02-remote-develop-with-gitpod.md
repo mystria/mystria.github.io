@@ -75,4 +75,4 @@ Gitpod 를 이용하는 절차를 정리하면 다음과 같다.
 - AWS Cloud 9 : https://aws.amazon.com/ko/cloud9/
 - GitHub Codespaces : https://github.com/features/codespaces
 - JetBrains Space : https://www.jetbrains.com/space/
-- Gitpod 사용자 블로그 : https://ddochea.tistory.com/191, https://bitlog.tistory.com/64
+- Gitpod 사용자 블로그 : https://ddochea.tistory.com/191, https://bitlog.tistory.com/64, https://facestyling.click/blog/code-on-web-using-gitpod/
