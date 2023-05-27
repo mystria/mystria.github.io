@@ -34,10 +34,7 @@ MapStruct 를 사용하는 방법은 인터넷에 많이 설명되어 있기 때
 ```protobuf
 syntax = "proto3";
 option java_multiple_files = true;
-package io.mystria;
-
-option java_package = "io.mystria";
-option java_outer_classname = "RestaurantProtos";
+...
 
 message Restaurant {
   string name = 1;
@@ -104,7 +101,7 @@ DTO 를 Protobuf Class 로 변환할 때 (개인적으로 생각하는)가장 �
 @Mapper(collectionMappingStrategy = CollectionMappingStrategy.ADDER_PREFERRED,
     nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
 public interface RestaurantMapper {
-		...
+    ...
 }
 ```
 
