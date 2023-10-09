@@ -38,10 +38,10 @@ public List<User> checkInUsersImperative(List<User> users) {
 
 private User checkIn(User user) {
     try {
-		    // 뭔가 복잡한 로직
-		    ...
-		    return user.success();
-		} catch (Exception e) {
+        // 뭔가 복잡한 로직
+        ...
+        return user.success();
+    } catch (Exception e) {
         return user.fail();
     }
 }
@@ -126,7 +126,7 @@ private List<User> fillSkippedUsers(List<User> checkedInUsers, List<User> users)
 private Mono<User> checkIn(User user) {
     // 뭔가 복잡한 로직
     ...
-		.onErrorResume(throwable -> {
+    .onErrorResume(throwable -> {
         log.error("Fail to check in, {}", throwable.getMessage(), throwable);
         return Mono.just(user.fail());
     });
