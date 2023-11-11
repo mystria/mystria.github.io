@@ -173,6 +173,7 @@ DTO 는 구간이 바뀌더라도 (DB 의 Entity 가 Controller 의 Response 까
 
 ## Clean Architecture : 클린 아키텍처 애매한 부분 정해 드립니다.
 
+NHN FORWARD 22 자료  
 [https://www.youtube.com/watch?v=g6Tg6_qpIVc](https://www.youtube.com/watch?v=g6Tg6_qpIVc)
 
 ### 소프트웨어 아키텍처?
