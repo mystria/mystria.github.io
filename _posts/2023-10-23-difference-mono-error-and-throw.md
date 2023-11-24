@@ -74,7 +74,7 @@ someMethod("test")
 ```java
 public Mono<String> someMethod(Mono<String> param) {
   ...
-	return param.map(p -> {
+  return param.map(p -> {
     throw RuntimeException();
   });
 }
