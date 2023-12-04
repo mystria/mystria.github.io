@@ -38,7 +38,7 @@ comments: true
 
 ```mermaid
 flowchart LR
-    A[Controller] --> B[Delegator] --> C[Service] --> D[Repository]
+    A[Controller] --> B[Service] --> C[Repository]
 ```
 
 전통적인 아키텍처의 문제점은 의존성의 방향에 의해 DB 구조(인프라)에 의해 비즈니스 로직이 결정될 수 있다는 점과 시스템의 규모가 커졌을 때 유지보수가 힘들어진다는 점이 있다.
