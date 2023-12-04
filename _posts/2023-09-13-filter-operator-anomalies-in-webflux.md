@@ -19,10 +19,10 @@ comments: true
 
 ```java
 public List<User> checkInUsersImperative(List<User> users) {
-    boolean circuitBreaker = false;
+    boolean circuitBreaker = false; // flag 변수
     List<User> checkedInUsers = new ArrayList<>();
     for (User user : users) {
-        if (circuitBreaker) {
+        if (circuitBreaker) { // 데이터 순회 중 하나가 실패하면 이후 데이터는 강제로 실패 처리
             user.fail();
             checkedInUsers.add(user);
             continue;
@@ -30,7 +30,7 @@ public List<User> checkInUsersImperative(List<User> users) {
         User checkedInUser = this.checkIn(user);
         checkedInUsers.add(checkedInUser);
         if (UserState.FAILED.equals(checkedInUser.getState())) {
-            circuitBreaker = true;
+            circuitBreaker = true; // 실패 시 flag 변경
         }
     }
     return checkedInUsers;
@@ -38,7 +38,7 @@ public List<User> checkInUsersImperative(List<User> users) {
 
 private User checkIn(User user) {
     try {
-        // 뭔가 복잡한 로직
+        // 뭔가 비즈니스 로직
         ...
         return user.success();
     } catch (Exception e) {
@@ -49,7 +49,7 @@ private User checkIn(User user) {
 
 checkIn() 메서드가 성공하면 user 는 CHECKED_IN 상태가 되지만, 실패하면 FAILED 상태가 된다. 그리고 한명이 실패하면 더 이상 체크인을 하지 않고 나머지 user 들도 실패 처리한다.
 
-명령형 코드에서는 익숙하게 구현할 수 있다. 외부에 상태를 관리할 flag 변수를 두면 되기 때문이다. 하지만 함수형으로 구현하려면? 외부에 변수를 변경(side-effect)하여 중간에 상황을 변화시키는 것은 불가능한 일이다.
+명령형 코드에서는 익숙하게 구현할 수 있다. 외부에 상태를 관리할 flag 변수를 두면 되기 때문이다. 하지만 함수형으로 구현하려면? 외부에 flag 변수를 변경(side-effect)하여 중간에 상황을 변화시키는 것은 불가능한 일이다.
 
 그러면 선언형이자 함수형인 WebFlux 로 이런저런 기능을 구현할 때는 어떻게 해야 할까? 
 
@@ -63,7 +63,7 @@ WebFlux 는 Reactive 연산자들을 제공한다. 여기서 특정 상황이 �
 
 Error 처리 연산자는 원하는 기능을 지원하지 않는다. onErrorContinue 는 이후 데이터까지 처리해 버린다.
 
-| Filter 연산자 | 설명 |
+| Error 처리 연산자 | 설명 |
 | --- | --- |
 | error() | Parameter 로 지정된 에러로 종료하는 mono/flux 생성 |
 | onErrorComplete() | 에러 이벤트를 완료 이벤트로 변경 |
@@ -124,7 +124,7 @@ private List<User> fillSkippedUsers(List<User> checkedInUsers, List<User> users)
 }
 
 private Mono<User> checkIn(User user) {
-    // 뭔가 복잡한 로직
+    // 뭔가 비즈니스 로직
     ...
     .onErrorResume(throwable -> {
         log.error("Fail to check in, {}", throwable.getMessage(), throwable);
