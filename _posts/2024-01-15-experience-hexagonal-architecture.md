@@ -6,7 +6,6 @@ categories: Architecture
 comments: true
 ---
 
-# Hexagonal Architecture 활용 경험
 Hexagonal Architecture 를 기반으로 구현을 하며 선택한 결정들과 마주했던 고민들   
 
 # 개요
@@ -60,7 +59,7 @@ flowchart BT
 
 # 도메인 모듈
 
-## **UseCase & Port**
+## UseCase & Port
 
 Domain 계층과 Adapter 계층이 만나는 UseCase 와 Port 들을 제공, Domain 에 존재해도 되지만 의존성이 구현체를 참조하지 못하도록 강제하기 위해 모듈로 분리
 
@@ -70,13 +69,13 @@ Inbound Port 는 UseCase 라는 postfix 를 사용 / Outbound Port 는 Port 라�
 
 인터페이스를 위해 사용할 DTO 도 이 계층에 정의한다.
 
-## Driving **(Primary/Driving Adapter)**
+## Driving (Primary/Driving Adapter)
 
 gRPC, REST 등으로 입력이 들어오는 모듈
 
 Controller 또는 RouterFunction 은 Driving Adapter 로 써 UseCase 를 통해 Domain 을 호출한다.
 
-## **Domain (Application / Domain)**
+## Domain (Application / Domain)
 
 Domain 언어로만 정의된 비즈니스 로직의 집합
 
@@ -84,7 +83,7 @@ Service 는 UseCase 의 구현체, Dependency Injection 으로 UseCase 에 주�
 
 Domain 에서 사용하는 객체들은 도메인 모델 패턴으로써 객체 내에 비즈니스 로직을 포함하고 있다. (참고로 Domain Driven Design(DDD) 에서는 Domain Model 을 Aggregate 로 정의할 수 있다.) 또한 Service 에서 트랜잭션 스크립트 패턴으로 구현 할 수 있다. 즉, 주요 로직은 Service 와 Domain Model 에서 구현된다.
 
-## Driven **(Secondary/Driven Adapter)**
+## Driven (Secondary/Driven Adapter)
 
 DB, Cache, 외부 서비스 등을 연결하거나 구현하는 모듈
 
@@ -94,7 +93,7 @@ DB 패키지의 adapter 에서는 JPA 트랜잭션을 구현하거나 Repository
 
 # 기타 모듈
 
-## **Common**
+## Common
 
 공통의 기능이나 객체를 담당하는 모듈
 
@@ -157,7 +156,7 @@ Domain 모듈은 도메인 언어로 정의되어 있으며 응집성을 위해 
 
 # DTO 와 Domain Model
 
-## **DTO 에 대하여**
+## DTO 에 대하여
 
 gRPC 의 protobuf 는 Java 객체를 생성하지만, 우리가 만든 객체를 protobuf 에서 사용할 수는 없기 때문에 gRPC service 의 proto 객체를 UseCase 의 DTO 로 바꿔주어야 한다. 만약 그냥 REST API 였다면 UseCase 의 DTO 를 request 또는 response 로 사용해도 괜찮을 것이다.
 
@@ -167,7 +166,7 @@ UseCase 와 Port 에서 인터페이스에 사용되는 객체가 필요하다.
 
 즉, Protobuf 또는 Request/Response 객체 → UseCase 의 DTO → Domain Model → Port 의 DTO → Entity 또는 Client 객체 와 같이 5단계의 객체가 존재하게 된다. 이렇게 다양한 DTO 는 엄청난 양의 중복 코드를 양성해 내고, 코드의 가독성을 떨어트린다.
 
-## **DTO 구현 사례**
+## DTO 구현 사례
 
 위 5단계의 객체를 어떻게 다룰지에 대한 다양한 논의들이 존재한다.
 
