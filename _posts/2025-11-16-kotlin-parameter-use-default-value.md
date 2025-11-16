@@ -33,7 +33,7 @@ fun method1(a: Int = 0, b: Int = 0) {
 fun main() {
   method1(3) // 3 은 a 에 할당됨
 }
-// a = 3, b = 3
+// a = 3, b = 0
 ~~~
 
 두 번째 이 후의 매개변수의 기본 값은 이전 매개변수를 사용할 수 있음
@@ -76,9 +76,9 @@ public static void method1(int a, int b, int v) {
 }
 ~~~
 
-Kotlin 을 Java 로 바꿀 때 `v` 값 처럼 인자 전달 여부를 정의하는 로직이 존재
+Kotlin 을 Java 로 바꿀(컴파일 타임) 때 `v` 값 처럼 인자 전달 여부를 정의하는 로직이 존재
 
-여기에서 매개변수 순서를 중요하게 여기는 것으로 추정되며, 실제로 실패하는(`a = b`) 코드는 바이트코드로 생성이 안됨
+여기에서 매개변수 순서를 중요하게 여기는 것으로 추정되며, 실제로 실패하는(`a: Int = b`) 코드는 바이트코드 생성조차 안됨
 ~~~
 // Backend Errors: 
 // ================
@@ -87,6 +87,8 @@ Kotlin 을 Java 로 바꿀 때 `v` 값 처럼 인자 전달 여부를 정의하�
 ~~~
 
 전체가 아닌 매개변수 일부만 전달했을 때 순서대로 처리하기 때문에, 순서를 중요하게 여기는게 아닐까 싶음
+
+쓰고보니 재미 없네...
 
 # 참조
 - https://kotlinlang.org/docs/functions.html#parameters-with-default-values
