@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "IN Query 를 QueryDSL 로 구현할 때 주의사항"
-date:   2025-04-24 00:00:00 +0900
+date:   2025-04-20 00:00:00 +0900
 categories: SQL, JPA, QueryDSL
 comments: true
 ---
@@ -14,7 +14,7 @@ PK 등을 이용해 DB 에서 데이터를 대량으로 조회해야하는 경�
 DB 에서 SQL IN 절로 PK n 개를 조회한다면 어떻게 될까? 대략 아래와 같이 QueryDSL 이 작성될 것이다.
 
 ```kotlin
-fun findById(ids: List<String): List<Product> =
+fun findById(ids: List<String>): List<Product> =
   from(product)
   .where(id.`in`(ids))
   .fetch()
@@ -30,7 +30,7 @@ SELECT ID, NAME, CATEGORY FROM PRODUCT WHERE ID IN (...);
 
 그럼 1000 개 쯤이면? 10000 개, 100000 개 쯤 된다면? 경험상 수 천개가 넘어가면 쿼리 속도가 엄청 느려졌다.
 
-참고로 이런 갯수별 성능을 정확히 지표로 표현할 수 없는 것은 동작하는 DB 의 종류, 시스템 자원 크기, 테이블 크기, 인덱스 등이 모두 변수가 되기 때문이다.
+참고로 이런 갯수별 성능을 간단히 지표로 표현할 수 없는 것은 동작하는 DB 의 종류, 시스템 자원 크기, 테이블 크기, 인덱스 등이 모두 변수가 되기 때문이다.
 
 아무리 인덱싱이 되어 있는 PK 더라도 IN 절을 무분별하게 활용할 수 없다. 적당히 나누어 조회하도록 chunk 를 걸어주고 취합 하는게 좋다.
 
@@ -49,9 +49,7 @@ fun findById(ids: List<String>): List<Product> =
 
 # 참고해야 할 것들
 
-## 관련 설정
-
-### 최대 쿼리 사이즈
+## 최대 쿼리 사이즈
 
 `max_allowed_packet` 은 최대 쿼리 사이즈(보통 400MB)이다. IN 절에 들어갈 데이터가 짧은 숫자가 아니라면 고려해봐야 할 것이다.
 
@@ -59,7 +57,7 @@ fun findById(ids: List<String>): List<Product> =
 SHOW VARIABLES LIKE 'max_allowed_packet';
 ```
 
-### 인덱스 활용 조건
+## 인덱스 활용 조건
 
 `eq_range_index_dive_limit` 는 range 시 index 를 탈지, 통계를 이용할지 판단하는 기준이다. range 가 될 경우 통계정보를 이용해 조회하게되어 속도가 예상과 달라질 수 있다.
 
@@ -73,7 +71,7 @@ SHOW VARIABLES LIKE 'max_allowed_packet';
 SHOW VARIABLES LIKE 'eq_range_index_dive_limit';
 ```
 
-### Prepare Statement 검토
+## Prepare Statement 검토
 
 `in_clause_parameter_padding` 은 JPA 설정으로 IN 쿼리의 preparedStatement 종류(크기)를 제한하는 방법이다.
 
@@ -98,7 +96,7 @@ IN 3개 호출 하면 처럼 4개로 IN 생성(마지막 item 반복)됨
 SELECT * FROM product WHERE id IN (1, 2, 3, 3);
 ```
 
-### OR 에 의한 쿼리 사이즈 확인
+## OR 에 의한 쿼리 사이즈 확인
 
 IN 절은 경우에 따라 OR 의 연속으로 간주될 수 있다. 이 경우 쿼리를 메모리에 올릴 때 사이즈 제한이 걸릴 수 있다.
 
